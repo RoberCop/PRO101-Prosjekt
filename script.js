@@ -4,25 +4,19 @@
 function newTreeStack()
 {
 	displayArray.push([]);
-	const treeDiv = document.getElementById("treeDiv");
 
 	// Each stack holds divs representing nodes
 	const stackDiv = document.createElement("div");
 
-	treeDiv.appendChild(stackDiv);
+	document.getElementById("treeDiv").appendChild(stackDiv);
 }
 
 // class to instantiate nodes on the tree
-function treeNodeClass(level)
+function treeNodeClass(level, text)
 {
 	this.childs = [];
+
 	this.level = level;
-
-	// todo
-	this.remove = function()
-	{
-
-	}
 
 	// adds a new instance to "childs" array
 	this.newChild = function()
@@ -30,24 +24,44 @@ function treeNodeClass(level)
 		this.childs.push(new treeNodeClass(this.level + 1));
 	}
 
-	// test method
-	this.printText = function()
+	this.addToDisplay = function()
 	{
-		console.log("hello");
+		displayArray[level - 1].push(this);
+		for (child of childs) child.addToDisplay();
 	}
 
 	this.draw = function()
 	{
-		
+		// todo
+	}
+
+	////////////////////////////////////
+	// Dom element
+	
+	this.domElem = document.createElement("div");
+	this.domElem.class = "treeNode";
+
+	let childPar = document.createElement("p");
+	childPar.innerText = text;
+
+	this.domElem.appendChild(childPar);
+
+	this.domElem.onclick = function()
+	{
+		for (let i = level; i < displayArray.length; i++)
+		{
+			displayArray[i] = null;
+		}
+
+		for (child of childs) child.addToDisplay();
+
+		//////////// todo
+		// drawNodes();
 	}
 }
 
 // Makes the root node, meant to be invisible to the user
 var root = new treeNodeClass(0);
-
-// test child node
-root.newChild();
-root.childs[0].printText();
 
 var displayArray = [];
 
@@ -58,10 +72,15 @@ for (let i = 0; i < 10; i++)
 }
 
 // Example for drawing nodes
-/*for (let i = 0; i < displayArray.length; i++)
+/*
+function drawNodes()
 {
-	for (let j = 0; j < displayArray[i].length; j++)
+	for (let i = 0; i < displayArray.length; i++)
 	{
-		displayArray[i][j].draw();
+		for (let j = 0; j < displayArray[i].length; j++)
+		{
+			displayArray[i][j].draw();
+		}
 	}
-}*/
+}
+*/
