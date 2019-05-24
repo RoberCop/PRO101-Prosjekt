@@ -16,7 +16,7 @@ function newTreeStack()
 }
 
 // class to instantiate nodes on the tree
-function treeNodeClass(level, parent, text)
+function treeNodeClass(level, parent, index, text)
 {
 	this.childs = [];
 
@@ -25,15 +25,17 @@ function treeNodeClass(level, parent, text)
 	
 	this.selectedChild = 0;
 
+	let indexOfThis = index;
+
 	// adds a new instance to "childs" array
 	this.newChild = function(newText)
 	{
-		this.childs.push(new treeNodeClass(this.level + 1, this, newText));
+		this.childs.push(new treeNodeClass(this.level + 1, this, this.childs.length, newText));
 	}
 
 	this.addToDisplay = function(isSelected)
 	{
-		displayArray[level - 1].push(this);
+		displayArray[this.level - 1].push(this);
 
 		if (isSelected)
 			for (childIndex in this.childs)
@@ -47,19 +49,26 @@ function treeNodeClass(level, parent, text)
 	this.domElem.className = "treeNode";
 	this.domElem.treeNode = this;
 
-	const childPar = document.createElement("p");
-	childPar.innerText = text;
+	this.childPar = document.createElement("p");
+	this.childPar.innerText = text;
 
-	this.domElem.appendChild(childPar);
+	this.domElem.appendChild(this.childPar);
 
 	this.domElem.onclick = function()
 	{
-		for (let i = this.treeNode.level; i < displayArray.length; i++)
+		for (let i = this.treeNode.level - 1; i < displayArray.length; i++)
 			displayArray[i] = [];
 
-		this.treeNode.parent.selectedChild = this.treeNode.parent.childs.indexOf(this.treeNode);
-		this.treeNode.addToDisplay(true);
-		drawNodes(this.treeNode.level);
+		this.treeNode.parent.selectedChild = indexOfThis;
+		this.treeNode.parent.addToDisplay(true);
+		drawNodes(this.treeNode.level - 1);
+	}
+
+	this.domElem.draw = function(nodeIndex)
+	{
+		this.style.left = (101 * nodeIndex);
+		this.style.backgroundColor = (this.treeNode.parent.selectedChild == indexOfThis) ? "#CCCCFF" : "#FFFFFF";
+
 	}
 }
 
@@ -72,7 +81,7 @@ function drawNodes(level)
 
 		for (let j = 0; j < displayArray[i].length; j++)
 		{
-			displayArray[i][j].domElem.style = "left: " + (100 * j) + "px;";
+			displayArray[i][j].domElem.draw(j);
 			treeDiv.children[i].appendChild(displayArray[i][j].domElem);
 		}
 	}
