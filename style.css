@@ -1,0 +1,36 @@
+body {
+	margin: 0;
+	background-color: #000;
+}
+
+#treeDiv {
+	width: 1280px;
+	height: 720px;
+	background-color: #FFF;
+	margin: auto;
+	margin-top: 50px;
+	position: relative;
+	overflow: hidden;
+}
+
+.treeStack {
+	position: relative;
+	width: 100%;
+	height: 70px;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.treeStack * {
+	position: absolute;
+}
+
+.treeNode {
+	width: 100px;
+	height: 100%;
+	border-right: 1px solid black;
+}
+
+.treeNode p {
+	margin: 4px;
+}
