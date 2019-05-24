@@ -68,7 +68,6 @@ function treeNodeClass(level, parent, index, text)
 	{
 		this.style.left = (101 * nodeIndex);
 		this.style.backgroundColor = (this.treeNode.parent.selectedChild == indexOfThis) ? "#CCCCFF" : "#FFFFFF";
-
 	}
 }
 
@@ -97,7 +96,7 @@ function firstDraw()
 }
 
 // Makes the root node, meant to be invisible to the user
-const root = new treeNodeClass(0, null, null);
+const root = new treeNodeClass(0, null, null, null);
 
 const displayArray = [];
 
