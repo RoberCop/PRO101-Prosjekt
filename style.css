@@ -26,11 +26,12 @@ body {
 }
 
 .treeNode {
-	width: 100px;
+	width: 150px;
 	height: 100%;
 	border-right: 1px solid black;
 }
 
 .treeNode p {
 	margin: 4px;
+	margin-right: 54px;
 }
