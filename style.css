@@ -1,3 +1,7 @@
+*
+{
+    font-weight: 200;
+}
 html, body
 {
     margin: 0;
@@ -42,7 +46,7 @@ main
 {
     grid-area: main;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: flex-end;
     align-items: center;
     grid-column: 1/2;
@@ -107,23 +111,40 @@ main > .addBtn
     justify-content: center;
     align-items: center;
     transition: 0.5s transform ease, 1s background-color ease-out;
+    overflow: hidden;
 }
 .addBtn:hover
 {
     transform: scale(1.05) translate(0%, -50%);
     background-color: #b2e68a;
 }
-.addBtn > span{
+.addBtn > span
+{
     transform-origin: center;
     transform: rotate(0deg);
-    transition: 0.5s all;
+    transition: 0.2s all;
 }
 .addBtn > span:hover
 {
-    transform: rotate(360deg);
+
 }
-.prjctDiv
+.project
 {
     border: 1px solid;
     padding: 1em;
+}
+.projectDetails
+{
+    display: grid;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: white;
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    text-align: center;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
