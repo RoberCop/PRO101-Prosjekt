@@ -19,14 +19,14 @@ h1
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-areas: "head"
+    grid-template-areas:
+    "head"
     "main"
     "foot";
     grid-template-rows: 100px 1fr 70px;
     grid-template-columns: 1fr;
     grid-row-gap: 20px;
-    justify-content: center;
-    align-items: center;
+    margin-bottom: 0;
 }
 header
 {
@@ -48,6 +48,16 @@ main
     grid-column: 1/2;
     border: 1px solid;
     height: 100%;
+    max-width: 60vw;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+nav
+{
+    grid-area: nav;
+    height: 100%;
+    border: 1px solid;
 }
 footer
 {
@@ -79,6 +89,38 @@ header > .navBox, .userDiv
     border: 3px solid;
     width: 80%;
     border-radius: 4px;
+}
+main > .addBtn
+{
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translate(0%, -50%);
+    width: 70px;
+    height: 70px;
+    border: 0.5px solid;
+    border-radius: 50%;
+    margin: 0 0 0 20px;
+    font-size: 70px;
+    font-weight: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s transform ease, 1s background-color ease-out;
+}
+.addBtn:hover
+{
+    transform: scale(1.05) translate(0%, -50%);
+    background-color: #b2e68a;
+}
+.addBtn > span{
+    transform-origin: center;
+    transform: rotate(0deg);
+    transition: 0.5s all;
+}
+.addBtn > span:hover
+{
+    transform: rotate(360deg);
 }
 .prjctDiv
 {
