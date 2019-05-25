@@ -17,15 +17,33 @@
 		</header>
 		<main>
 			<div id="treeDiv">
-				<div class="prjctDiv">
+				<!--
+				<div class="project">
 					<h3>Project1</h3>
 				</div>
+				-->
 			</div>
-			<div class="addBtn"><span>+</span></div>
+			<div class="addBtn" data-btn="addProject"><span data-btn="addProject">+</span></div>
 		</main>
 		<footer>
 		</footer>
 	</section>
+	<!--Script for testing-->
+	<script>
+		const treeDiv = document.getElementById('treeDiv');
+		const html = document.querySelector('html');
+		document.addEventListener('click', e => {
+			if (e.target.dataset.btn == 'addProject'){
+				console.log('Add btn clicked');
+				const el = document.createElement('div');
+				el.setAttribute('class', 'projectDetails');
+				el.innerText = 'Create new project';
+				html.style.backgroundColor = "rgba(0, 0, 0, 0.5)"
+				treeDiv.appendChild(el);
+
+			}
+		})
+	</script>
 	<script src="script.js"></script>
 	</body>
 </html>
