@@ -35,10 +35,23 @@ function treeNodeClass(level, parent, index, text)
 		if (level > 0)
 			displayArray[level - 1].push(this);
 
-		// if selected, call this same method on child objects
+		this.domElem.style.left = (151 * this.indexOfThis);
+
 		if (isSelected)
+		{
+			// style for when node is selected
+			this.removeBtn.style.visibility = "visible";
+			this.domElem.style.backgroundColor = "#CCCCFF";
+
+			// if selected, call this same method on child objects
 			for (childIndex in this.childs)
 				this.childs[childIndex].addToDisplay(childIndex == this.selectedChild);
+		}
+		else {
+			// style for when node is unselected
+			this.removeBtn.style.visibility = "hidden";
+			this.domElem.style.backgroundColor = "#FFFFFF";
+		}
 	}
 
 	////////////////////////////////////
@@ -67,13 +80,6 @@ function treeNodeClass(level, parent, index, text)
 		for (let i = level - 1; i < displayArray.length; i++)
 			displayArray[i] = [];
 
-		// hides last selected node's "removeBtn", and makes this node's button visible
-		if (parent.childs[parent.selectedChild] !== undefined)
-		{
-			parent.childs[parent.selectedChild].removeBtn.style.visibility = "hidden"; 
-			this.treeNode.removeBtn.style.visibility = "visible";
-		}
-
 		// set this node to be the selected child, on the parent
 		parent.selectedChild = this.treeNode.indexOfThis;
 
@@ -82,18 +88,14 @@ function treeNodeClass(level, parent, index, text)
 		drawNodes(level - 1);
 	}
 
-	this.domElem.setStyle = function(nodeIndex)
-	{
-		this.style.left = (151 * nodeIndex);
-		this.style.backgroundColor = (parent.selectedChild == this.treeNode.indexOfThis) ? "#CCCCFF" : "#FFFFFF";
-	}
-
 	this.removeBtn.onclick = function()
 	{
 		const treeNodeIndex = this.treeNode.indexOfThis;
 
+		// remove selected node, and fill inn from the right
 		parent.childs.splice(treeNodeIndex, 1);
 
+		// update indicies on other nodes to the right(reference members)
 		for (let i = treeNodeIndex; i < parent.childs.length; i++)
 			parent.childs[i].indexOfThis = i;
 	}
@@ -110,7 +112,6 @@ function drawNodes(level)
 		// add each node to the stack
 		for (let j = 0; j < displayArray[i].length; j++)
 		{
-			displayArray[i][j].domElem.setStyle(j);
 			treeDiv.children[i].appendChild(displayArray[i][j].domElem);
 		}
 	}
