@@ -21,6 +21,7 @@ function treeNodeClass(level, parent, index, text)
 	this.childs = [];
 
 	this.selectedChild = 0;
+	this.indexOfThis = index;
 
 	// adds a new instance to "childs" array
 	this.newChild = function(newText)
@@ -55,6 +56,7 @@ function treeNodeClass(level, parent, index, text)
 	this.removeBtn.style.right = 0;
 	this.removeBtn.style.top = 0;
 	this.removeBtn.style.visibility = "hidden";
+	this.removeBtn.treeNode = this;
 
 	this.domElem.appendChild(this.childPar);
 	this.domElem.appendChild(this.removeBtn);
@@ -66,11 +68,14 @@ function treeNodeClass(level, parent, index, text)
 			displayArray[i] = [];
 
 		// hides last selected node's "removeBtn", and makes this node's button visible
-		parent.childs[parent.selectedChild].removeBtn.style.visibility = "hidden"; 
-		this.treeNode.removeBtn.style.visibility = "visible";
+		if (parent.childs[parent.selectedChild] !== undefined)
+		{
+			parent.childs[parent.selectedChild].removeBtn.style.visibility = "hidden"; 
+			this.treeNode.removeBtn.style.visibility = "visible";
+		}
 
 		// set this node to be the selected child, on the parent
-		parent.selectedChild = index;
+		parent.selectedChild = this.treeNode.indexOfThis;
 
 		// recursively add to display based on selected nodes from parent node, and draw the new nodes
 		parent.addToDisplay(true);
@@ -80,14 +85,17 @@ function treeNodeClass(level, parent, index, text)
 	this.domElem.setStyle = function(nodeIndex)
 	{
 		this.style.left = (151 * nodeIndex);
-		this.style.backgroundColor = (parent.selectedChild == index) ? "#CCCCFF" : "#FFFFFF";
+		this.style.backgroundColor = (parent.selectedChild == this.treeNode.indexOfThis) ? "#CCCCFF" : "#FFFFFF";
 	}
 
 	this.removeBtn.onclick = function()
 	{
-		parent.selectedChild = 0;
-		parent.childs.splice(index, 1);
-		index = 0;
+		const treeNodeIndex = this.treeNode.indexOfThis;
+
+		parent.childs.splice(treeNodeIndex, 1);
+
+		for (let i = treeNodeIndex; i < parent.childs.length; i++)
+			parent.childs[i].indexOfThis = i;
 	}
 }
 
