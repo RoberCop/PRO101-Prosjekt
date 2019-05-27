@@ -23,13 +23,15 @@ h1
     height: 100vh;
     display: grid;
     grid-template-areas:
-    "head"
-    "main"
-    "foot";
+    "head head"
+    "edit main"
+    "foot foot";
     grid-template-rows: 100px 1fr 70px;
-    grid-template-columns: 1fr;
+    grid-template-columns: 0.3fr 1fr;
     grid-row-gap: 20px;
+    grid-column-gap: 50px;
     margin-bottom: 0;
+    justify-content: space-between;
 }
 
 header
@@ -43,6 +45,13 @@ header
     height: 100%;
 }
 
+.edit-container
+{
+    grid-area: edit;
+    border: 1px solid;
+    margin-left: 20px;
+    display: flex;
+}
 main
 {
     grid-area: main;
@@ -50,21 +59,18 @@ main
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    grid-column: 1/2;
     border: 1px solid;
     height: 100%;
     max-width: 60vw;
+    right: 0;
     position: relative;
+    margin-right: 20px;
+    /*
     left: 50%;
     transform: translate(-50%);
 	overflow: scroll;
-}
 
-nav
-{
-    grid-area: nav;
-    height: 100%;
-    border: 1px solid;
+     */
 }
 
 footer
