@@ -1,3 +1,37 @@
+function addNodeBtnClass(level, parent, index)
+{
+	this.indexOfThis = index;
+
+	this.addToDisplay = function(isSelected)
+	{
+		displayArray[level - 1].push(this);
+		this.domElem.style.left = (151 * this.indexOfThis);
+	}
+
+	///////////////////////////////
+	// Dom element
+	
+	this.domElem = document.createElement("div");
+	this.domElem.className = "addButton";
+	this.domElem.treeNode = this;
+
+	this.domElem.onclick = function()
+	{
+		for (let i = level - 1; i < displayArray.length; i++)
+			displayArray[i] = [];
+
+		parent.childs.splice(this.treeNode.indexOfThis, 1);
+		parent.newChild("Sample Text");
+		parent.childs[this.treeNode.indexOfThis].newAddBtnRec();
+
+		parent.selectedChild = this.treeNode.indexOfThis++;
+		parent.childs.push(this.treeNode);
+
+		parent.addToDisplay(true);
+		drawNodes(level - 1);
+	}
+}
+
 // Dom element constants
 const treeDiv = document.getElementById("treeDiv"); 
 
@@ -46,6 +80,7 @@ for (let i = 0; i < 30; i++)
 	newTreeStack();
 
 const root = getTreeData();
+root.newAddBtnRec();
 firstDraw();
 
 const html = document.querySelector('html');
