@@ -48,6 +48,7 @@ for (let i = 0; i < 30; i++)
 const root = getTreeData();
 firstDraw();
 
+//Eventlistener for the add button
 const html = document.querySelector('html');
 document.addEventListener('click', e => {
 	if (e.target.dataset.btn == 'addProject'){

@@ -50,6 +50,7 @@ header
     grid-area: edit;
     display: flex;
     border: 1px solid;
+    border-radius: 4px;
     margin-left: 20px;
     padding: 10px 0 10px 0;
 }
@@ -158,6 +159,11 @@ input, textarea
     height: 200px;
 }
 
+div > h3
+{
+    text-decoration: underline;
+}
+
 textarea:focus, input:focus
 {
     outline: none;
@@ -179,7 +185,7 @@ textarea:focus, input:focus
     border-radius: 4px;
 }
 
-main > .addBtn
+.addBtn
 {
     position: absolute;
     top: 50%;
@@ -222,53 +228,38 @@ main > .addBtn
     border: 1px solid;
     padding: 1em;
 }
-.projectDetails
-{
-    display: grid;
-    border: 1px solid;
-    border-radius: 5px;
-    background-color: white;
-    width: 50%;
-    height: 50%;
-    position: absolute;
-    text-align: center;
-    z-index: 100;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 
 #treeDiv {
 	height: 80vh;
 	background-color: #FFF;
 	position: relative;
-    overflow: scroll;
+    overflow-y: scroll;
     grid-area: main;
+    margin-right: 20px;
+    border: 1px solid;
 }
 
 .treeStack {
-	position: relative;
-	width: 100%;
-	height: 70px;
-}
-
-.treeStack {
+    position: relative;
+    width: 100%;
+    height: 70px;
 	display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     margin-bottom: 5px;
-    border: 1px solid;
 }
 
 .treeNode {
 	width: 150px;
+	min-width: 150px;
 	height: 100%;
-	/*border-right: 1px solid black;*/
     border: 1px solid;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-right: 5px;
+    text-align: center;
 }
 
 .treeNode p {

@@ -17,9 +17,54 @@ function getTreeData()
 	root.childs[0].childs[0].newChild("Make a door");
 	root.childs[0].childs[0].newChild("test");
 	root.childs[0].childs[0].newChild("test");
+	root.childs[0].childs[0].newChild("test");
+	root.childs[0].childs[0].newChild("test");
+	root.childs[0].childs[0].newChild("test");
 
-	root.childs[0].childs[0].childs[0].newChild("Get some concrete");
-	root.childs[0].childs[0].childs[1].newChild("Get some wood");
+	root.
+		childs[0].
+		childs[0].
+		childs[0].
+	newChild("Get some concrete");
+	root.
+		childs[0].
+		childs[0].
+		childs[0].
+		childs[0].
+	newChild("test");
+	root.
+		childs[0].
+		childs[0].
+		childs[0].
+		childs[0].
+		childs[0].
+	newChild("test");
+	root.
+		childs[0].
+		childs[0].
+		childs[0].
+		childs[0].
+		childs[0].
+		childs[0].
+	newChild("test");
+	root.
+		childs[0].
+		childs[0].
+		childs[0].
+		childs[0].
+		childs[0].
+		childs[0].
+		childs[0]
+	.newChild("test");
+	root.
+		childs[0].
+		childs[0].
+		childs[1].
+	newChild("Get some wood");
+
+	for (let i = 2; i < 30; i++) {
+
+	}
 
 	//Car
 	root.childs[0].childs[1].newChild("Make a engine");
