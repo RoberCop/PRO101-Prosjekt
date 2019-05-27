@@ -26,9 +26,9 @@ h1
     "head head"
     "edit main"
     "foot foot";
-    grid-template-rows: 100px 1fr 70px;
+    grid-template-rows: 80px 1fr 70px;
     grid-template-columns: 0.3fr 1fr;
-    grid-row-gap: 20px;
+    grid-row-gap: 10px;
     grid-column-gap: 50px;
     margin-bottom: 0;
     justify-content: space-between;
@@ -48,10 +48,12 @@ header
 .edit-container
 {
     grid-area: edit;
+    display: flex;
     border: 1px solid;
     margin-left: 20px;
-    display: flex;
+    padding: 10px 0 10px 0;
 }
+
 main
 {
     grid-area: main;
@@ -91,6 +93,74 @@ header > .navBox, .userDiv
     padding: 10px;
     height: 50px;
     width: 50px;
+}
+
+input, textarea
+{
+    border: 1px dashed;
+    border-radius: 4px;
+    resize: none;
+}
+
+.flex-center
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-btn-container
+{
+    height: 10%;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-btn-container > img
+{
+    height: 25px;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.green
+{
+    background-color: lightgreen;
+}
+
+.red
+{
+    background-color: #d46464;
+}
+
+.orange
+{
+    background-color: #ffb333;
+}
+
+#title-div > input
+{
+    font-size: 20px;
+    text-align: center;
+    padding: 0.7em;
+}
+
+#descript-div > textarea
+{
+    font-size: 20px;
+    text-align: center;
+    padding: 0.7em;
+    height: 200px;
+}
+
+textarea:focus, input:focus
+{
+    outline: none;
+    border: 2px #ee9b4c solid;
 }
 
 .navBox
@@ -197,9 +267,11 @@ main > .addBtn
 	height: 100%;
 	/*border-right: 1px solid black;*/
     border: 1px solid;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .treeNode p {
-	margin: 4px;
-	margin-right: 54px;
+    text-align: center;
 }
