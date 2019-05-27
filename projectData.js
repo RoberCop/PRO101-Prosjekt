@@ -1,6 +1,6 @@
 function getTreeData()
 {
-	const root = new treeNodeClass(0, this, 0, null);
+	const root = new treeNodeClass(0, null, 0, null);
 	
 	// Hard code sample nodes for testing
 	root.newChild("Project");
