@@ -15,6 +15,15 @@ function treeNodeClass(level, parent, index, text)
 		this.childs.push(new treeNodeClass(level + 1, this, this.childs.length, newText));
 	}
 
+	this.newAddBtnRec = function()
+	{
+		this.childs.push(new addNodeBtnClass(level + 1, this, this.childs.length));
+
+		for (child of this.childs)
+			if (child.selectedChild !== undefined)
+				child.newAddBtnRec();
+	}
+
 	this.addToDisplay = function(isSelected)
 	{
 		// add this node to the displayArray if its not root
