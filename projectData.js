@@ -50,15 +50,6 @@ function getTreeData()
 	root.
 		childs[0].
 		childs[0].
-		childs[0].
-		childs[0].
-		childs[0].
-		childs[0].
-		childs[0]
-	.newChild("test");
-	root.
-		childs[0].
-		childs[0].
 		childs[1].
 	newChild("Get some wood");
 
