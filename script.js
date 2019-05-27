@@ -157,3 +157,16 @@ root.childs[0].childs[1].newChild("Make a frame");
 root.childs[0].childs[1].newChild("Make some wheels");
 
 firstDraw();
+
+const html = document.querySelector('html');
+document.addEventListener('click', e => {
+	if (e.target.dataset.btn == 'addProject'){
+		console.log('Add btn clicked');
+		const el = document.createElement('div');
+		el.setAttribute('class', 'projectDetails');
+		el.innerText = 'Create new project';
+		html.style.backgroundColor = "rgba(0, 0, 0, 0.5)"
+		treeDiv.appendChild(el);
+
+	}
+})
