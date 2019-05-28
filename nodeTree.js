@@ -17,6 +17,16 @@ function addNodeBtnClass(level, parent, index)
 		this.domElem.style.left = (151 * this.indexOfThis);
 	}
 
+	// same as in treeNodeClass()
+	this.draw = function()
+	{
+		for (let i = level - 1; i < displayArray.length; i++)
+			displayArray[i] = [];
+
+		parent.addToDisplay(true);
+		drawNodes(level - 1);
+	}
+
 	///////////////////////////////
 	// Dom element
 	
@@ -26,18 +36,16 @@ function addNodeBtnClass(level, parent, index)
 
 	this.domElem.onclick = function()
 	{
-		for (let i = level - 1; i < displayArray.length; i++)
-			displayArray[i] = [];
-
 		parent.childs.splice(this.treeNode.indexOfThis, 1);
 		parent.newChild("Sample Text");
 		parent.childs[this.treeNode.indexOfThis].newAddBtnRec();
 
+		selectedNode = parent.childs[this.treeNode.indexOfThis];
+
 		parent.selectedChild = this.treeNode.indexOfThis++;
 		parent.childs.push(this.treeNode);
 
-		parent.addToDisplay(true);
-		drawNodes(level - 1);
+		this.treeNode.draw();
 	}
 }
 
@@ -63,6 +71,14 @@ function createWarningElem()
 	const deleteBtn = document.createElement('div');
 	deleteBtn.innerText = "Delete anyway";
 	btnContainer.appendChild(deleteBtn);
+
+	deleteBtn.onclick = function()
+	{
+		const newSelectedNode = selectedNode.getParent();
+		selectedNode.removeNode();
+		selectedNode = newSelectedNode;
+		body.removeChild(shader);
+	}
 
 	//Cancel button
 	const cancelBtn = document.createElement('h4');
@@ -139,5 +155,7 @@ const root = getTreeData();
 root.newAddBtnRec();
 
 createWarningElem();
+
+var selectedNode = root.childs[0];
 
 firstDraw();

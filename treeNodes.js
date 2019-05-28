@@ -49,6 +49,35 @@ function treeNodeClass(level, parent, index, text)
 		}
 	}
 
+	this.removeNode = function()
+	{
+		// remove selected node, and fill inn from the right
+		parent.childs.splice(this.indexOfThis, 1);
+		selectedNode = parent.childs[this.indexOfThis];
+
+		// update indicies on other nodes to the right(reference members)
+		for (let i = this.indexOfThis; i < parent.childs.length; i++)
+			parent.childs[i].indexOfThis = i;
+
+		this.draw();
+	}
+
+	this.draw = function()
+	{
+		// clear this stack and outwards in the display array
+		for (let i = level - 1; i < displayArray.length; i++)
+			displayArray[i] = [];
+
+		// recursively add to display based on selected nodes from parent node, and draw the new nodes
+		parent.addToDisplay(true);
+		drawNodes(level - 1);
+	}
+
+	this.getParent = function()
+	{
+		return parent;
+	}
+
 	////////////////////////////////////
 	// Dom element
 	
@@ -71,27 +100,10 @@ function treeNodeClass(level, parent, index, text)
 
 	this.domElem.onclick = function()
 	{
-		// clear this stack and outwards in the display array
-		for (let i = level - 1; i < displayArray.length; i++)
-			displayArray[i] = [];
-
 		// set this node to be the selected child, on the parent
 		parent.selectedChild = this.treeNode.indexOfThis;
+		selectedNode = parent.childs[this.treeNode.indexOfThis];
 
-		// recursively add to display based on selected nodes from parent node, and draw the new nodes
-		parent.addToDisplay(true);
-		drawNodes(level - 1);
-	}
-
-	this.removeBtn.onclick = function()
-	{
-		const treeNodeIndex = this.treeNode.indexOfThis;
-
-		// remove selected node, and fill inn from the right
-		parent.childs.splice(treeNodeIndex, 1);
-
-		// update indicies on other nodes to the right(reference members)
-		for (let i = treeNodeIndex; i < parent.childs.length; i++)
-			parent.childs[i].indexOfThis = i;
+		this.treeNode.draw();
 	}
 }
