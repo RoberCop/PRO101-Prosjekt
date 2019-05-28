@@ -11,6 +11,16 @@ html, body
     font-weight: 200;
 }
 
+html {
+    z-index: 200;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 h1
 {
     font-weight: 200;
@@ -93,10 +103,10 @@ input, textarea
 .edit-btn-container
 {
     height: 10%;
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -104,7 +114,9 @@ input, textarea
 {
     height: 25px;
     padding: 15px;
+    border: 1px solid;
     border-radius: 4px;
+    transition: 0.3s all ease;
 }
 
 .green
@@ -210,4 +222,44 @@ textarea:focus, input:focus
 	width: 10px;
 	height: 10px;
 	background-color: #555;
+}
+
+.module {
+    width: 40vw;
+    height: 40vh;
+    border: 1px solid;
+    border-radius: 10px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-items: center;
+    background-color: whitesmoke;
+    text-align: center;
+}
+.module > h1 {
+    text-decoration: underline;
+}
+.module > p {
+    font-weight: bolder;
+}
+.module-btn {
+    padding: 20px;
+    width: 30%;
+    border-radius: 10px;
+    border: 1px solid;
+    transition: 0.3s all ease;
+}
+.module-btn:hover, .edit-btn-container > img:hover {
+    transform: scale(1.05);
+}
+
+.shader {
+    background-color: rgba(50, 50, 50, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
