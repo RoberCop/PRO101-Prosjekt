@@ -93,11 +93,11 @@ function renderWarning(){
 	//Module
 	const module = document.createElement('div');
 	module.dataset.clicked = "true";
-	const h2 = document.createElement('h2');
-	h2.innerText = 'Hold it!';
+	const h1 = document.createElement('h1');
+	h1.innerText = 'Hold it!';
 	//Paragraph in module
 	const paragraph = document.createElement('p');
-	paragraph.innerText = 'Hold up! This wil also delete the child nodes. Are you sure you want to delete this?';
+	paragraph.innerText = 'This wil also delete the child nodes. Are you sure you want to delete this?';
 	//Button container
 	const btnContainer = document.createElement('div');
 	btnContainer.setAttribute('class', 'edit-btn-container');
@@ -112,12 +112,12 @@ function renderWarning(){
 	btnContainer.appendChild(cancelBtn);
 	//Attributes
 	module.setAttribute('class', 'module');
-	deleteBtn.setAttribute('class', 'red deleteBtn');
-	cancelBtn.setAttribute('class', 'green cancleBtn');
+	deleteBtn.setAttribute('class', 'red deleteBtn module-btn');
+	cancelBtn.setAttribute('class', 'green cancelBtn module-btn');
 	//Appends to child
 	body.appendChild(shader);
 	shader.appendChild(module);
-	module.appendChild(h2);
+	module.appendChild(h1);
 	module.appendChild(paragraph);
 	module.appendChild(btnContainer);
 }
