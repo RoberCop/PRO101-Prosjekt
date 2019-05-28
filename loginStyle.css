@@ -1,0 +1,382 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+
+*{
+	box-sizing: border-box; /*PADDING DOES NOT AFFECT WIDTH*/
+}
+
+body{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	background: #85e0fc;
+	color: rgb(0, 0, 0);
+	overflow: hidden;
+	margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 300;
+}
+
+#wrapper {
+	display: flex;
+	flex-direction: row;
+}
+
+#left{
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+
+}
+
+#right{
+	flex: 1;
+} 
+
+/*******SIGN IN********/
+#signin {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 80%;
+	padding-bottom: 1rem;
+}
+
+#signin form {
+	width: 80%;
+	padding-bottom: 3rem;
+}
+
+
+
+#signin .logo {
+	margin-bottom: 8vh;
+}
+
+#signin .logo-txt {
+	color: #006685;
+	
+}
+
+#signin label {
+	font-size: 1.1rem;
+	line-height: 2rem;
+	font-weight: 500;
+	color: #006685;
+}
+
+#signin .text-input {
+	font-size: 1.1rem;
+	margin-bottom: 1.3rem;
+	width: 100%;
+	border-radius: 2px;
+	background: beige;
+	color: #006685;
+	border: 1px solid #1ec9fd;
+	padding: 0.5rem 1rem;
+	line-height: 1.3rem;
+
+}
+
+#signin .error-msg {
+	color: red;
+	margin-top: 0;
+}
+
+
+
+/*********BUTTONS*********/
+#signin .primary-btn, .modal-body .primary-btn {
+	width: 100%;
+}
+
+#signin .secondary-btn, .or, .links {
+	width: 60%;
+}
+
+#signin .links a {
+	display: block;
+	color: #006685;;
+	text-decoration: none;
+	margin-bottom: 1rem;
+	text-align: center;
+	font-size: 0.9rem;
+} 
+.primary-btn {
+	padding: 0.7rem 1rem;
+	height: 2.7rem;
+	display: block;
+	border: 0;
+	border-radius: 2px;
+	font-weight: 500;
+	background: #006685;
+	color: #85e0fc;;
+	text-decoration: none;
+	cursor: pointer;
+	text-align: center;
+	transition: all 0.5s;
+
+}
+
+.primary-btn:hover {
+	background-color: #006685b9;
+}
+
+.secondary-btn {
+	padding: 0.7rem 1rem;
+	height: 2.7rem;
+	display: block;
+	border: 1px solid #006685 ;
+	border-radius: 2px;
+	font-weight: 500;
+	background: none;
+	color: #006685;
+	text-decoration: none;
+	cursor: pointer;
+	text-align: center;
+	transition: all 0.5s;
+
+}
+
+#signin .secondary-btn:hover {
+	border-color: #fff;
+	color: #fff;
+}
+
+#showcase .secondary-btn:hover {
+	background-color: #fff;
+	
+	
+}
+
+/*******OR*******/
+#signin .or{
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 1.2rem;
+	align-items: center;
+}
+
+#signin .or .bar{
+	flex: auto;
+	border: none;
+	height: 1px;
+	background: #006685;
+
+
+}
+
+#signin .or span {
+	color: #006685;
+	padding: 0 0.8rem;
+}
+
+/*******SHOWCASE******/
+#showcase {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	background: url('/img/agenda-calendar-checklist-3243.jpg') no-repeat center center / cover;
+	height: 100vh;
+}
+
+#showcase .showcase-text{
+	font-size: 3rem;
+	width: 100%;
+	color: #006685;
+	margin-bottom: 1.5rem;
+
+}
+
+#showcase .secondary-btn {
+	width: 60%;
+	margin: auto;
+}
+
+/*******FOOTER*******/
+#main-footer {
+	color: #006685;
+	text-align: center;
+	font-size: 0.8rem;
+	max-width: 80%;
+	padding-top: 5rem;
+}
+
+#main-footer a {
+	color: #fcfcdf;
+	text-decoration: underline;
+}
+
+
+
+/*******MODAL********/
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left:0;
+	top: 0;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: rgba(255, 255, 255, 0.5)
+}
+
+.modal-content {
+	background-color: #1ec9fd;
+	border-radius: 10px;
+	margin: auto;
+	width: 30%;
+	box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(145, 55, 55, 0.17);
+	animation-name: modalOpen;
+	animation-duration: 0.6s;
+}
+
+.modal-header h2{
+	margin: 0;
+}
+
+.modal-header {
+	border-radius: 10px 10px 0 0;
+	background: beige;
+	padding: 1.3rem;
+	font-size: 1.3rem;
+	color: #006685;
+}
+
+.modal-body {
+	background: #85e0fc;;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal-footer {
+	display: flex;
+	flex-direction: row;
+	padding: 1.3rem;
+	justify-content: space-around;
+	font-size: 1.3rem;
+	color: #006685;
+	background: beige;
+	border-radius: 0 0 10px 10px;
+}
+
+.modal-body form {
+	width: 80%;
+	padding-bottom: 3rem;
+}
+
+.modal-body label {
+	font-size: 1.1rem;
+	line-height: 2rem;
+	font-weight: 500;
+	color: #006685;
+}
+
+.modal-body .text-input {
+	font-size: 1.1rem;
+	margin-bottom: 1.3rem;
+	width: 100%;
+	border-radius: 2px;
+	background: beige;
+	color: #006685;
+	border: 1px solid #006685;
+	padding: 0.5rem 1rem;
+	line-height: 1.3rem;
+
+}
+
+.wrong-input {
+	font-size: 1.1rem;
+	margin-bottom: 1.3rem;
+	width: 100%;
+	border-radius: 2px;
+	background: beige;
+	color: #006685;
+	padding: 0.5rem 1rem;
+	line-height: 1.3rem;
+	border: 2px solid red;
+	animation: shake 0.2s;
+	animation-iteration-count: 2;
+
+}
+
+.close-btn {
+	float: right;
+	color: #006685;
+	font-size: 1.4rem;
+}
+
+.close-btn:hover, .close-btn:focus {
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.error {
+	color: red;
+	margin-top: 0;
+}
+
+
+
+
+
+/**********MEDIA QUERIES*************/
+@media(min-width: 1200px) {
+	#left {
+		flex: 4;
+	}
+	#right {
+		flex: 6;
+	}
+}
+
+@media(max-width: 768px) {
+	body {
+		overflow: auto;
+	}
+	#right {
+		display: none;
+	}
+	#left {
+		justify-content: start;
+		margin-top: 2vh;
+	}
+#signin .logo {
+	margin-bottom: 2vh;
+	}
+	#signin .text-input {
+		margin-bottom: 0.7rem;
+	}
+	#main-footer {
+		padding-top: 1rem;
+	}
+.modal-content {
+	width: 80%;
+}
+}
+
+/******KEYFRAMES*********/
+
+	@keyframes modalOpen {
+		from{transform: scale(0)}
+		to{transform: scale(1)}
+	}
+
+@keyframes shake {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(1.01);
+	}
+}

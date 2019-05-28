@@ -207,22 +207,39 @@ textarea:focus, input:focus
 	min-width: 150px;
 	height: 100%;
     border: 1px solid;
+    border-radius: 3px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-right: 5px;
     text-align: center;
+   /* animation: nodeOpen 10s linear 0s infinite paused;*/
 }
+
+/*.treeNode:hover {
+    transform: scale(1.2);
+}*/
 
 .treeNode p {
     text-align: center;
+ 
+
 }
 
 .addButton {
 	width: 10px;
 	height: 10px;
-	background-color: #555;
+	color: #006685;
 }
+
+.addButton:hover {
+    color: green;
+    animation: addBtnAnim 0.7s linear 0s infinite alternate;
+}
+
+/*.addButton + .treeNode {
+    animation-play-state: running;
+}*/
 
 .module {
     width: 40vw;
@@ -262,4 +279,22 @@ textarea:focus, input:focus
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@keyframes nodeOpen {
+	from{
+        transform: scale(0)
+    }
+	to{
+        transform: scale(1)
+    }
+}
+
+@keyframes addBtnAnim {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.3);
+    }
 }
