@@ -54,28 +54,6 @@ header
     margin-left: 20px;
     padding: 10px 0 10px 0;
 }
-/*
-main
-{
-    grid-area: main;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    border: 1px solid;
-    height: 100%;
-    max-width: 60vw;
-    right: 0;
-    position: relative;
-    margin-right: 20px;
-    /*
-    left: 50%;
-    transform: translate(-50%);
-	overflow: scroll;
-
-
-}
-*/
 
 footer
 {
@@ -183,44 +161,6 @@ textarea:focus, input:focus
     border: 3px solid;
     width: 80%;
     border-radius: 4px;
-}
-
-.addBtn
-{
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    transform: translate(0%, -50%);
-    width: 70px;
-    height: 70px;
-    border: 0.5px solid;
-    border-radius: 50%;
-    margin: 0 0 0 20px;
-    font-size: 70px;
-    font-weight: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.5s transform ease, 1s background-color ease-out;
-    overflow: hidden;
-}
-
-.addBtn:hover
-{
-    transform: scale(1.05) translate(0%, -50%);
-    background-color: #b2e68a;
-}
-
-.addBtn > span
-{
-    transform-origin: center;
-    transform: rotate(0deg);
-    transition: 0.2s all;
-}
-
-.addBtn > span:hover
-{
-
 }
 
 .project
