@@ -11,6 +11,16 @@ html, body
     font-weight: 200;
 }
 
+html {
+    z-index: 200;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 h1
 {
     font-weight: 200;
@@ -115,10 +125,10 @@ input, textarea
 .edit-btn-container
 {
     height: 10%;
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -270,4 +280,29 @@ textarea:focus, input:focus
 	width: 10px;
 	height: 10px;
 	background-color: #555;
+}
+
+.module {
+    width: 50vw;
+    height: 50vh;
+    border: 1px solid;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    background-color: whitesmoke;
+    text-align: center;
+}
+.module * {
+    border: 1px solid;
+}
+.shader {
+    background-color: rgba(50, 50, 50, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
