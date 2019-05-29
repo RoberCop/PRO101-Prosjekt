@@ -94,7 +94,9 @@ function createWarningElem()
 	{
 		const newSelectedNode = selectedNode.getParent();
 		selectedNode.removeNode();
+		selectedNode.domElem.style.backgroundColor = "#CCCCFF";
 		selectedNode = newSelectedNode;
+		selectedNode.domElem.style.backgroundColor = "#CCFFCC";
 		selectedNode.updateNodeEdit();
 		body.removeChild(shader);
 	}
