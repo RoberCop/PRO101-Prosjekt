@@ -94,13 +94,30 @@ function treeNodeClass(level, parent, index, title, desc)
 	// Dom element
 	
 	this.domElem = document.createElement("div");
+	let domHeader = document.createElement("div");
+	let childH4 = document.createElement("h4");
+	let domBody = document.createElement("div");
+	let icon = document.createElement("i");
+	let light = document.createElement("div");
+
 	this.domElem.className = "treeNode";
 	this.domElem.treeNode = this;
 
-	this.childPar = document.createElement("p");
-	this.childPar.innerText = title;
+	domHeader.className = "node-header";
 
-	this.domElem.appendChild(this.childPar);
+	childH4.innerText = title;
+
+	domBody.className = "node-body";
+
+	icon.className = "light";
+
+	domHeader.appendChild(childH4);
+
+	domBody.appendChild(icon);
+	domBody.appendChild(light);
+
+	this.domElem.appendChild(domHeader);
+	this.domElem.appendChild(domBody);
 
 	this.domElem.onclick = function()
 	{

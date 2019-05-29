@@ -138,7 +138,7 @@ saveNode.onclick = function()
 	selectedNode.title = nodeTitle.value;
 	selectedNode.desc = nodeDesc.value;
 	selectedNode.updateNodeEdit();
-	selectedNode.childPar.innerText = nodeTitle.value;
+	selectedNode.childH4.innerText = nodeTitle.value;
 }
 
 doneNode.onclick = function()
