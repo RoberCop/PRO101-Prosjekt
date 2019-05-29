@@ -12,6 +12,8 @@ function treeNodeClass(level, parent, index, title, desc)
 	this.title = (title !== undefined) ? title : "";
 	this.desc = (desc !== undefined) ? desc : "";
 
+	this.isDone = false;
+
 	// adds a new instance to "childs" array
 	this.newChild = function(newText, newDesc)
 	{
@@ -34,6 +36,7 @@ function treeNodeClass(level, parent, index, title, desc)
 			displayArray[level - 1].push(this);
 
 		this.domElem.style.left = (151 * this.indexOfThis);
+		this.domElem.style.borderColor = (this.isDone) ? "#00FF00" : "#FF0000";
 
 		if (isSelected)
 		{

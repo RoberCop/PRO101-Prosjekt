@@ -8,6 +8,9 @@ shader.setAttribute('class', 'shader');
 const nodeTitle = document.getElementById("nodeTitle");
 const nodeDesc = document.getElementById("nodeDesc");
 
+const doneNode = document.getElementById("doneNode");
+const notDoneNode = document.getElementById("notDoneNode");
+
 const deleteBtn = document.getElementById("deleteNode");
 const refreshBtn = document.getElementById("refreshNode");
 const saveBtn = document.getElementById("saveNode");
@@ -53,6 +56,9 @@ function addNodeBtnClass(level, parent, index)
 
 		selectedNode = parent.childs[this.treeNode.indexOfThis];
 		selectedNode.updateNodeEdit();
+
+		parent.isDone = false;
+		selectedNode.getParent().domElem.style.borderColor = "#FF0000";
 
 		parent.selectedChild = this.treeNode.indexOfThis++;
 		parent.childs.push(this.treeNode);
@@ -131,6 +137,25 @@ saveNode.onclick = function()
 	selectedNode.desc = nodeDesc.value;
 	selectedNode.updateNodeEdit();
 	selectedNode.childPar.innerText = nodeTitle.value;
+}
+
+doneNode.onclick = function()
+{
+	for (let i = 0; i < selectedNode.childs.length; i++)
+	{
+		if ( (!selectedNode.childs[i].isDone) && (selectedNode.childs[i].selectedChild !== undefined) ) return;
+	}
+
+	selectedNode.isDone = true;
+	selectedNode.domElem.style.borderColor = "#00FF00";
+}
+
+notDoneNode.onclick = function()
+{
+	selectedNode.isDone = false;
+	selectedNode.getParent().isDone = false;
+	selectedNode.domElem.style.borderColor = "#FF0000";
+	selectedNode.getParent().domElem.style.borderColor = "#FF0000";
 }
 
 /* Makes stacks inside "treeDiv", causing displayArray to become
