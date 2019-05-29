@@ -181,7 +181,7 @@ h1, h2, h3, h4, h5, h6 {
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	background: url('/img/agenda-calendar-checklist-3243.jpg') no-repeat center center / cover;
+	background: url('img/agenda-calendar-checklist-3243.jpg') no-repeat center center / cover;
 	height: 100vh;
 }
 
