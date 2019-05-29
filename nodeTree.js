@@ -120,6 +120,19 @@ deleteNode.onclick = function ()
 	body.appendChild(shader);
 }
 
+refreshNode.onclick = function()
+{
+	selectedNode.updateNodeEdit();
+}
+
+saveNode.onclick = function()
+{
+	selectedNode.title = nodeTitle.value;
+	selectedNode.desc = nodeDesc.value;
+	selectedNode.updateNodeEdit();
+	selectedNode.childPar.innerText = nodeTitle.value;
+}
+
 /* Makes stacks inside "treeDiv", causing displayArray to become
  * a two-dimentional array
 */

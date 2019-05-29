@@ -15,38 +15,12 @@ function getTreeData()
 	root.childs[0].childs[0].newChild("Make a roof");
 	root.childs[0].childs[0].newChild("Make windows");
 	root.childs[0].childs[0].newChild("Make a door");
-	root.childs[0].childs[0].newChild("test");
-	root.childs[0].childs[0].newChild("test");
-	root.childs[0].childs[0].newChild("test");
-	root.childs[0].childs[0].newChild("test");
-	root.childs[0].childs[0].newChild("test");
 
 	root.
 		childs[0].
 		childs[0].
 		childs[0].
 	newChild("Get some concrete");
-	root.
-		childs[0].
-		childs[0].
-		childs[0].
-		childs[0].
-	newChild("test");
-	root.
-		childs[0].
-		childs[0].
-		childs[0].
-		childs[0].
-		childs[0].
-	newChild("test");
-	root.
-		childs[0].
-		childs[0].
-		childs[0].
-		childs[0].
-		childs[0].
-		childs[0].
-	newChild("test");
 	root.
 		childs[0].
 		childs[0].

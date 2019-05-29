@@ -9,8 +9,8 @@ function treeNodeClass(level, parent, index, title, desc)
 	this.selectedChild = -1;
 	this.indexOfThis = index;
 
-	this.title = title;
-	this.desc = desc;
+	this.title = (title !== undefined) ? title : "";
+	this.desc = (desc !== undefined) ? desc : "";
 
 	// adds a new instance to "childs" array
 	this.newChild = function(newText, newDesc)
@@ -38,8 +38,7 @@ function treeNodeClass(level, parent, index, title, desc)
 		if (isSelected)
 		{
 			// style for when node is selected
-			this.removeBtn.style.visibility = "visible";
-			this.domElem.style.backgroundColor = "#CCCCFF";
+			this.domElem.style.backgroundColor = (this === selectedNode) ? "#CCFFCC" : "#CCCCFF";
 
 			// if selected, call this same method on child objects
 			for (childIndex in this.childs)
@@ -47,7 +46,6 @@ function treeNodeClass(level, parent, index, title, desc)
 		}
 		else {
 			// style for when node is unselected
-			this.removeBtn.style.visibility = "hidden";
 			this.domElem.style.backgroundColor = "#FFFFFF";
 		}
 	}
@@ -99,15 +97,7 @@ function treeNodeClass(level, parent, index, title, desc)
 	this.childPar = document.createElement("p");
 	this.childPar.innerText = title;
 
-	this.removeBtn = document.createElement("button");
-	this.removeBtn.innerText = "X";
-	this.removeBtn.style.right = 0;
-	this.removeBtn.style.top = 0;
-	this.removeBtn.style.visibility = "hidden";
-	this.removeBtn.treeNode = this;
-
 	this.domElem.appendChild(this.childPar);
-	this.domElem.appendChild(this.removeBtn);
 
 	this.domElem.onclick = function()
 	{
