@@ -1,11 +1,8 @@
 // Dom element constants
-const treeDiv = document.getElementById('treeDiv');
+const treeDiv = document.getElementById("treeDiv");
 const html = document.querySelector('html');
 const body = document.querySelector('body');
-const header = document.querySelector('header');
-const menuBar = document.querySelector('#menuBar');
 const shader = document.createElement('div');
-
 shader.setAttribute('class', 'shader');
 
 const deleteBtn = document.getElementById("deleteNode");
@@ -48,47 +45,6 @@ function addNodeBtnClass(level, parent, index) {
 	}
 }
 
-//Hides the header
-let interval = 100;
-header.style.transition = "0.1s transform ease-in-out";
-menuBar.style.transition = "0.1s transform ease-in-out";
-/*
-document.addEventListener("mousemove", (e)=>{
-	let mouseY = e.clientY;
-	let mouseX = e.clientX;
-	html.style.backgroundColor = "rgba(" + mouseY / 2 + ", " + mouseX / 2 + ", " + 130 +", 0.2)";
-
-	if (mouseY < 100)
-	{
-		header.style.transform = "translate(0%, 0%)";
-	}
-
-	else
-	{
-
-		header.style.transform = "translate(0%, -100%)";
-	}
-});
- */
-document.onmousemove = (e) => {
-	let mouseY = e.clientY;
-	let mouseX = e.clientX;
-	//Changes background-color based on mouseXY
-	html.style.backgroundColor = "rgba(" + mouseY / 2 + ", " + mouseX / 2 + ", " + 130 +", 0.2)";
-
-	if (mouseY < 100)
-	{
-		header.style.transform = "translate(0%, 0%)";
-		menuBar.style.transform = "translate(0, 0%)";
-	}
-
-	else
-	{
-		header.style.transform = "translate(0%, -100%)";
-		menuBar.style.transform = "translate(0, 100%)";
-	}
-};
-//Warning element
 function createWarningElem() {
 	//Module
 	const module = document.createElement('div');

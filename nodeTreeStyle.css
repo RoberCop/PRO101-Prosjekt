@@ -9,7 +9,6 @@ html, body
     font-family: 'Work Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     font-weight: 200;
-    transition: background-color 1.5s ease;
 }
 
 html {
@@ -52,10 +51,8 @@ header
     justify-content: space-between;
     align-items: center;
     grid-area: head;
+    border: 1px solid;
     height: 100%;
-    transform: translate(0%, 0%);
-    transform-style: preserve-3d;
-    border-top: none;
 }
 
 .edit-container
