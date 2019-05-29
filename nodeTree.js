@@ -5,23 +5,37 @@ const body = document.querySelector('body');
 const shader = document.createElement('div');
 shader.setAttribute('class', 'shader');
 
-const deleteBtn = document.getElementById("deleteNode");
+const nodeTitle = document.getElementById("nodeTitle");
+const nodeDesc = document.getElementById("nodeDesc");
 
-function addNodeBtnClass(level, parent, index) {
+const deleteBtn = document.getElementById("deleteNode");
+const refreshBtn = document.getElementById("refreshNode");
+const saveBtn = document.getElementById("saveNode");
+
+function addNodeBtnClass(level, parent, index)
+{
 	this.indexOfThis = index;
 
-	this.addToDisplay = function (isSelected) {
+	this.addToDisplay = function (isSelected)
+	{
 		displayArray[level - 1].push(this);
 		this.domElem.style.left = (151 * this.indexOfThis);
 	}
 
 	// same as in treeNodeClass()
-	this.draw = function () {
+	this.draw = function ()
+	{
 		for (let i = level - 1; i < displayArray.length; i++)
 			displayArray[i] = [];
 
 		parent.addToDisplay(true);
 		drawNodes(level - 1);
+	}
+
+	this.updateNodeEdit = function()
+	{
+		nodeTitle.innerText = this.title;
+		nodeDesc.innerText = this.desc;
 	}
 
 	///////////////////////////////
@@ -31,12 +45,14 @@ function addNodeBtnClass(level, parent, index) {
 	this.domElem.className = "addButton fas fa-plus";
 	this.domElem.treeNode = this;
 
-	this.domElem.onclick = function () {
+	this.domElem.onclick = function ()
+	{
 		parent.childs.splice(this.treeNode.indexOfThis, 1);
-		parent.newChild("Sample Text");
+		parent.newChild("Sample Text", "Sample Desc");
 		parent.childs[this.treeNode.indexOfThis].newAddBtnRec();
 
 		selectedNode = parent.childs[this.treeNode.indexOfThis];
+		selectedNode.updateNodeEdit();
 
 		parent.selectedChild = this.treeNode.indexOfThis++;
 		parent.childs.push(this.treeNode);
@@ -45,7 +61,8 @@ function addNodeBtnClass(level, parent, index) {
 	}
 }
 
-function createWarningElem() {
+function createWarningElem()
+{
 	//Module
 	const module = document.createElement('div');
 	module.dataset.clicked = "true";
@@ -67,10 +84,12 @@ function createWarningElem() {
 	deleteBtn.innerText = "Delete anyway";
 	btnContainer.appendChild(deleteBtn);
 
-	deleteBtn.onclick = function () {
+	deleteBtn.onclick = function ()
+	{
 		const newSelectedNode = selectedNode.getParent();
 		selectedNode.removeNode();
 		selectedNode = newSelectedNode;
+		selectedNode.updateNodeEdit();
 		body.removeChild(shader);
 	}
 
@@ -80,7 +99,8 @@ function createWarningElem() {
 	cancelBtn.innerText = "Cancel";
 	btnContainer.appendChild(cancelBtn);
 
-	cancelBtn.onclick = function () {
+	cancelBtn.onclick = function ()
+	{
 		body.removeChild(shader);
 	}
 
@@ -95,14 +115,16 @@ function createWarningElem() {
 	shader.appendChild(module);
 }
 
-deleteNode.onclick = function () {
+deleteNode.onclick = function ()
+{
 	body.appendChild(shader);
 }
 
 /* Makes stacks inside "treeDiv", causing displayArray to become
  * a two-dimentional array
 */
-function newTreeStack() {
+function newTreeStack()
+{
 	displayArray.push([]);
 
 	// Each stack holds divs representing nodes
@@ -113,20 +135,24 @@ function newTreeStack() {
 }
 
 // Redraw all nodes from a stack and outward
-function drawNodes(level) {
-	for (let i = level; i < displayArray.length; i++) {
+function drawNodes(level)
+{
+	for (let i = level; i < displayArray.length; i++)
+	{
 		// clear dom elements in the stack
 		treeDiv.children[i].innerHTML = "";
 
 		// add each node to the stack
-		for (let j = 0; j < displayArray[i].length; j++) {
+		for (let j = 0; j < displayArray[i].length; j++)
+		{
 			treeDiv.children[i].appendChild(displayArray[i][j].domElem);
 		}
 	}
 }
 
 // draw all the nodes from root the first time
-function firstDraw() {
+function firstDraw()
+{
 	// fill in the displayArray from root
 	for (childIndex in root.childs)
 		root.childs[childIndex].addToDisplay(childIndex == root.selectedChild);

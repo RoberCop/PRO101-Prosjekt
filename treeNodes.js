@@ -2,17 +2,20 @@
 const displayArray = [];
 
 // class to instantiate nodes on the tree
-function treeNodeClass(level, parent, index, text)
+function treeNodeClass(level, parent, index, title, desc)
 {
 	this.childs = [];
 
-	this.selectedChild = 0;
+	this.selectedChild = -1;
 	this.indexOfThis = index;
 
+	this.title = title;
+	this.desc = desc;
+
 	// adds a new instance to "childs" array
-	this.newChild = function(newText)
+	this.newChild = function(newText, newDesc)
 	{
-		this.childs.push(new treeNodeClass(level + 1, this, this.childs.length, newText));
+		this.childs.push(new treeNodeClass(level + 1, this, this.childs.length, newText, newDesc));
 	}
 
 	this.newAddBtnRec = function()
@@ -55,6 +58,8 @@ function treeNodeClass(level, parent, index, text)
 		parent.childs.splice(this.indexOfThis, 1);
 		selectedNode = parent.childs[this.indexOfThis];
 
+		this.updateNodeEdit();
+
 		// update indicies on other nodes to the right(reference members)
 		for (let i = this.indexOfThis; i < parent.childs.length; i++)
 			parent.childs[i].indexOfThis = i;
@@ -73,6 +78,12 @@ function treeNodeClass(level, parent, index, text)
 		drawNodes(level - 1);
 	}
 
+	this.updateNodeEdit = function()
+	{
+		nodeTitle.value = this.title;
+		nodeDesc.value = this.desc;
+	}
+
 	this.getParent = function()
 	{
 		return parent;
@@ -86,7 +97,7 @@ function treeNodeClass(level, parent, index, text)
 	this.domElem.treeNode = this;
 
 	this.childPar = document.createElement("p");
-	this.childPar.innerText = text;
+	this.childPar.innerText = title;
 
 	this.removeBtn = document.createElement("button");
 	this.removeBtn.innerText = "X";
@@ -103,6 +114,9 @@ function treeNodeClass(level, parent, index, text)
 		// set this node to be the selected child, on the parent
 		parent.selectedChild = this.treeNode.indexOfThis;
 		selectedNode = parent.childs[this.treeNode.indexOfThis];
+
+		// update node editor
+		this.treeNode.updateNodeEdit();
 
 		this.treeNode.draw();
 	}
