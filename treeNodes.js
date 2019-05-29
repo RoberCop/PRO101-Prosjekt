@@ -35,13 +35,13 @@ function treeNodeClass(level, parent, index, title, desc)
 		if (level > 0)
 			displayArray[level - 1].push(this);
 
-		this.domElem.style.left = (151 * this.indexOfThis);
-		this.domElem.style.borderColor = (this.isDone) ? "#00FF00" : "#FF0000";
+		this.domBody.style.left = (151 * this.indexOfThis);
+		this.domBody.style.borderColor = (this.isDone) ? "#00FF00" : "#FF0000";
 
 		if (isSelected)
 		{
 			// style for when node is selected
-			this.domElem.style.backgroundColor = (this === selectedNode) ? "#CCFFCC" : "#CCCCFF";
+			this.domBody.style.backgroundColor = (this === selectedNode) ? "#CCFFCC" : "#CCCCFF";
 
 			// if selected, call this same method on child objects
 			for (childIndex in this.childs)
@@ -49,7 +49,7 @@ function treeNodeClass(level, parent, index, title, desc)
 		}
 		else {
 			// style for when node is unselected
-			this.domElem.style.backgroundColor = "#FFFFFF";
+			this.domBody.style.backgroundColor = "#FFFFFF";
 		}
 	}
 
@@ -94,30 +94,33 @@ function treeNodeClass(level, parent, index, title, desc)
 	// Dom element
 	
 	this.domElem = document.createElement("div");
-	let domHeader = document.createElement("div");
-	let childH4 = document.createElement("h4");
-	let domBody = document.createElement("div");
-	let icon = document.createElement("i");
-	let light = document.createElement("div");
+	this.domHeader = document.createElement("div");
+	this.childH4 = document.createElement("h4");
+	this.domBody = document.createElement("div");
+	this.icon = document.createElement("i");
+	this.light = document.createElement("div");
 
 	this.domElem.className = "treeNode";
 	this.domElem.treeNode = this;
 
-	domHeader.className = "node-header";
+	this.domHeader.className = "node-header";
 
-	childH4.innerText = title;
+	this.childH4.innerText = title;
 
-	domBody.className = "node-body";
+	this.domBody.className = "node-body";
 
-	icon.className = "light";
+	this.icon.className = "fas fa-user";
 
-	domHeader.appendChild(childH4);
+	this.light.className = "light";
+	this.light.style.visibility = "hidden";
 
-	domBody.appendChild(icon);
-	domBody.appendChild(light);
+	this.domHeader.appendChild(this.childH4);
 
-	this.domElem.appendChild(domHeader);
-	this.domElem.appendChild(domBody);
+	this.domBody.appendChild(this.icon);
+	this.domBody.appendChild(this.light);
+
+	this.domElem.appendChild(this.domHeader);
+	this.domElem.appendChild(this.domBody);
 
 	this.domElem.onclick = function()
 	{
