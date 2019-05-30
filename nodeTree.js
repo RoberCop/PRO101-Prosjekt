@@ -60,6 +60,8 @@ treeDiv.style.transition = "0.1s all ease-in-out";
 editContainer.style.left = "0";
 editContainer.style.transform = "translate(-100%, 0%)";
 
+//TODO: Make it possible do add task to selected node when pressing enter
+
 //Trigger events base on mouseXY
 document.onmousemove = (e) => {
 
