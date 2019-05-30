@@ -1,7 +1,12 @@
 // Dom element constants
-const treeDiv = document.getElementById("treeDiv");
+const treeDiv = document.getElementById('treeDiv');
 const html = document.querySelector('html');
 const body = document.querySelector('body');
+const header = document.querySelector('header');
+
+const largeInput = document.querySelector('#largeInput');
+const menuBar = document.querySelector('#menuBar');
+const editContainer = document.querySelector('#editContainer');
 const shader = document.createElement('div');
 shader.setAttribute('class', 'shader');
 
@@ -11,10 +16,61 @@ const nodeDesc = document.getElementById("nodeDesc");
 const doneNode = document.getElementById("doneNode");
 const notDoneNode = document.getElementById("notDoneNode");
 
-const deleteBtn = document.getElementById("deleteNode");
-const refreshBtn = document.getElementById("refreshNode");
-const saveBtn = document.getElementById("saveNode");
+const deleteNode = document.getElementById("deleteNode");
+const refreshNode = document.getElementById("refreshNode");
+const saveNode = document.getElementById("saveNode");
 
+//Sets transition on elements
+header.style.transition = "0.1s transform ease-in-out";
+largeInput.style.transition = "0.1s transform ease-in-out";
+menuBar.style.transition = "0.1s transform ease-in-out";
+editContainer.style.transition = "0.1s all ease-in-out";
+treeDiv.style.transition = "0.1s all ease-in-out";
+
+//Sets position on elements
+editContainer.style.left = "0";
+editContainer.style.transform = "translate(-100%, 0%)";
+
+//TODO: Make it possible to add task to selected node when pressing enter
+
+//Trigger events base on mouseXY
+document.onmousemove = (e) => {
+
+	//Gets mouse position
+	let mouseY = e.clientY;
+	let mouseX = e.clientX;
+
+	//Lowers header
+	if (mouseY < 100)
+	{
+		header.style.transform = "translate(0%, 0%)";
+		menuBar.style.transform = "translate(0, 0%)";
+		largeInput.style.transform = "translate(-50%, 100%)";
+	}
+	//Rises header
+	if (mouseY > 200)
+	{
+		header.style.transform = "translate(0%, -100%)";
+		menuBar.style.transform = "translate(0, 100%)";
+		largeInput.style.transform = "translate(-50%, -100%)";
+	}
+	//Hides the editContainer
+	if (mouseX > 300)
+	{
+		editContainer.style.transform = "translate(-100%, 0%)";
+		editContainer.style.borderRight = "50px solid black";
+		treeDiv.style.width = "95vw";
+	}
+};
+
+//Displays the editContainer
+editContainer.onmouseover = (e) => {
+	editContainer.style.transform = "translate(0%, 0%)";
+	editContainer.style.borderRight = "1px solid";
+	treeDiv.style.width = "80vw";
+}
+
+//Warning element
 function createWarningElem()
 {
 	//Module
@@ -132,7 +188,7 @@ function firstDraw()
 }
 
 // Makes 10 stacks to start with
-for (let i = 0; i < 30; i++)
+for (let i = 0; i < 10; i++)
 	newTreeStack();
 
 const root = getTreeData();

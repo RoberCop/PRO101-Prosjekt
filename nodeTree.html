@@ -11,39 +11,58 @@
 <body>
 	<section class="gridSection">
 		<header>
-			<div class="navBox">
+			<div class="navBox" id="menuBar">
+				<!--
 				<div class="hamburger"></div>
 				<div class="hamburger"></div>
 				<div class="hamburger"></div>
+				-->
 			</div>
+
 			<h1>Think Task</h1>
 			<div class="userDiv">User</div>
+
+			<div id="largeInput">
+				<input type="text" placeholder="Add task">
+				<div class="addIcon">
+					<i class="fas fa-plus"></i>
+				</div>
+			</div>
 		</header>
-		<div class="edit-container flex-center">
-			<div id="title-div" class="flex-center">
-				<h3>Title:</h3>
-				<input id="nodeTitle" placeholder="Title" type="text">
+
+		<main>
+			<div id="treeDiv">
 			</div>
-			<div id="descript-div" class="flex-center">
-				<h3>Description:</h3>
-				<textarea id="nodeDesc" placeholder="Give your project a description"></textarea>
-			</div>
-			<div id="setStatus-div">
-				<!-- change this to an image -->
-				<div id="doneNode"><p>Done</p></div> 
-				<div id="notDoneNode"><p>Not Done</p></div> 
-			</div>
-			<div class="edit-btn-container">
-				<img id="deleteNode" class="red" src="img/icons/rubbish-bin.svg">
-				<img id="refreshNode" class="orange" src="img/icons/refresh.svg">
-				<img id="saveNode" class="green" src="img/icons/checked.svg">
-			</div>
-		</div>
-		<div id="treeDiv">
-		</div>
+		</main>
+
 		<footer>
 		</footer>
 	</section>
+
+	<div class="edit-container flex-center" id="editContainer">
+		<div id="title-div" class="flex-center">
+			<h3>Title:</h3>
+			<input id="nodeTitle" placeholder="Project title" type="text">
+		</div>
+
+		<div id="descript-div" class="flex-center">
+			<h3>Description:</h3>
+			<textarea id="nodeDesc" placeholder="Give your project a description"></textarea>
+		</div>
+
+		<div id="setStatus-div">
+			<!-- change this to an image -->
+			<div id="doneNode"><p>Done</p></div>
+			<div id="notDoneNode"><p>Not Done</p></div>
+		</div>
+
+		<div class="edit-btn-container">
+			<img id="deleteNode" class="red" src="img/icons/rubbish-bin.svg">
+			<img id="refreshNode" class="orange" src="img/icons/refresh.svg">
+			<img id="saveNode" class="green" src="img/icons/checked.svg">
+		</div>
+	</div>
+
 	<script src="treeNodes.js"></script>
 	<script src="projectData.js"></script>
 	<script src="addNodeBtn.js"></script>
