@@ -41,7 +41,6 @@ quickAddPlus.onclick = function()
 	selectedNode.newChild(quickAddInput.value, "Sample Desc");
 	quickAddInput.value = "";
 	selectedNode.newAddBtnRec();
-	selectedNode.addToDisplay(true, true);
 	selectedNode.draw(selectedNode.level);
 }
 
