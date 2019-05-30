@@ -4,11 +4,12 @@ const html = document.querySelector('html');
 const body = document.querySelector('body');
 const header = document.querySelector('header');
 const menuBar = document.querySelector('#menuBar');
+const editContainer = document.querySelector('#editContainer');
 const shader = document.createElement('div');
+const deleteBtn = document.getElementById("deleteNode");
 
 shader.setAttribute('class', 'shader');
 
-const deleteBtn = document.getElementById("deleteNode");
 
 function addNodeBtnClass(level, parent, index) {
 	this.indexOfThis = index;
@@ -48,46 +49,50 @@ function addNodeBtnClass(level, parent, index) {
 	}
 }
 
-//Hides the header
-let interval = 100;
+//Sets transition on elements
 header.style.transition = "0.1s transform ease-in-out";
 menuBar.style.transition = "0.1s transform ease-in-out";
-/*
-document.addEventListener("mousemove", (e)=>{
-	let mouseY = e.clientY;
-	let mouseX = e.clientX;
-	html.style.backgroundColor = "rgba(" + mouseY / 2 + ", " + mouseX / 2 + ", " + 130 +", 0.2)";
+editContainer.style.transition = "0.1s all ease-in-out";
+treeDiv.style.transition = "0.1s all ease-in-out";
+//Sets position on elements
+editContainer.style.left = "0";
+editContainer.style.transform = "translate(-100%, 0%)";
 
-	if (mouseY < 100)
-	{
-		header.style.transform = "translate(0%, 0%)";
-	}
-
-	else
-	{
-
-		header.style.transform = "translate(0%, -100%)";
-	}
-});
- */
+//Trigger events base on mouseXY
 document.onmousemove = (e) => {
+
 	let mouseY = e.clientY;
 	let mouseX = e.clientX;
-	//Changes background-color based on mouseXY
-	html.style.backgroundColor = "rgba(" + mouseY / 2 + ", " + mouseX / 2 + ", " + 130 +", 0.2)";
 
+	//Lowers header
 	if (mouseY < 100)
 	{
 		header.style.transform = "translate(0%, 0%)";
 		menuBar.style.transform = "translate(0, 0%)";
 	}
-
+	//Hides the editContainer
+	else if (mouseX > 300)
+	{
+		editContainer.style.transform = "translate(-100%, 0%)";
+		editContainer.style.borderRight = "50px solid black";
+		treeDiv.style.width = "95vw";
+	}
+	//Rises header
 	else
 	{
 		header.style.transform = "translate(0%, -100%)";
 		menuBar.style.transform = "translate(0, 100%)";
 	}
 };
+
+//Displays the editContainer
+editContainer.onmouseover = (e) => {
+	console.log(e.target.id);
+	editContainer.style.transform = "translate(0%, 0%)";
+	editContainer.style.borderRight = "1px solid";
+	treeDiv.style.width = "80vw";
+}
+
 //Warning element
 function createWarningElem() {
 	//Module
@@ -179,7 +184,7 @@ function firstDraw() {
 }
 
 // Makes 10 stacks to start with
-for (let i = 0; i < 30; i++)
+for (let i = 0; i < 10; i++)
 	newTreeStack();
 
 const root = getTreeData();
