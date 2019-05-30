@@ -41,7 +41,7 @@ quickAddPlus.onclick = function()
 	selectedNode.newChild(quickAddInput.value, "Sample Desc");
 	quickAddInput.value = "";
 	selectedNode.newAddBtnRec();
-	selectedNode.draw(selectedNode.level);
+	selectedNode.draw();
 }
 
 //Trigger events base on mouseXY
