@@ -1,0 +1,115 @@
+<html>
+    <head>
+        <title>ThinkTask Project overview</title>
+        <link rel="stylesheet" type="text/css" href="Overview.css">
+    </head>
+    
+    <header id= "header1">ThinkTask</header>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <body>
+        
+        
+        <!--THE projectcontainer div start-->
+        <div class="ContainerProject" id ="ContainerP">
+                
+            
+            
+            <div class="Trashcancont" id="Deleteprojectcont" > 
+                        <img class="Trashcanimg" id="Deleteproject1" src="Pictures/trash_can.png" ondrop="deldrop(event)" ondragover="allowDrop(event)">
+                </div>
+
+            <!--THE inprogresstab div start-->
+            <div class="overlayTab"id="InProgress">
+                <div class="overlayHeader"id="InprogressHeader" type="button" name="answer" value="Show imp" onclick="showimp()" draggable="true" ondragover="opentabdragImp()" ondragleave="dragleaveImp()">
+                    <p>In Progress</p>
+                </div>
+
+                <div class="overcontainer"id="InprogressContainer">
+                    <div class="headerContainer" id="HCinprog">
+                        <p>Projects in Progress:</p>
+                    </div>
+
+                    <div class="UserProjecttab" id="IpProject1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    
+                </div>
+            </div>
+            <!--THE inprogresstab div end-->      
+
+            <!--THE upcomingtab div start-->          
+            <div class="overlayTab"id="UpComing">
+                <div class="overlayHeader"id="UpcomingHeader"type="button" name="answer" value="Show upc" onclick="showupc()" draggable="true" ondragover="opentabdragcUpc()" ondragleave="dragleaveUpc()">              <p>UpComing</p>
+                </div>
+
+                <div class="overcontainer"id="upcommingContainer">
+                    <div class="headerContainer" id="HCupcoming">
+                        <p>Projects Upcomming:</p>
+                    </div>
+
+                    <div class="UserProjecttab" id="UpProject1" draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ></div>
+                  
+                </div>
+
+
+            </div>
+            <!--THE upcomingtab div end-->
+
+            <!--THE Completedtab div start-->
+            <div class="overlayTab"id="Completed">
+                <div class="overlayHeader"id="CompletedHeader"type="button" name="answer" value="Show comp" onclick="showcomp()" draggable="true" ondragover="opentabdragComp()" ondragleave="dragleaveComp()" >  <p>Completed</p>
+                </div>
+
+                <div class="overcontainer"id="CompletedContainer" >
+                    <div class="headerContainer" id="HCcompleted">
+                        <p>Projects Completed:</p>
+                    </div>
+
+                    <div class="UserProjecttab" id="CompProject1" draggable="true"  ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    
+                </div>
+            </div>
+            <!--THE Completedtab div end-->
+
+        </div>
+        
+        <div class="ProjectFeed" id="ProjectFeed1">
+            <p>Project Feed:</p>
+            
+            <div class=FeedUpdate id="Feedup1"></div>
+           
+        </div>
+        <!--THE projectcontainer div end-->
+        
+        <div class="NewProjectButton" id="NewProjectButton1" type="button" name="answer" value="Show form" onclick="showform()">
+            <div id="Buttontxt"><p>New Project</p></div>
+            <div id="line1"></div>
+            <div id="line2"></div>
+        </div>
+        
+      
+         
+   
+        <div class="form" id="projectform">
+            <form id="formPro">
+                <div id="formHeader">Create your Project</div>
+                <br>
+                Project Name: <br>  
+                <input type="text" name="Project Name" id="Projectname"><br>
+                Chose its Phase:<br>
+                <select id="type" name="In progress/ Upcoming">
+                    <option value="inprogress">In Progress</option>
+                        <option value="upcoming">Upcoming</option>
+                </select>
+                <br>
+                <input type="button" id="send" name="answer" value="Create Project" onclick="createProject()">
+                
+                <input type="button" id="close" name="answer" value="Cancel" onclick="closeform()">
+            </form>  
+        
+        
+        
+        </div>    
+        
+        
+       <script src="Overview.js"></script> 
+    </body>
+</html>
