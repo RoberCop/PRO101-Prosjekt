@@ -33,8 +33,8 @@ function treeNodeClass(level, parent, index, title, desc)
 		if (!isParent)
 			displayArray[level - 1].push(this);
 
-		this.domBody.style.left = (151 * this.indexOfThis);
-		this.domBody.style.borderColor = (this.isDone) ? "#00FF00" : "#FF0000";
+		this.domElem.style.left = (151 * this.indexOfThis);
+		this.domElem.style.borderColor = (this.isDone) ? "#00FF00" : "#FF0000";
 
 		if (isSelected)
 		{
@@ -134,6 +134,9 @@ function treeNodeClass(level, parent, index, title, desc)
 	this.light = document.createElement("div");
 
 	this.domElem.className = "treeNode";
+	this.domElem.borderWidth = "1px";
+	this.domElem.borderStyle = "solid";
+	this.domElem.borderColor = "red";
 	this.domElem.treeNode = this;
 
 	this.domHeader.className = "node-header";
