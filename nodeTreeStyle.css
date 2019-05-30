@@ -67,10 +67,42 @@ header > #largeInput {
     left: 50%;
     height: 100px;
     width: 40%;
-    padding: 10px;
     border: 1px solid;
+    border-radius: 5px;
     font-size: 70px;
-    text-align: center;
+    display: grid;
+    grid-template-areas: "input icon";
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 0.1fr;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#largeInput > input {
+    grid-area: input;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size: 50px;
+    border: none;
+}
+#largeInput > .addIcon {
+    grid-area: icon;
+    height: 80px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    border-radius: 50%;
+    transform: translate(0%, 0);
+    margin: 0 20px 0 0;
+}
+
+.addIcon > i {
+    font-size: 30px;
 }
 
 main {
