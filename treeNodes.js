@@ -9,7 +9,6 @@ function treeNodeClass(level, parent, index, title, desc)
 	this.selectedChild = -1;
 	this.indexOfThis = index;
 
-	this.title = (title !== undefined) ? title : "";
 	this.desc = (desc !== undefined) ? desc : "";
 
 	this.isDone = false;
@@ -22,17 +21,16 @@ function treeNodeClass(level, parent, index, title, desc)
 
 	this.newAddBtnRec = function()
 	{
-		this.childs.push(new addNodeBtnClass(level + 1, this, this.childs.length));
-
 		for (child of this.childs)
-			if (child.selectedChild !== undefined)
-				child.newAddBtnRec();
+			child.newAddBtnRec();
+
+		this.childs.push(new addNodeBtnClass(level + 1, this, this.childs.length));
 	}
 
-	this.addToDisplay = function(isSelected)
+	this.addToDisplay = function(isSelected, isParent)
 	{
 		// add this node to the displayArray if its not root
-		if (level > 0)
+		if (!isParent)
 			displayArray[level - 1].push(this);
 
 		this.domBody.style.left = (151 * this.indexOfThis);
@@ -40,32 +38,14 @@ function treeNodeClass(level, parent, index, title, desc)
 
 		if (isSelected)
 		{
-			// style for when node is selected
-			this.domBody.style.backgroundColor = (this === selectedNode) ? "#CCFFCC" : "#CCCCFF";
-
 			// if selected, call this same method on child objects
 			for (childIndex in this.childs)
-				this.childs[childIndex].addToDisplay(childIndex == this.selectedChild);
+				this.childs[childIndex].addToDisplay(childIndex == this.selectedChild, false);
 		}
 		else {
 			// style for when node is unselected
 			this.domBody.style.backgroundColor = "#FFFFFF";
 		}
-	}
-
-	this.removeNode = function()
-	{
-		// remove selected node, and fill inn from the right
-		parent.childs.splice(this.indexOfThis, 1);
-		selectedNode = parent.childs[this.indexOfThis];
-
-		this.updateNodeEdit();
-
-		// update indicies on other nodes to the right(reference members)
-		for (let i = this.indexOfThis; i < parent.childs.length; i++)
-			parent.childs[i].indexOfThis = i;
-
-		this.draw();
 	}
 
 	this.draw = function()
@@ -75,19 +55,72 @@ function treeNodeClass(level, parent, index, title, desc)
 			displayArray[i] = [];
 
 		// recursively add to display based on selected nodes from parent node, and draw the new nodes
-		parent.addToDisplay(true);
+		parent.addToDisplay(true, true);
 		drawNodes(level - 1);
 	}
 
-	this.updateNodeEdit = function()
+	this.removeNode = function()
 	{
-		nodeTitle.value = this.title;
+		// remove selected node
+		parent.childs.splice(this.indexOfThis, 1);
+
+		// update indicies on other nodes to the right of deleted node(reference members)
+		for (let i = this.indexOfThis; i < parent.childs.length; i++)
+			parent.childs[i].indexOfThis = i;
+
+		let newIndex = this.indexOfThis;
+
+		if (parent.childs[newIndex].selectedChild === undefined)
+			newIndex--;
+
+		if (newIndex < 0)
+			selectedNode = parent;
+		else
+			selectedNode = parent.childs[newIndex];
+		
+		selectedNode.refreshNodeEdit();
+		parent.selectedChild = newIndex;
+		selectedNode.domBody.style.backgroundColor = "#CCFFCC";
+
+		this.draw();
+	}
+
+	this.refreshNodeEdit = function()
+	{
+		nodeTitle.value = this.childH4.innerText;
 		nodeDesc.value = this.desc;
 	}
 
-	this.getParent = function()
+	this.saveNodeEdit = function()
 	{
-		return parent;
+		this.childH4.innerText = nodeTitle.value;
+		this.desc = nodeDesc.value;
+	}
+
+	this.setDone = function(toState)
+	{
+		// when setting to "not done"
+		if (toState == false)
+		{
+			this.isDone = false;
+			this.domElem.style.borderColor = "#FF0000";
+			
+			parent.isDone = false;
+			parent.domElem.style.borderColor = "#FF0000";
+
+			return;
+		}
+
+		// return if not allowed to set to "done"
+		for (let i = 0; i < this.childs.length; i++)
+		{
+			if ( (!this.childs[i].isDone) &&
+				 (this.childs[i].selectedChild !== undefined) ) return;
+		}
+
+		// setting to "done" allowed
+		this.isDone = true;
+		this.domElem.style.borderColor = "#00FF00";
 	}
 
 	////////////////////////////////////
@@ -124,13 +157,15 @@ function treeNodeClass(level, parent, index, title, desc)
 
 	this.domElem.onclick = function()
 	{
+		selectedNode.domBody.style.backgroundColor = "#CCCCFF";
+
 		// set this node to be the selected child, on the parent
 		parent.selectedChild = this.treeNode.indexOfThis;
-		selectedNode = parent.childs[this.treeNode.indexOfThis];
+		selectedNode = this.treeNode;
 
-		// update node editor
-		this.treeNode.updateNodeEdit();
+		selectedNode.domBody.style.backgroundColor = "#CCFFCC";
 
+		this.treeNode.refreshNodeEdit();
 		this.treeNode.draw();
 	}
 }

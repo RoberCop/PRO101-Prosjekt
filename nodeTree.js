@@ -31,14 +31,8 @@ function addNodeBtnClass(level, parent, index)
 		for (let i = level - 1; i < displayArray.length; i++)
 			displayArray[i] = [];
 
-		parent.addToDisplay(true);
+		parent.addToDisplay(true, true);
 		drawNodes(level - 1);
-	}
-
-	this.updateNodeEdit = function()
-	{
-		nodeTitle.innerText = this.title;
-		nodeDesc.innerText = this.desc;
 	}
 
 	///////////////////////////////
@@ -50,15 +44,17 @@ function addNodeBtnClass(level, parent, index)
 
 	this.domElem.onclick = function ()
 	{
+		selectedNode.domBody.style.backgroundColor = "#CCCCFF";
+
 		parent.childs.splice(this.treeNode.indexOfThis, 1);
 		parent.newChild("Sample Text", "Sample Desc");
 		parent.childs[this.treeNode.indexOfThis].newAddBtnRec();
 
 		selectedNode = parent.childs[this.treeNode.indexOfThis];
-		selectedNode.updateNodeEdit();
+		selectedNode.refreshNodeEdit();
+		selectedNode.domBody.style.backgroundColor = "#CCFFCC";
 
-		parent.isDone = false;
-		selectedNode.getParent().domElem.style.borderColor = "#FF0000";
+		selectedNode.setDone(false);
 
 		parent.selectedChild = this.treeNode.indexOfThis++;
 		parent.childs.push(this.treeNode);
@@ -92,12 +88,7 @@ function createWarningElem()
 
 	deleteBtn.onclick = function ()
 	{
-		const newSelectedNode = selectedNode.getParent();
 		selectedNode.removeNode();
-		selectedNode.domBody.style.backgroundColor = "#CCCCFF";
-		selectedNode = newSelectedNode;
-		selectedNode.domBody.style.backgroundColor = "#CCFFCC";
-		selectedNode.updateNodeEdit();
 		body.removeChild(shader);
 	}
 
@@ -130,34 +121,22 @@ deleteNode.onclick = function ()
 
 refreshNode.onclick = function()
 {
-	selectedNode.updateNodeEdit();
+	selectedNode.refreshNodeEdit();
 }
 
 saveNode.onclick = function()
 {
-	selectedNode.title = nodeTitle.value;
-	selectedNode.desc = nodeDesc.value;
-	selectedNode.updateNodeEdit();
-	selectedNode.childH4.innerText = nodeTitle.value;
+	selectedNode.saveNodeEdit();
 }
 
 doneNode.onclick = function()
 {
-	for (let i = 0; i < selectedNode.childs.length; i++)
-	{
-		if ( (!selectedNode.childs[i].isDone) && (selectedNode.childs[i].selectedChild !== undefined) ) return;
-	}
-
-	selectedNode.isDone = true;
-	selectedNode.domElem.style.borderColor = "#00FF00";
+	selectedNode.setDone(true);
 }
 
 notDoneNode.onclick = function()
 {
-	selectedNode.isDone = false;
-	selectedNode.getParent().isDone = false;
-	selectedNode.domElem.style.borderColor = "#FF0000";
-	selectedNode.getParent().domElem.style.borderColor = "#FF0000";
+	selectedNode.setDone(false);
 }
 
 /* Makes stacks inside "treeDiv", causing displayArray to become
