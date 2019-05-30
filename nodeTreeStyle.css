@@ -20,7 +20,7 @@ body {
     display: flex;
     width: 100%;
     height: 100%;
-    justify-content: center;
+    jusify-content: center;
     align-items: center;
 }
 
@@ -58,6 +58,19 @@ header
     transform: translate(0%, 0%);
     transform-style: preserve-3d;
     border-top: none;
+    z-index: 100;
+}
+
+header > #largeInput {
+    position: absolute;
+    transform: translate(-50%, 100%);
+    left: 50%;
+    height: 100px;
+    width: 40%;
+    padding: 10px;
+    border: 1px solid;
+    font-size: 70px;
+    text-align: center;
 }
 
 main {
