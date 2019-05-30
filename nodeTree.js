@@ -3,6 +3,7 @@ const treeDiv = document.getElementById('treeDiv');
 const html = document.querySelector('html');
 const body = document.querySelector('body');
 const header = document.querySelector('header');
+const largeInput = document.querySelector('#largeInput');
 const menuBar = document.querySelector('#menuBar');
 const editContainer = document.querySelector('#editContainer');
 const shader = document.createElement('div');
@@ -51,6 +52,7 @@ function addNodeBtnClass(level, parent, index) {
 
 //Sets transition on elements
 header.style.transition = "0.1s transform ease-in-out";
+largeInput.style.transition = "0.1s transform ease-in-out";
 menuBar.style.transition = "0.1s transform ease-in-out";
 editContainer.style.transition = "0.1s all ease-in-out";
 treeDiv.style.transition = "0.1s all ease-in-out";
@@ -61,6 +63,7 @@ editContainer.style.transform = "translate(-100%, 0%)";
 //Trigger events base on mouseXY
 document.onmousemove = (e) => {
 
+	//Gets mouse position
 	let mouseY = e.clientY;
 	let mouseX = e.clientX;
 
@@ -69,19 +72,21 @@ document.onmousemove = (e) => {
 	{
 		header.style.transform = "translate(0%, 0%)";
 		menuBar.style.transform = "translate(0, 0%)";
+		largeInput.style.transform = "translate(-50%, 100%)";
+	}
+	//Rises header
+	if (mouseY > 200)
+	{
+		header.style.transform = "translate(0%, -100%)";
+		menuBar.style.transform = "translate(0, 100%)";
+		largeInput.style.transform = "translate(-50%, -100%)";
 	}
 	//Hides the editContainer
-	else if (mouseX > 300)
+	if (mouseX > 300)
 	{
 		editContainer.style.transform = "translate(-100%, 0%)";
 		editContainer.style.borderRight = "50px solid black";
 		treeDiv.style.width = "95vw";
-	}
-	//Rises header
-	else
-	{
-		header.style.transform = "translate(0%, -100%)";
-		menuBar.style.transform = "translate(0, 100%)";
 	}
 };
 
