@@ -1,14 +1,14 @@
 // Dom element constants
-const treeDiv = document.getElementById('treeDiv');
-const html = document.querySelector('html');
-const body = document.querySelector('body');
-const header = document.querySelector('header');
+const treeDiv = document.getElementById("treeDiv");
+const html = document.querySelector("html");
+const body = document.querySelector("body");
+const header = document.querySelector("header");
 
-const largeInput = document.querySelector('#largeInput');
-const menuBar = document.querySelector('#menuBar');
-const editContainer = document.querySelector('#editContainer');
-const shader = document.createElement('div');
-shader.setAttribute('class', 'shader');
+const largeInput = document.querySelector("#largeInput");
+const menuBar = document.querySelector("#menuBar");
+const editContainer = document.querySelector("#editContainer");
+const shader = document.createElement("div");
+shader.setAttribute("class", "shader");
 
 const nodeTitle = document.getElementById("nodeTitle");
 const nodeDesc = document.getElementById("nodeDesc");
@@ -19,6 +19,9 @@ const notDoneNode = document.getElementById("notDoneNode");
 const deleteNode = document.getElementById("deleteNode");
 const refreshNode = document.getElementById("refreshNode");
 const saveNode = document.getElementById("saveNode");
+
+const quickAddInput = document.getElementById("quickAddInput");
+const quickAddPlus = document.getElementById("quickAddPlus");
 
 //Sets transition on elements
 header.style.transition = "0.1s transform ease-in-out";
@@ -32,6 +35,15 @@ editContainer.style.left = "0";
 editContainer.style.transform = "translate(-100%, 0%)";
 
 //TODO: Make it possible to add task to selected node when pressing enter
+quickAddPlus.onclick = function()
+{
+	selectedNode.childs.splice(selectedNode.childs.length - 1, 1);
+	selectedNode.newChild(quickAddInput.value, "Sample Desc");
+	quickAddInput.value = "";
+	selectedNode.newAddBtnRec();
+	selectedNode.addToDisplay(true, true);
+	selectedNode.draw(selectedNode.level);
+}
 
 //Trigger events base on mouseXY
 document.onmousemove = (e) => {
@@ -74,23 +86,23 @@ editContainer.onmouseover = (e) => {
 function createWarningElem()
 {
 	//Module
-	const module = document.createElement('div');
+	const module = document.createElement("div");
 	module.dataset.clicked = "true";
 
 	//Title
-	const h1 = document.createElement('h1');
-	h1.innerText = 'Hold it!';
+	const h1 = document.createElement("h1");
+	h1.innerText = "Hold it!";
 
 	//Paragraph in module
-	const paragraph = document.createElement('p');
-	paragraph.innerText = 'This wil also delete the child nodes. Are you sure you want to delete this?';
+	const paragraph = document.createElement("p");
+	paragraph.innerText = "This will also delete the child nodes. Are you sure you want to delete this?";
 
 	//Button container
-	const btnContainer = document.createElement('div');
-	btnContainer.setAttribute('class', 'edit-btn-container');
+	const btnContainer = document.createElement("div");
+	btnContainer.setAttribute("class", "edit-btn-container");
 
 	//Delete button
-	const deleteBtn = document.createElement('div');
+	const deleteBtn = document.createElement("div");
 	deleteBtn.innerText = "Delete anyway";
 	btnContainer.appendChild(deleteBtn);
 
@@ -101,7 +113,7 @@ function createWarningElem()
 	}
 
 	//Cancel button
-	const cancelBtn = document.createElement('h4');
+	const cancelBtn = document.createElement("h4");
 	cancelBtn.dataset.btn = "cancel";
 	cancelBtn.innerText = "Cancel";
 	btnContainer.appendChild(cancelBtn);
@@ -112,9 +124,9 @@ function createWarningElem()
 	}
 
 	//Attributes
-	module.setAttribute('class', 'module');
-	deleteBtn.setAttribute('class', 'red deleteBtn module-btn');
-	cancelBtn.setAttribute('class', 'green cancelBtn module-btn');
+	module.setAttribute("class", "module");
+	deleteBtn.setAttribute("class", "red deleteBtn module-btn");
+	cancelBtn.setAttribute("class", "green cancelBtn module-btn");
 
 	module.appendChild(h1);
 	module.appendChild(paragraph);
@@ -193,9 +205,12 @@ for (let i = 0; i < 10; i++)
 
 const root = getTreeData();
 root.newAddBtnRec();
+root.selectedChild = 0;
 
 createWarningElem();
 
 var selectedNode = root.childs[0];
+selectedNode.domBody.style.backgroundColor = "#CCFFCC";
+selectedNode.refreshNodeEdit();
 
 firstDraw();

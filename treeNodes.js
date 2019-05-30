@@ -14,17 +14,21 @@ function treeNodeClass(level, parent, index, title, desc)
 	this.isDone = false;
 
 	// adds a new instance to "childs" array
-	this.newChild = function(newText, newDesc)
+	this.newChild = function(newTitle, newDesc)
 	{
-		this.childs.push(new treeNodeClass(level + 1, this, this.childs.length, newText, newDesc));
+		this.childs.push(new treeNodeClass(level + 1, this, this.childs.length, newTitle, newDesc));
 	}
 
 	this.newAddBtnRec = function()
 	{
 		for (child of this.childs)
-			child.newAddBtnRec();
+			if (child.selectedChild !== undefined)
+				child.newAddBtnRec();
 
-		this.childs.push(new addNodeBtnClass(level + 1, this, this.childs.length));
+		const checkIndex = this.childs.length - 1;
+
+		if ( (checkIndex === -1) || (this.childs[checkIndex].selectedChild !== undefined) )
+			this.childs.push(new addNodeBtnClass(level + 1, this, this.childs.length));
 	}
 
 	this.addToDisplay = function(isSelected, isParent)
