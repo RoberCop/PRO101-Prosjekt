@@ -6,6 +6,8 @@ function treeNodeClass(level, parent, index, title, desc)
 {
 	this.childs = [];
 
+	this.level = level;
+
 	this.selectedChild = -1;
 	this.indexOfThis = index;
 
@@ -16,7 +18,7 @@ function treeNodeClass(level, parent, index, title, desc)
 	// adds a new instance to "childs" array
 	this.newChild = function(newTitle, newDesc)
 	{
-		this.childs.push(new treeNodeClass(level + 1, this, this.childs.length, newTitle, newDesc));
+		this.childs.push(new treeNodeClass(this.level + 1, this, this.childs.length, newTitle, newDesc));
 	}
 
 	this.newAddBtnRec = function()
@@ -28,14 +30,14 @@ function treeNodeClass(level, parent, index, title, desc)
 		const checkIndex = this.childs.length - 1;
 
 		if ( (checkIndex === -1) || (this.childs[checkIndex].selectedChild !== undefined) )
-			this.childs.push(new addNodeBtnClass(level + 1, this, this.childs.length));
+			this.childs.push(new addNodeBtnClass(this.level + 1, this, this.childs.length));
 	}
 
 	this.addToDisplay = function(isSelected, isParent)
 	{
 		// add this node to the displayArray if its not root
 		if (!isParent)
-			displayArray[level - 1].push(this);
+			displayArray[this.level - 1].push(this);
 
 		this.domElem.style.left = (151 * this.indexOfThis);
 		this.domElem.style.borderColor = (this.isDone) ? "#00FF00" : "#FF0000";
@@ -55,12 +57,12 @@ function treeNodeClass(level, parent, index, title, desc)
 	this.draw = function()
 	{
 		// clear this stack and outwards in the display array
-		for (let i = level - 1; i < displayArray.length; i++)
+		for (let i = this.level - 1; i < displayArray.length; i++)
 			displayArray[i] = [];
 
 		// recursively add to display based on selected nodes from parent node, and draw the new nodes
 		parent.addToDisplay(true, true);
-		drawNodes(level - 1);
+		drawNodes(this.level - 1);
 	}
 
 	this.removeNode = function()
@@ -141,6 +143,7 @@ function treeNodeClass(level, parent, index, title, desc)
 	this.domElem.borderWidth = "1px";
 	this.domElem.borderStyle = "solid";
 	this.domElem.borderColor = "red";
+	this.domElem.draggable = "true";
 	this.domElem.treeNode = this;
 
 	this.domHeader.className = "node-header";
@@ -162,6 +165,11 @@ function treeNodeClass(level, parent, index, title, desc)
 	this.domElem.appendChild(this.domHeader);
 	this.domElem.appendChild(this.domBody);
 
+	for (let i = 0; i < this.domElem.childNodes.length; i++)
+	{
+		this.domElem.childNodes[i].style.pointerEvents = "none";
+	}
+
 	this.domElem.onclick = function()
 	{
 		selectedNode.domBody.style.backgroundColor = "#CCCCFF";
@@ -174,5 +182,31 @@ function treeNodeClass(level, parent, index, title, desc)
 
 		this.treeNode.refreshNodeEdit();
 		this.treeNode.draw();
+	}
+
+	this.domElem.ondragstart = function(event)
+	{
+		event.dataTransfer.setData("preLevel", event.target.treeNode.level);
+		event.dataTransfer.setData("preIndex", event.target.treeNode.indexOfThis);
+	}
+
+	this.domElem.ondragover = function(event)
+	{
+		event.preventDefault();
+	}
+
+	this.domElem.ondrop = function(event)
+	{
+		event.preventDefault();
+		console.log(event.target);
+		const preLevel = event.dataTransfer.getData("preLevel");
+		const preIndex = event.dataTransfer.getData("preIndex");
+		const targetLevel = event.target.treeNode.level;
+		const targetIndex = event.target.treeNode.indexOfThis;
+
+		const preObject = displayArray[preLevel - 1][preIndex];
+		const targetObject = displayArray[targetLevel - 1][targetIndex];
+
+		console.log(preObject);
 	}
 }
