@@ -66,7 +66,6 @@ function checkLogIn()
             if (signinPass.value == usersArr[i].password)
             {
                 console.log("success password");
-                return;
             }
         }
     }
