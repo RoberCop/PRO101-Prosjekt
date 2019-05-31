@@ -1,9 +1,14 @@
 // Dom element constants
 const treeDiv = document.getElementById("treeDiv");
-const html = document.querySelector('html');
-const body = document.querySelector('body');
-const shader = document.createElement('div');
-shader.setAttribute('class', 'shader');
+const html = document.querySelector("html");
+const body = document.querySelector("body");
+const header = document.querySelector("header");
+
+const largeInput = document.querySelector("#largeInput");
+const menuBar = document.querySelector("#menuBar");
+const editContainer = document.querySelector("#editContainer");
+const shader = document.createElement("div");
+shader.setAttribute("class", "shader");
 
 const nodeTitle = document.getElementById("nodeTitle");
 const nodeDesc = document.getElementById("nodeDesc");
@@ -11,98 +16,103 @@ const nodeDesc = document.getElementById("nodeDesc");
 const doneNode = document.getElementById("doneNode");
 const notDoneNode = document.getElementById("notDoneNode");
 
-const deleteBtn = document.getElementById("deleteNode");
-const refreshBtn = document.getElementById("refreshNode");
-const saveBtn = document.getElementById("saveNode");
+const deleteNode = document.getElementById("deleteNode");
+const refreshNode = document.getElementById("refreshNode");
+const saveNode = document.getElementById("saveNode");
 
-function addNodeBtnClass(level, parent, index)
+const quickAddInput = document.getElementById("quickAddInput");
+const quickAddPlus = document.getElementById("quickAddPlus");
+
+//Sets transition on elements
+header.style.transition = "0.1s transform ease-in-out";
+largeInput.style.transition = "0.1s transform ease-in-out";
+menuBar.style.transition = "0.1s transform ease-in-out";
+editContainer.style.transition = "0.1s all ease-in-out";
+treeDiv.style.transition = "0.1s all ease-in-out";
+
+//Sets position on elements
+editContainer.style.left = "0";
+editContainer.style.transform = "translate(-100%, 0%)";
+
+//TODO: Make it possible to add task to selected node when pressing enter
+quickAddPlus.onclick = function()
 {
-	this.indexOfThis = index;
-
-	this.addToDisplay = function (isSelected)
-	{
-		displayArray[level - 1].push(this);
-		this.domElem.style.left = (151 * this.indexOfThis);
-	}
-
-	// same as in treeNodeClass()
-	this.draw = function ()
-	{
-		for (let i = level - 1; i < displayArray.length; i++)
-			displayArray[i] = [];
-
-		parent.addToDisplay(true);
-		drawNodes(level - 1);
-	}
-
-	this.updateNodeEdit = function()
-	{
-		nodeTitle.innerText = this.title;
-		nodeDesc.innerText = this.desc;
-	}
-
-	///////////////////////////////
-	// Dom element
-
-	this.domElem = document.createElement("i");
-	this.domElem.className = "addButton fas fa-plus";
-	this.domElem.treeNode = this;
-
-	this.domElem.onclick = function ()
-	{
-		parent.childs.splice(this.treeNode.indexOfThis, 1);
-		parent.newChild("Sample Text", "Sample Desc");
-		parent.childs[this.treeNode.indexOfThis].newAddBtnRec();
-
-		selectedNode = parent.childs[this.treeNode.indexOfThis];
-		selectedNode.updateNodeEdit();
-
-		parent.isDone = false;
-		selectedNode.getParent().domElem.style.borderColor = "#FF0000";
-
-		parent.selectedChild = this.treeNode.indexOfThis++;
-		parent.childs.push(this.treeNode);
-
-		this.treeNode.draw();
-	}
+	selectedNode.childs.splice(selectedNode.childs.length - 1, 1);
+	selectedNode.newChild(quickAddInput.value, "Sample Desc");
+	quickAddInput.value = "";
+	selectedNode.newAddBtnRec();
+	selectedNode.draw();
 }
 
+//Trigger events base on mouseXY
+document.onmousemove = (e) => {
+
+	//Gets mouse position
+	let mouseY = e.clientY;
+	let mouseX = e.clientX;
+
+	//Lowers header
+	if (mouseY < 100)
+	{
+		header.style.transform = "translate(0%, 0%)";
+		menuBar.style.transform = "translate(0, 0%)";
+		largeInput.style.transform = "translate(-50%, 100%)";
+	}
+	//Rises header
+	if (mouseY > 200)
+	{
+		header.style.transform = "translate(0%, -100%)";
+		menuBar.style.transform = "translate(0, 100%)";
+		largeInput.style.transform = "translate(-50%, -100%)";
+	}
+	//Hides the editContainer
+	if (mouseX > 300)
+	{
+		editContainer.style.transform = "translate(-100%, 0%)";
+		editContainer.style.borderRight = "50px solid black";
+		treeDiv.style.width = "95vw";
+	}
+};
+
+//Displays the editContainer
+editContainer.onmouseover = (e) => {
+	editContainer.style.transform = "translate(0%, 0%)";
+	editContainer.style.borderRight = "1px solid";
+	treeDiv.style.width = "80vw";
+}
+
+//Warning element
 function createWarningElem()
 {
 	//Module
-	const module = document.createElement('div');
+	const module = document.createElement("div");
 	module.dataset.clicked = "true";
 
 	//Title
-	const h1 = document.createElement('h1');
-	h1.innerText = 'Hold it!';
+	const h1 = document.createElement("h1");
+	h1.innerText = "Hold it!";
 
 	//Paragraph in module
-	const paragraph = document.createElement('p');
-	paragraph.innerText = 'This wil also delete the child nodes. Are you sure you want to delete this?';
+	const paragraph = document.createElement("p");
+	paragraph.innerText = "This will also delete the child nodes. Are you sure you want to delete this?";
 
 	//Button container
-	const btnContainer = document.createElement('div');
-	btnContainer.setAttribute('class', 'edit-btn-container');
+	const btnContainer = document.createElement("div");
+	btnContainer.setAttribute("class", "edit-btn-container");
 
 	//Delete button
-	const deleteBtn = document.createElement('div');
+	const deleteBtn = document.createElement("div");
 	deleteBtn.innerText = "Delete anyway";
 	btnContainer.appendChild(deleteBtn);
 
 	deleteBtn.onclick = function ()
 	{
-		const newSelectedNode = selectedNode.getParent();
 		selectedNode.removeNode();
-		selectedNode.domBody.style.backgroundColor = "#CCCCFF";
-		selectedNode = newSelectedNode;
-		selectedNode.domBody.style.backgroundColor = "#CCFFCC";
-		selectedNode.updateNodeEdit();
 		body.removeChild(shader);
 	}
 
 	//Cancel button
-	const cancelBtn = document.createElement('h4');
+	const cancelBtn = document.createElement("h4");
 	cancelBtn.dataset.btn = "cancel";
 	cancelBtn.innerText = "Cancel";
 	btnContainer.appendChild(cancelBtn);
@@ -113,9 +123,9 @@ function createWarningElem()
 	}
 
 	//Attributes
-	module.setAttribute('class', 'module');
-	deleteBtn.setAttribute('class', 'red deleteBtn module-btn');
-	cancelBtn.setAttribute('class', 'green cancelBtn module-btn');
+	module.setAttribute("class", "module");
+	deleteBtn.setAttribute("class", "red deleteBtn module-btn");
+	cancelBtn.setAttribute("class", "green cancelBtn module-btn");
 
 	module.appendChild(h1);
 	module.appendChild(paragraph);
@@ -130,34 +140,22 @@ deleteNode.onclick = function ()
 
 refreshNode.onclick = function()
 {
-	selectedNode.updateNodeEdit();
+	selectedNode.refreshNodeEdit();
 }
 
 saveNode.onclick = function()
 {
-	selectedNode.title = nodeTitle.value;
-	selectedNode.desc = nodeDesc.value;
-	selectedNode.updateNodeEdit();
-	selectedNode.childH4.innerText = nodeTitle.value;
+	selectedNode.saveNodeEdit();
 }
 
 doneNode.onclick = function()
 {
-	for (let i = 0; i < selectedNode.childs.length; i++)
-	{
-		if ( (!selectedNode.childs[i].isDone) && (selectedNode.childs[i].selectedChild !== undefined) ) return;
-	}
-
-	selectedNode.isDone = true;
-	selectedNode.domElem.style.borderColor = "#00FF00";
+	selectedNode.setDone(true);
 }
 
 notDoneNode.onclick = function()
 {
-	selectedNode.isDone = false;
-	selectedNode.getParent().isDone = false;
-	selectedNode.domElem.style.borderColor = "#FF0000";
-	selectedNode.getParent().domElem.style.borderColor = "#FF0000";
+	selectedNode.setDone(false);
 }
 
 /* Makes stacks inside "treeDiv", causing displayArray to become
@@ -201,14 +199,17 @@ function firstDraw()
 }
 
 // Makes 10 stacks to start with
-for (let i = 0; i < 30; i++)
+for (let i = 0; i < 10; i++)
 	newTreeStack();
 
 const root = getTreeData();
 root.newAddBtnRec();
+root.selectedChild = 0;
 
 createWarningElem();
 
 var selectedNode = root.childs[0];
+selectedNode.domBody.style.backgroundColor = "#CCFFCC";
+selectedNode.refreshNodeEdit();
 
 firstDraw();
