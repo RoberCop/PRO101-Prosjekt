@@ -51,14 +51,9 @@ h1, h2, h3, h4, h5, h6 {
 	padding-bottom: 3rem;
 }
 
-
-
-#signin .logo {
-	margin-bottom: 8vh;
-}
-
 #signin .logo-txt {
-	color: #006685;
+	margin: 0.5% auto;
+	width: 50%;
 	
 }
 
@@ -73,10 +68,10 @@ h1, h2, h3, h4, h5, h6 {
 	font-size: 1.1rem;
 	margin-bottom: 1.3rem;
 	width: 100%;
-	border-radius: 2px;
+	border-radius: 4px;
 	background: beige;
 	color: #006685;
-	border: 1px solid #1ec9fd;
+	border: none;
 	padding: 0.5rem 1rem;
 	line-height: 1.3rem;
 
@@ -111,7 +106,7 @@ h1, h2, h3, h4, h5, h6 {
 	height: 2.7rem;
 	display: block;
 	border: 0;
-	border-radius: 2px;
+	border-radius: 4px;
 	font-weight: 500;
 	background: #006685;
 	color: #85e0fc;;
@@ -131,7 +126,7 @@ h1, h2, h3, h4, h5, h6 {
 	height: 2.7rem;
 	display: block;
 	border: 1px solid #006685 ;
-	border-radius: 2px;
+	border-radius: 4px;
 	font-weight: 500;
 	background: none;
 	color: #006685;
@@ -214,7 +209,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-/*******MODAL********/
+/*******MODALS********/
 .modal {
 	display: none;
 	position: fixed;
@@ -229,7 +224,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .modal-content {
-	background-color: #1ec9fd;
+	background-color: #85e0fc;
 	border-radius: 10px;
 	margin: auto;
 	width: 30%;
@@ -285,10 +280,10 @@ h1, h2, h3, h4, h5, h6 {
 	font-size: 1.1rem;
 	margin-bottom: 1.3rem;
 	width: 100%;
-	border-radius: 2px;
+	border-radius: 4px;
 	background: beige;
 	color: #006685;
-	border: 1px solid #006685;
+	border: none;
 	padding: 0.5rem 1rem;
 	line-height: 1.3rem;
 
@@ -298,12 +293,27 @@ h1, h2, h3, h4, h5, h6 {
 	font-size: 1.1rem;
 	margin-bottom: 1.3rem;
 	width: 100%;
-	border-radius: 2px;
+	border-radius: 4px;
 	background: beige;
 	color: #006685;
 	padding: 0.5rem 1rem;
 	line-height: 1.3rem;
 	border: 2px solid red;
+	animation: shake 0.2s;
+	animation-iteration-count: 2;
+
+}
+
+.valid-input {
+	font-size: 1.1rem;
+	margin-bottom: 1.3rem;
+	width: 100%;
+	border-radius: 4px;
+	background: beige;
+	color: #006685;
+	padding: 0.5rem 1rem;
+	line-height: 1.3rem;
+	border: 2px solid rgb(0, 255, 34);
 	animation: shake 0.2s;
 	animation-iteration-count: 2;
 
@@ -326,6 +336,14 @@ h1, h2, h3, h4, h5, h6 {
 	margin-top: 0;
 }
 
+#got-a {
+	font-size: 10rem;
+	margin: auto;
+    background: linear-gradient(320deg, #2de907, #00f7ff);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: gradient-anim 2s linear 0s infinite alternate;
+}
 
 
 
@@ -379,4 +397,13 @@ h1, h2, h3, h4, h5, h6 {
 	to {
 		transform: scale(1.01);
 	}
+}
+
+@keyframes gradient-anim {
+	from {
+        filter: hue-rotate(0deg);
+    }
+    to {
+        filter: hue-rotate(360deg);
+    }
 }
