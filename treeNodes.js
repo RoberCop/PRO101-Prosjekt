@@ -212,14 +212,14 @@ function treeNodeClass(level, parent, index, title, desc)
 
 	this.domElem.ondrop = function(event)
 	{
-		//event.preventDefault();
 		const targetObj = event.target.treeNode;
 
 		// at least dont allow dropping on the same node
 		if (targetObj == currentDragObj) return;
 
-		/* 
-		 * if currentDragObj is selected by parent
+		/* dont allow dropping parent into it's own layers,
+		 * still allow moving unselected nodes upwards,
+		 * using 'and' condition makes moving nodes backwards allowed
 		 */
 		if ( (targetObj.level > currentDragObj.level) && 
 			 (currentDragObj.parent.selectedChild === currentDragObj.indexOfThis) ) return;
@@ -234,6 +234,7 @@ function treeNodeClass(level, parent, index, title, desc)
 			if (newIndex < 0) 
 				newIndex = 0;
 			else {
+				// in this case, backgroundColor needs changes, not else
 				currentDragObj.parent.childs[newIndex].domBody.style.backgroundColor = "#CCCCFF";
 			}
 
@@ -241,7 +242,7 @@ function treeNodeClass(level, parent, index, title, desc)
 		}
 
 		/* update indicies on other nodes to the right of currentDragObj,
-		 * and possibly fix parent's selected child
+		 * and possibly fix parent's selected child, when to the right of currentDragObj
 		 */
 		for (let i = currentDragObj.indexOfThis; i < currentDragObj.parent.childs.length; i++)
 		{
@@ -263,11 +264,11 @@ function treeNodeClass(level, parent, index, title, desc)
 		currentDragObj.parent = targetObj.parent;
 		currentDragObj.indexOfThis = oldTargetIndex;
 		
-		// update selected child of parent after moving currentDragObj
 		currentDragObj.parent.selectedChild = currentDragObj.indexOfThis;
 
 		selectedNode.domBody.style.backgroundColor = "#CCCCFF";
 
+		// set the dragged node to the new selectedNode
 		selectedNode = currentDragObj;
 		currentDragObj.domBody.style.backgroundColor = "#CCFFCC";
 
