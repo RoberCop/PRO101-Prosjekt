@@ -56,36 +56,22 @@ function checkInput()
 }
 
 //CHECK LOGIN CREDENTIALS
-function checkLogIn() 
+function checkLogIn()
 {
-    for (let i = 0; i < usersArr.length; i++) 
+    for (let i = 0; i < usersArr.length; i++)
     {
-
-        if (signinName.value == usersArr[i].username) 
+        if (signinName.value == usersArr[i].username)
         {
-            console.log('succes username')
-            if (signinPass.value == usersArr[i].password) 
+            console.log("success username")
+            if (signinPass.value == usersArr[i].password)
             {
-                console.log('success password');
-    
+                console.log("success password");
+                return;
             }
-            else 
-            {
-                console.log('Wrong password');
-                loginErr();
-                
-            }
-            return;  
-        }
-        else 
-        {
-            console.log('Wrong username');
-            loginErr();
-            
-     
         }
     }
-    return;
+
+    loginErr(); 
 }
 
 function loginErr()

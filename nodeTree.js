@@ -32,7 +32,7 @@ treeDiv.style.transition = "0.1s all ease-in-out";
 
 //Sets position on elements
 editContainer.style.left = "0";
-editContainer.style.transform = "translate(-100%, 0%)";
+editContainer.style.transform = "translate(-105%, 0%)";
 
 //TODO: Make it possible to add task to selected node when pressing enter
 quickAddPlus.onclick = function()
@@ -68,8 +68,8 @@ document.onmousemove = (e) => {
 	//Hides the editContainer
 	if (mouseX > 300)
 	{
-		editContainer.style.transform = "translate(-100%, 0%)";
-		editContainer.style.borderRight = "50px solid black";
+		editContainer.style.transform = "translate(-105%, 0%)";
+		editContainer.style.borderRight = "10px solid #9c9c9c";
 		treeDiv.style.width = "95vw";
 	}
 };
