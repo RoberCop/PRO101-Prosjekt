@@ -1,21 +1,27 @@
 function addNodeBtnClass(level, parent, index)
 {
+	this.level = level;
+	this.parent = parent;
 	this.indexOfThis = index;
 
 	this.addToDisplay = function (isSelected)
 	{
-		displayArray[level - 1].push(this);
-		this.domElem.style.left = (151 * this.indexOfThis);
+		displayArray[this.level - 1].push(this);
 	}
 
 	// same as in treeNodeClass()
 	this.draw = function ()
 	{
-		for (let i = level - 1; i < displayArray.length; i++)
+		for (let i = this.level - 1; i < displayArray.length; i++)
 			displayArray[i] = [];
 
 		parent.addToDisplay(true, true);
-		drawNodes(level - 1);
+		drawNodes(this.level - 1);
+	}
+
+	this.setLevelRec = function()
+	{
+		this.level = this.parent.level + 1;
 	}
 
 	///////////////////////////////
