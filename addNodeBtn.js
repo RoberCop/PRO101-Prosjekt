@@ -22,7 +22,7 @@ function addNodeBtnClass(level, parent, index)
 	// Dom element
 
 	this.domElem = document.createElement("i");
-	this.domElem.className = "addButton fas fa-plus";
+	this.domElem.className = "addButton far fa-plus-square fa-2x";
 	this.domElem.treeNode = this;
 
 	this.domElem.onclick = function ()
