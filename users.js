@@ -1,5 +1,6 @@
-var users = [{
-    username: "bjarne",
-    password: "kek"
-
-}];
+var usersArr = [
+    {
+        username: "kek",
+        password: "kek"
+    }
+];

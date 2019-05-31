@@ -15,10 +15,8 @@
     <div id="wrapper">
         <div id="left">
             <div id="signin">
-                <div class="logo">
-                    <h1 class="logo-txt">ThinkTask</h1>
-                </div>
-                <form id="signin-form" action="">
+                <img src="img/61547811_456665284905230_6470493107598131200_n.png" alt="" class="logo-txt">
+                <form id="signin-form">
                     <div>
                         <label>Username</label>
                         <input type="text" name="" id="signin-name" class="text-input" required="">
@@ -26,15 +24,15 @@
                     <div>
                         <label>Password</label>
                         <input type="password" name="" id="signin-password" class="text-input" required="">
-                        <p class="error-msg"></p>
+                        <p class="error"></p>
                     </div>
-                    <button type="submit" id="signin-btn" class="primary-btn">Sign in</button>
+                    <button type="button" href="" id="signin-btn" class="primary-btn">Sign in</button>
                 </form>
 
                 <div class="links">
-                    <a href="#">Forgot password</a>
-                    <a href="">Sign in with Facebook <i class="fab fa-facebook"> </i></a>
-                    <a href="">Sign in with Google <i class="fab fa-google"></i></a>
+                    <a>Forgot password</a>
+                    <a>Sign in with Facebook <i class="fab fa-facebook"> </i></a>
+                    <a>Sign in with Google <i class="fab fa-google"></i></a>
 
                 </div>
                 <div class="or">
@@ -42,12 +40,12 @@
                     <span>OR</span>
                     <hr class="bar">
                 </div>
-                <a href="#" id="signup-btn" class="secondary-btn">Create an account</a>
+                <a id="signup-btn" class="secondary-btn">Create an account</a>
             </div>
             <footer id="main-footer">
                 <p>Copyright &copy; 2019, ThinkTask All Rights Reserved</p>
                 <div>
-                    <a href="#">terms of use</a> | <a href="#">Privacy Policy</a>
+                    <a>terms of use</a> | <a>Privacy Policy</a>
                 </div>
             </footer>
         </div>
@@ -55,7 +53,7 @@
             <div id="showcase">
                 <div class="showcase-content">
                     <h1 class="showcase-text">Plan it, Manage it, <strong>Make it</strong></h1>
-                    <a href="#" class="secondary-btn">Why you should use ThinkTask</a>
+                    <a id="why-btn" class="secondary-btn">Why you should use ThinkTask</a>
                 </div>
             </div>
         </div>
@@ -71,20 +69,22 @@
                     <form id="signup-form">
                         <div>
                             <label>Username</label>
-                            <input type="text" name="" id="signup-name" class="text-input">
+                            <input type="text" name="" id="signup-username" placeholder="Username" class="text-input">
                             <p class="error"></p>
                         </div>
                         <div>
                             <label>Password</label>
-                            <input type="password" name="" id="signup-password" class="text-input">
+                            <input type="password" name="" id="signup-password" placeholder="Password"
+                                class="text-input">
                             <p class="error"></p>
                         </div>
                         <div>
                             <label>Repeat password</label>
-                            <input type="password" name="" id="signup-repeat" class="text-input">
+                            <input type="password" name="" id="signup-repeat" placeholder="Repeat password"
+                                class="text-input">
                             <p class="error"></p>
                         </div>
-                        <button type="submit" class="primary-btn" id="submit-signup">Let's go!</button>
+                        <button type="button" href="" class="primary-btn" id="submit-signup">Let's go!</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -94,7 +94,7 @@
                 </div>
             </div>
         </div>
-        <!---END SIGNUP-MODAL-->
+        <!---END SIGNUP MODAL-->
         <div id="signed-up-modal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
@@ -109,12 +109,31 @@
                     <i class="fab fa-facebook"></i>
                     <i class="fab fa-instagram"></i>
                     <i class="fab fa-github"></i>
-
+                </div>
+            </div>
+        </div>
+        <!--END SIGNUP MODAL-->
+        <!--END SIGNED-UP MODAL-->
+        <div id="reasons-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span id="close-modal3" class="close-btn">&times;</span>
+                    <h2 class="modal-title">ThinkTask</h2>
+                </div>
+                <div class="modal-body">
+                    <h2>Beacause this project got an</h2>
+                    <h2 id="got-a">A</h2>
+                    <h2>?</h2>
+                </div>
+                <div class="modal-footer">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-github"></i>
                 </div>
             </div>
         </div>
     </div>
-
+    </div>
     <!--FUNCTIONALITY-->
     <script src="modalScript.js"></script>
     <script src="login.js"></script>
