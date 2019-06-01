@@ -112,7 +112,7 @@ function treeNodeClass(level, parent, index, title, desc)
 		// when setting to "not done"
 		if (toState == false)
 		{
-			undoneRec(this);
+			this.undoneRec();
 
 			return;
 		}
@@ -154,15 +154,6 @@ function treeNodeClass(level, parent, index, title, desc)
 		}
 
 		return true;
-	}
-
-	var undoneRec = function(self)
-	{
-		self.isDone = false;
-		self.domElem.style.borderColor = "#FF0000";
-
-		if (self.level > 1)
-			self.parent.undoneRec();
 	}
 
 	////////////////////////////////////
@@ -300,7 +291,7 @@ function treeNodeClass(level, parent, index, title, desc)
 		currentDragObj.refreshNodeEdit();
 
 		if (!getCanBeDone(currentDragObj.parent))
-			undoneRec(currentDragObj.parent);
+			currentDragObj.parent.undoneRec();
 
 		// Just because its global, and references an object, nullify it when we are done
 		currentDragObj = null;
