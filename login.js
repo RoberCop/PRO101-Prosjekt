@@ -56,21 +56,23 @@ function checkInput()
 }
 
 //CHECK LOGIN CREDENTIALS
-function checkLogIn()
-{
-    for (let i = 0; i < usersArr.length; i++)
-    {
-        if (signinName.value == usersArr[i].username)
-        {
-            console.log("success username")
-            if (signinPass.value == usersArr[i].password)
-            {
-                console.log("success password");
-            }
-        }
-    }
+function checkLogIn() {
+    let username = document.getElementById("signin-name").value;
+    let password = document.getElementById("signin-password").value;
 
-    loginErr(); 
+    for(let i = 0; i < usersArr.length; i++) {
+
+        if(username == usersArr[i].username){
+            if(password == usersArr[i].password){
+                console.log("success");
+                window.location.replace('Overview.html');
+                return;
+            }
+        } 
+    }
+    
+    loginErr();
+    return;
 }
 
 function loginErr()

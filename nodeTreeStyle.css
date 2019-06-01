@@ -149,7 +149,7 @@ main {
     border-radius: 4px;
     margin-left: 20px;
     padding: 1rem;
-    background: #ffb333;
+    background: #ffca28;
 }
 
 
@@ -168,7 +168,7 @@ main {
 }
 
 .edit-container #doneNode:hover {
-    color: #09c709
+    color: #76ff03;
 }
 
 .edit-container #notDoneNode {
