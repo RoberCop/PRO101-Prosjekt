@@ -107,16 +107,8 @@ function treeNodeClass(level, parent, index, title, desc)
 		this.desc = nodeDesc.value;
 	}
 
-	this.setDone = function(toState)
+	this.setDone = function()
 	{
-		// when setting to "not done"
-		if (toState == false)
-		{
-			this.undoneRec();
-
-			return;
-		}
-
 		// return if not allowed to set to "done"
 		if (!this.getCanBeDone()) return;
 
@@ -264,7 +256,7 @@ function dragDropMove(targetObj)
 	{
 		currentDragObj.parent.childs[i].indexOfThis--;
 
-		if ((i + 1) == currentDragObj.parent.selectedChild)
+		if ((i + 1) === currentDragObj.parent.selectedChild)
 			currentDragObj.parent.selectedChild--;
 	}
 

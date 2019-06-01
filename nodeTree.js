@@ -23,49 +23,72 @@ const saveNode = document.getElementById("saveNode");
 const quickAddInput = document.getElementById("quickAddInput");
 const quickAddPlus = document.getElementById("quickAddPlus");
 
-//Sets transition on elements
+// Sets transition on elements
 header.style.transition = "0.1s transform ease-in-out";
 largeInput.style.transition = "0.1s transform ease-in-out";
 menuBar.style.transition = "0.1s transform ease-in-out";
 editContainer.style.transition = "0.1s all ease-in-out";
 treeDiv.style.transition = "0.1s all ease-in-out";
 
-//Sets position on elements
+// Sets position on elements
 editContainer.style.left = "0";
 editContainer.style.transform = "translate(-100%, 0%)";
 
-//TODO: Make it possible to add task to selected node when pressing enter
+quickAddInput.onkeypress = function(event)
+{
+	var keyPressed = event.which || event.keycode;
+
+	// enter needs to be pressed
+	if (keyPressed === 13)
+		quickNodeAdd();
+}
+
 quickAddPlus.onclick = function()
 {
+	quickNodeAdd();
+}
+
+function quickNodeAdd()
+{
+	// always check if input is empty first
+	if (quickAddInput.value == "") return;
+
 	selectedNode.childs.splice(selectedNode.childs.length - 1, 1);
 	selectedNode.newChild(quickAddInput.value, "Sample Desc");
 	quickAddInput.value = "";
 	selectedNode.newAddBtnRec();
 	selectedNode.draw();
+
+	if (!selectedNode.getCanBeDone())
+		selectedNode.undoneRec();
 }
 
-//Trigger events base on mouseXY
+// Trigger events based on mouseXY
 document.onmousemove = (e) => {
 
-	//Gets mouse position
+	// Gets mouse position
 	let mouseY = e.clientY;
 	let mouseX = e.clientX;
 
-	//Lowers header
+	// Lowers header
 	if (mouseY < 100)
 	{
 		header.style.transform = "translate(0%, 0%)";
 		menuBar.style.transform = "translate(0, 0%)";
 		largeInput.style.transform = "translate(-50%, 100%)";
+
+		return;
 	}
-	//Rises header
+
+	// Rises header
 	if (mouseY > 200)
 	{
 		header.style.transform = "translate(0%, -100%)";
 		menuBar.style.transform = "translate(0, 100%)";
 		largeInput.style.transform = "translate(-50%, -100%)";
 	}
-	//Hides the editContainer
+
+	// Hides the editContainer
 	if (mouseX > 300)
 	{
 		editContainer.style.transform = "translate(-100%, 0%)";
@@ -74,33 +97,34 @@ document.onmousemove = (e) => {
 	}
 };
 
-//Displays the editContainer
+// Displays the editContainer
 editContainer.onmouseover = (e) => {
+
 	editContainer.style.transform = "translate(0%, 0%)";
 	editContainer.style.borderRight = "1px solid";
 	treeDiv.style.width = "80vw";
 }
 
-//Warning element
+// Warning element
 function createWarningElem()
 {
-	//Module
+	// Module
 	const module = document.createElement("div");
 	module.dataset.clicked = "true";
 
-	//Title
+	// Title
 	const h1 = document.createElement("h1");
 	h1.innerText = "Hold it!";
 
-	//Paragraph in module
+	// Paragraph in module
 	const paragraph = document.createElement("p");
 	paragraph.innerText = "This will also delete the child nodes. Are you sure you want to delete this?";
 
-	//Button container
+	// Button container
 	const btnContainer = document.createElement("div");
 	btnContainer.setAttribute("class", "edit-btn-container");
 
-	//Delete button
+	// Delete button
 	const deleteBtn = document.createElement("div");
 	deleteBtn.innerText = "Delete anyway";
 	btnContainer.appendChild(deleteBtn);
@@ -111,7 +135,7 @@ function createWarningElem()
 		body.removeChild(shader);
 	}
 
-	//Cancel button
+	// Cancel button
 	const cancelBtn = document.createElement("h4");
 	cancelBtn.dataset.btn = "cancel";
 	cancelBtn.innerText = "Cancel";
@@ -122,7 +146,7 @@ function createWarningElem()
 		body.removeChild(shader);
 	}
 
-	//Attributes
+	// Attributes
 	module.setAttribute("class", "module");
 	deleteBtn.setAttribute("class", "red deleteBtn module-btn");
 	cancelBtn.setAttribute("class", "green cancelBtn module-btn");
@@ -150,12 +174,12 @@ saveNode.onclick = function()
 
 doneNode.onclick = function()
 {
-	selectedNode.setDone(true);
+	selectedNode.setDone();
 }
 
 notDoneNode.onclick = function()
 {
-	selectedNode.setDone(false);
+	selectedNode.undoneRec();
 }
 
 /* Makes stacks inside "treeDiv", causing displayArray to become
