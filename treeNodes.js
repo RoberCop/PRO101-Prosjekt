@@ -112,21 +112,13 @@ function treeNodeClass(level, parent, index, title, desc)
 		// when setting to "not done"
 		if (toState == false)
 		{
-			this.isDone = false;
-			this.domElem.style.borderColor = "#FF0000";
-			
-			this.parent.isDone = false;
-			this.parent.domElem.style.borderColor = "#FF0000";
+			undoneRec(this);
 
 			return;
 		}
 
 		// return if not allowed to set to "done"
-		for (let i = 0; i < this.childs.length; i++)
-		{
-			if ( (!this.childs[i].isDone) &&
-				 (this.childs[i].selectedChild !== undefined) ) return;
-		}
+		if (!getCanBeDone(this)) return;
 
 		// setting to "done" allowed
 		this.isDone = true;
@@ -139,6 +131,38 @@ function treeNodeClass(level, parent, index, title, desc)
 
 		for (child of this.childs)
 			child.setLevelRec();
+	}
+
+	this.undoneRec = function()
+	{
+		this.isDone = false;
+		this.domElem.style.borderColor = "#FF0000";
+
+		if (this.level > 1)
+			this.parent.undoneRec();
+	}
+
+	/////////////////////////////////////
+	// Private methods (using 'self' instead of 'this')
+
+	var getCanBeDone = function(self)
+	{
+		for (let i = 0; i < self.childs.length; i++)
+		{
+			if ( (!self.childs[i].isDone) &&
+				 (self.childs[i].selectedChild !== undefined) ) return false;
+		}
+
+		return true;
+	}
+
+	var undoneRec = function(self)
+	{
+		self.isDone = false;
+		self.domElem.style.borderColor = "#FF0000";
+
+		if (self.level > 1)
+			self.parent.undoneRec();
 	}
 
 	////////////////////////////////////
@@ -177,8 +201,7 @@ function treeNodeClass(level, parent, index, title, desc)
 	this.domElem.appendChild(this.domHeader);
 	this.domElem.appendChild(this.domBody);
 
-	/*
-	 * Prevents mouse events from occuring on child elements,
+	/* Prevents mouse events from occuring on child elements,
 	 * neccessary due to how drag and drop works.
 	 */
 	for (let i = 0; i < this.domElem.childNodes.length; i++)
@@ -200,9 +223,9 @@ function treeNodeClass(level, parent, index, title, desc)
 		this.treeNode.draw();
 	}
 
-	this.domElem.ondragstart = function(event)
+	this.domElem.ondragstart = function()
 	{
-		currentDragObj = event.target.treeNode;
+		currentDragObj = this.treeNode;
 	}
 
 	this.domElem.ondragover = function(event)
@@ -210,9 +233,9 @@ function treeNodeClass(level, parent, index, title, desc)
 		event.preventDefault();
 	}
 
-	this.domElem.ondrop = function(event)
+	this.domElem.ondrop = function()
 	{
-		const targetObj = event.target.treeNode;
+		const targetObj = this.treeNode;
 
 		// at least dont allow dropping on the same node
 		if (targetObj == currentDragObj) return;
@@ -275,6 +298,9 @@ function treeNodeClass(level, parent, index, title, desc)
 		currentDragObj.setLevelRec();
 		currentDragObj.draw();
 		currentDragObj.refreshNodeEdit();
+
+		if (!getCanBeDone(currentDragObj.parent))
+			undoneRec(currentDragObj.parent);
 
 		// Just because its global, and references an object, nullify it when we are done
 		currentDragObj = null;
