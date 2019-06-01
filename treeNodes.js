@@ -118,7 +118,7 @@ function treeNodeClass(level, parent, index, title, desc)
 		}
 
 		// return if not allowed to set to "done"
-		if (!getCanBeDone(this)) return;
+		if (!this.getCanBeDone()) return;
 
 		// setting to "done" allowed
 		this.isDone = true;
@@ -142,15 +142,12 @@ function treeNodeClass(level, parent, index, title, desc)
 			this.parent.undoneRec();
 	}
 
-	/////////////////////////////////////
-	// Private methods (using 'self' instead of 'this')
-
-	var getCanBeDone = function(self)
+	this.getCanBeDone = function()
 	{
-		for (let i = 0; i < self.childs.length; i++)
+		for (let i = 0; i < this.childs.length; i++)
 		{
-			if ( (!self.childs[i].isDone) &&
-				 (self.childs[i].selectedChild !== undefined) ) return false;
+			if ( (!this.childs[i].isDone) &&
+				 (this.childs[i].selectedChild !== undefined) ) return false;
 		}
 
 		return true;
@@ -226,74 +223,75 @@ function treeNodeClass(level, parent, index, title, desc)
 
 	this.domElem.ondrop = function()
 	{
-		const targetObj = this.treeNode;
-
-		// at least dont allow dropping on the same node
-		if (targetObj == currentDragObj) return;
-
-		/* dont allow dropping parent into it's own layers,
-		 * still allow moving unselected nodes upwards,
-		 * using 'and' condition makes moving nodes backwards allowed
-		 */
-		if ( (targetObj.level > currentDragObj.level) && 
-			 (currentDragObj.parent.selectedChild === currentDragObj.indexOfThis) ) return;
-
-		currentDragObj.parent.childs.splice(currentDragObj.indexOfThis, 1);
-
-		if (currentDragObj.indexOfThis == currentDragObj.parent.selectedChild)
-		{
-			// if moving the selectedChild
-			let newIndex = currentDragObj.indexOfThis - 1;
-
-			if (newIndex < 0) 
-				newIndex = 0;
-			else {
-				// in this case, backgroundColor needs changes, not else
-				currentDragObj.parent.childs[newIndex].domBody.style.backgroundColor = "#CCCCFF";
-			}
-
-			currentDragObj.parent.selectedChild = newIndex;
-		}
-
-		/* update indicies on other nodes to the right of currentDragObj,
-		 * and possibly fix parent's selected child, when to the right of currentDragObj
-		 */
-		for (let i = currentDragObj.indexOfThis; i < currentDragObj.parent.childs.length; i++)
-		{
-			currentDragObj.parent.childs[i].indexOfThis--;
-
-			if ((i + 1) == currentDragObj.parent.selectedChild)
-				currentDragObj.parent.selectedChild--;
-		}
-
-		targetObj.parent.childs.splice(targetObj.indexOfThis, 0, currentDragObj);
-
-		oldTargetIndex = targetObj.indexOfThis;
-
-		// update indicies on other nodes to the right of targetObj
-		for (let i = targetObj.indexOfThis; i < targetObj.parent.childs.length; i++)
-			targetObj.parent.childs[i].indexOfThis = i;
-
-		// update dragged objects instance variables
-		currentDragObj.parent = targetObj.parent;
-		currentDragObj.indexOfThis = oldTargetIndex;
-		
-		currentDragObj.parent.selectedChild = currentDragObj.indexOfThis;
-
-		selectedNode.domBody.style.backgroundColor = "#CCCCFF";
-
-		// set the dragged node to the new selectedNode
-		selectedNode = currentDragObj;
-		currentDragObj.domBody.style.backgroundColor = "#CCFFCC";
-
-		currentDragObj.setLevelRec();
-		currentDragObj.draw();
-		currentDragObj.refreshNodeEdit();
-
-		if (!getCanBeDone(currentDragObj.parent))
-			currentDragObj.parent.undoneRec();
-
-		// Just because its global, and references an object, nullify it when we are done
-		currentDragObj = null;
+		dragDropMove(this.treeNode);
 	}
+}
+
+// used by both node classes to move dragged node
+function dragDropMove(targetObj)
+{
+	// at least dont allow dropping on the same node
+	if (targetObj == currentDragObj) return;
+
+	/* dont allow dropping parent into it's own layers,
+	 * still allow moving unselected nodes upwards,
+	 * using 'and' condition makes moving nodes backwards allowed
+	 */
+	if ( (targetObj.level > currentDragObj.level) && 
+		 (currentDragObj.parent.selectedChild === currentDragObj.indexOfThis) ) return;
+
+	currentDragObj.parent.childs.splice(currentDragObj.indexOfThis, 1);
+
+	if (currentDragObj.indexOfThis == currentDragObj.parent.selectedChild)
+	{
+		// if moving the selectedChild
+		let newIndex = currentDragObj.indexOfThis - 1;
+
+		if (newIndex < 0) 
+			newIndex = 0;
+		else {
+			// in this case, backgroundColor needs changes, not else
+			currentDragObj.parent.childs[newIndex].domBody.style.backgroundColor = "#CCCCFF";
+		}
+
+		currentDragObj.parent.selectedChild = newIndex;
+	}
+
+	/* update indicies on other nodes to the right of currentDragObj,
+	 * and possibly fix parent's selected child, when to the right of currentDragObj
+	 */
+	for (let i = currentDragObj.indexOfThis; i < currentDragObj.parent.childs.length; i++)
+	{
+		currentDragObj.parent.childs[i].indexOfThis--;
+
+		if ((i + 1) == currentDragObj.parent.selectedChild)
+			currentDragObj.parent.selectedChild--;
+	}
+
+	targetObj.parent.childs.splice(targetObj.indexOfThis, 0, currentDragObj);
+
+	oldTargetIndex = targetObj.indexOfThis;
+
+	// update indicies on other nodes to the right of targetObj
+	for (let i = targetObj.indexOfThis; i < targetObj.parent.childs.length; i++)
+		targetObj.parent.childs[i].indexOfThis = i;
+
+	// update dragged objects instance variables
+	currentDragObj.parent = targetObj.parent;
+	currentDragObj.indexOfThis = oldTargetIndex;
+	
+	currentDragObj.parent.selectedChild = currentDragObj.indexOfThis;
+
+	selectedNode.domBody.style.backgroundColor = "#CCCCFF";
+
+	// set the dragged node to the new selectedNode
+	selectedNode = currentDragObj;
+	currentDragObj.domBody.style.backgroundColor = "#CCFFCC";
+
+	currentDragObj.setLevelRec();
+	currentDragObj.draw();
+	currentDragObj.refreshNodeEdit();
+
+	if (!currentDragObj.parent.getCanBeDone())
+		currentDragObj.parent.undoneRec();
 }

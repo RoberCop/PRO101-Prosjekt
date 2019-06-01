@@ -50,4 +50,14 @@ function addNodeBtnClass(level, parent, index)
 
 		this.treeNode.draw();
 	}
+
+	this.domElem.ondragover = function(event)
+	{
+		event.preventDefault();
+	}
+
+	this.domElem.ondrop = function()
+	{
+		dragDropMove(this.treeNode);
+	}
 }
