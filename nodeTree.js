@@ -14,6 +14,7 @@ const nodeTitle = document.getElementById("nodeTitle");
 const nodeDesc = document.getElementById("nodeDesc");
 
 const doneNode = document.getElementById("doneNode");
+const inProgNode = document.getElementById("inProgNode");
 const notDoneNode = document.getElementById("notDoneNode");
 
 const deleteNode = document.getElementById("deleteNode");
@@ -59,8 +60,7 @@ function quickNodeAdd()
 	selectedNode.newAddBtnRec();
 	selectedNode.draw();
 
-	if (!selectedNode.getCanBeDone())
-		selectedNode.undoneRec();
+	selectedNode.setStatusRec(0);
 }
 
 // Trigger events based on mouseXY
@@ -174,12 +174,17 @@ saveNode.onclick = function()
 
 doneNode.onclick = function()
 {
-	selectedNode.setDone();
+	selectedNode.setStatusRec(2);
+}
+
+inProgNode.onclick = function()
+{
+	selectedNode.setStatusRec(1);
 }
 
 notDoneNode.onclick = function()
 {
-	selectedNode.undoneRec();
+	selectedNode.setStatusRec(0);
 }
 
 /* Makes stacks inside "treeDiv", causing displayArray to become

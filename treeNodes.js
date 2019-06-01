@@ -17,7 +17,7 @@ function treeNodeClass(level, parent, index, title, desc)
 
 	this.desc = (desc !== undefined) ? desc : "";
 
-	this.isDone = false;
+	this.status = 0;
 
 	// adds a new instance to "childs" array
 	this.newChild = function(newTitle, newDesc)
@@ -43,7 +43,8 @@ function treeNodeClass(level, parent, index, title, desc)
 		if (!isStart)
 			displayArray[this.level - 1].push(this);
 
-		this.domElem.style.borderColor = (this.isDone) ? "#00FF00" : "#FF0000";
+		const statusColor = (this.status > 0) ? ( (this.status > 1) ? "#0F0" : "#FF0" ) : "#F00";
+		this.domElem.style.borderColor = statusColor;
 
 		if (isSelected)
 		{
@@ -107,14 +108,20 @@ function treeNodeClass(level, parent, index, title, desc)
 		this.desc = nodeDesc.value;
 	}
 
-	this.setDone = function()
+	this.setStatusRec = function(newStatus)
 	{
-		// return if not allowed to set to "done"
-		if (!this.getCanBeDone()) return;
+		// return if not allowed to set to newStatus
+		if (!this.getCanBeStatus(newStatus)) return;
 
-		// setting to "done" allowed
-		this.isDone = true;
-		this.domElem.style.borderColor = "#00FF00";
+		// setting to newStatus allowed
+		this.status = newStatus;
+
+		const statusColor = (newStatus > 0) ? ( (newStatus > 1) ? "#0F0" : "#FF0" ) : "#F00";
+		this.domElem.style.borderColor = statusColor;
+
+		// setting to 'done' is not recursive, dont call on root
+		if ( (newStatus < 2) && (this.level > 1) )
+			this.parent.setStatusRec(newStatus);
 	}
 
 	this.setLevelRec = function()
@@ -125,20 +132,14 @@ function treeNodeClass(level, parent, index, title, desc)
 			child.setLevelRec();
 	}
 
-	this.undoneRec = function()
+	this.getCanBeStatus = function(newStatus)
 	{
-		this.isDone = false;
-		this.domElem.style.borderColor = "#FF0000";
+		// always allowed to set to 'in progress'
+		if (newStatus === 1) return true;
 
-		if (this.level > 1)
-			this.parent.undoneRec();
-	}
-
-	this.getCanBeDone = function()
-	{
 		for (let i = 0; i < this.childs.length; i++)
 		{
-			if ( (!this.childs[i].isDone) &&
+			if ( (this.childs[i].status !== newStatus) &&
 				 (this.childs[i].selectedChild !== undefined) ) return false;
 		}
 
@@ -156,11 +157,13 @@ function treeNodeClass(level, parent, index, title, desc)
 	this.light = document.createElement("div");
 
 	this.domElem.className = "treeNode";
-	this.domElem.borderWidth = "1px";
-	this.domElem.borderStyle = "solid";
-	this.domElem.borderColor = "red";
 	this.domElem.draggable = "true";
 	this.domElem.treeNode = this;
+
+	this.domElem.style.borderWidth = "2px";
+	this.domElem.style.borderStyle = "solid";
+	this.domElem.style.borderColor = "red";
+	this.domElem.style.boxShadow = "0px 0px 4px";
 
 	this.domHeader.className = "node-header";
 
@@ -284,6 +287,5 @@ function dragDropMove(targetObj)
 	currentDragObj.draw();
 	currentDragObj.refreshNodeEdit();
 
-	if (!currentDragObj.parent.getCanBeDone())
-		currentDragObj.parent.undoneRec();
+	currentDragObj.setStatusRec(currentDragObj.status);
 }
