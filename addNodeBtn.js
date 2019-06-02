@@ -15,7 +15,7 @@ function addNodeBtnClass(level, parent, index)
 		for (let i = this.level - 1; i < displayArray.length; i++)
 			displayArray[i] = [];
 
-		parent.addToDisplay(true, true);
+		this.parent.addToDisplay(true, true);
 		drawNodes(this.level - 1);
 	}
 
@@ -35,16 +35,16 @@ function addNodeBtnClass(level, parent, index)
 	{
 		selectedNode.domBody.style.backgroundColor = "#CCCCFF";
 
-		parent.childs.splice(this.treeNode.indexOfThis, 1);
-		parent.newChild("Sample Text", "Sample Desc");
-		parent.childs[this.treeNode.indexOfThis].newAddBtnRec();
+		this.treeNode.parent.childs.splice(this.treeNode.indexOfThis, 1);
+		this.treeNode.parent.newChild("Sample Text", "Sample Desc");
+		this.treeNode.parent.childs[this.treeNode.indexOfThis].newAddBtnRec();
 
-		selectedNode = parent.childs[this.treeNode.indexOfThis];
+		selectedNode = this.treeNode.parent.childs[this.treeNode.indexOfThis];
 		selectedNode.refreshNodeEdit();
 		selectedNode.domBody.style.backgroundColor = "#CCFFCC";
 
-		parent.selectedChild = this.treeNode.indexOfThis++;
-		parent.childs.push(this.treeNode);
+		this.treeNode.parent.selectedChild = this.treeNode.indexOfThis++;
+		this.treeNode.parent.childs.push(this.treeNode);
 
 		this.treeNode.draw();
 	}

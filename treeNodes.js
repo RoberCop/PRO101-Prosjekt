@@ -23,7 +23,10 @@ function treeNodeClass(level, parent, index, title, desc, status)
 	this.newChild = function(newTitle, newDesc)
 	{
 		this.childs.push(new treeNodeClass(this.level + 1, this, this.childs.length,
-			newTitle, newDesc, this.status));
+			newTitle, newDesc, 0));
+
+		if (this.level > 0)
+			this.setStatusRec();
 	}
 
 	this.newAddBtnRec = function()
@@ -146,8 +149,6 @@ function treeNodeClass(level, parent, index, title, desc, status)
 	this.setStatusRec = function()
 	{
 		var canBeGreen = true;
-
-		if (this.childs.length === 1) return;
 
 		for (child of this.childs)
 		{
