@@ -245,7 +245,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .modal-body {
-	background: #85e0fc;;
+	background: #85e0fc;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
