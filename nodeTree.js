@@ -24,6 +24,12 @@ const saveNode = document.getElementById("saveNode");
 const quickAddInput = document.getElementById("quickAddInput");
 const quickAddPlus = document.getElementById("quickAddPlus");
 
+// used toggle elements on and off with keyboard shortcuts
+var toggleQuickAdd = false;
+var toggleEditCont = false;
+
+var delPromptActive = false;
+
 // Sets transition on elements
 header.style.transition = "0.1s transform ease-in-out";
 largeInput.style.transition = "0.1s transform ease-in-out";
@@ -34,12 +40,82 @@ treeDiv.style.transition = "0.1s all ease-in-out";
 // Sets position on elements
 editContainer.style.left = "0";
 editContainer.style.transform = "translate(-100%, 0%)";
+moveQuickAdd(false);
 
-quickAddInput.onkeypress = function(event)
+document.onkeydown = function(event)
 {
 	var keyPressed = event.which || event.keycode;
 
-	// enter needs to be pressed
+	if (delPromptActive)
+	{
+		if (keyPressed === 13)
+		{
+			selectedNode.removeNode();
+			body.removeChild(shader);
+			delPromptActive = false;
+			return;
+		}
+	}
+
+	// open node editor with ctrl-z
+	if ( (event.ctrlKey) && (keyPressed === 90) )
+	{
+		moveEditContainer(!toggleEditCont);
+		return;
+	}
+
+	// open quickAdd with ctrl-q
+	if ( (event.ctrlKey) && (keyPressed === 81) )
+	{
+		moveQuickAdd(!toggleQuickAdd);
+
+		if (!toggleQuickAdd)
+			nodeTitle.focus(); // only fix to get rid of focus
+
+		return;
+	}
+
+	// make sure elements are closed, as arrows are used when typing
+	if ( (toggleEditCont) || (toggleQuickAdd) ) return;
+
+	const selectedParent = selectedNode.parent;
+
+	// arrow left
+	if ( (keyPressed === 37) && (selectedNode.indexOfThis > 0) )
+	{
+		selectedParent.childs[selectedParent.selectedChild - 1].setSelectedNode();
+		return;
+	}
+
+	// arrow right
+	if ( (keyPressed === 39) && (selectedNode.indexOfThis < (selectedParent.childs.length - 2)) )
+	{
+		selectedParent.childs[selectedParent.selectedChild + 1].setSelectedNode();
+		return;
+	}
+
+	// arrow up
+	if ( (keyPressed === 38) && (selectedNode.childs.length > 1) )
+	{
+		const childIndex = (selectedNode.selectedChild > -1) ? selectedNode.selectedChild : 0;
+
+		selectedNode.childs[childIndex].setSelectedNode();
+		return;
+	}
+
+	// arrow down
+	if ( (keyPressed === 40) && (selectedNode.level > 1) )
+	{
+		selectedParent.setSelectedNode();
+		return;
+	}
+}
+
+quickAddInput.onkeydown = function(event)
+{
+	var keyPressed = event.which || event.keycode;
+
+	// enter tries to make a new node
 	if (keyPressed === 13)
 		quickNodeAdd();
 }
@@ -59,50 +135,75 @@ function quickNodeAdd()
 	quickAddInput.value = "";
 	selectedNode.newAddBtnRec();
 	selectedNode.draw();
-
-	selectedNode.setStatusRec(0);
 }
 
 // Trigger events based on mouseXY
 document.onmousemove = (e) => {
+
+	if (delPromptActive) return;
 
 	// Gets mouse position
 	let mouseY = e.clientY;
 	let mouseX = e.clientX;
 
 	// Lowers header
-	if (mouseY < 100)
+	if (mouseY < 200)
 	{
-		header.style.transform = "translate(0%, 0%)";
-		menuBar.style.transform = "translate(0, 0%)";
-		largeInput.style.transform = "translate(-50%, 100%)";
-
+		moveQuickAdd(true);
 		return;
 	}
 
 	// Rises header
 	if (mouseY > 200)
-	{
-		header.style.transform = "translate(0%, -100%)";
-		menuBar.style.transform = "translate(0, 100%)";
-		largeInput.style.transform = "translate(-50%, -100%)";
-	}
+		moveQuickAdd(false);
 
 	// Hides the editContainer
 	if (mouseX > 300)
-	{
-		editContainer.style.transform = "translate(-100%, 0%)";
-		editContainer.style.borderRight = "50px solid black";
-		treeDiv.style.width = "95vw";
-	}
-};
+		moveEditContainer(false);
+}
 
 // Displays the editContainer
 editContainer.onmouseover = (e) => {
 
-	editContainer.style.transform = "translate(0%, 0%)";
-	editContainer.style.borderRight = "1px solid";
-	treeDiv.style.width = "80vw";
+	if ( (delPromptActive) || (toggleEditCont) ) return;
+
+	moveEditContainer(true);
+}
+
+function moveQuickAdd(downOrUp)
+{
+	if (downOrUp)
+	{
+		header.style.transform = "translate(0%, 0%)";
+		menuBar.style.transform = "translate(0, 0%)";
+		largeInput.style.transform = "translate(-50%, 100%)";
+		quickAddInput.focus();
+		toggleQuickAdd = true;
+	}
+	else {
+		header.style.transform = "translate(0%, -100%)";
+		menuBar.style.transform = "translate(0, 100%)";
+		largeInput.style.transform = "translate(-50%, -100%)";
+		toggleQuickAdd = false;
+	}
+}
+
+function moveEditContainer(rightOrleft)
+{
+	if (rightOrleft)
+	{
+		editContainer.style.transform = "translate(0%, 0%)";
+		editContainer.style.borderRight = "1px solid";
+		treeDiv.style.width = "80vw";
+		nodeTitle.focus();
+		toggleEditCont = true;
+	}
+	else {
+		editContainer.style.transform = "translate(-100%, 0%)";
+		editContainer.style.borderRight = "50px solid black";
+		treeDiv.style.width = "95vw";
+		toggleEditCont = false;
+	}
 }
 
 // Warning element
@@ -129,10 +230,11 @@ function createWarningElem()
 	deleteBtn.innerText = "Delete anyway";
 	btnContainer.appendChild(deleteBtn);
 
-	deleteBtn.onclick = function ()
+	deleteBtn.onclick = function()
 	{
 		selectedNode.removeNode();
 		body.removeChild(shader);
+		delPromptActive = false;
 	}
 
 	// Cancel button
@@ -141,9 +243,10 @@ function createWarningElem()
 	cancelBtn.innerText = "Cancel";
 	btnContainer.appendChild(cancelBtn);
 
-	cancelBtn.onclick = function ()
+	cancelBtn.onclick = function()
 	{
 		body.removeChild(shader);
+		delPromptActive = false;
 	}
 
 	// Attributes
@@ -157,9 +260,10 @@ function createWarningElem()
 	shader.appendChild(module);
 }
 
-deleteNode.onclick = function ()
+deleteNode.onclick = function()
 {
 	body.appendChild(shader);
+	delPromptActive = true;
 }
 
 refreshNode.onclick = function()
@@ -174,17 +278,17 @@ saveNode.onclick = function()
 
 doneNode.onclick = function()
 {
-	selectedNode.setStatusRec(2);
+	selectedNode.tryStatus(2);
 }
 
 inProgNode.onclick = function()
 {
-	selectedNode.setStatusRec(1);
+	selectedNode.tryStatus(1);
 }
 
 notDoneNode.onclick = function()
 {
-	selectedNode.setStatusRec(0);
+	selectedNode.tryStatus(0);
 }
 
 /* Makes stacks inside "treeDiv", causing displayArray to become
@@ -211,9 +315,7 @@ function drawNodes(level)
 
 		// add each node to the stack
 		for (let j = 0; j < displayArray[i].length; j++)
-		{
 			treeDiv.children[i].appendChild(displayArray[i][j].domElem);
-		}
 	}
 }
 

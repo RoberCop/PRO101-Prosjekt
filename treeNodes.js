@@ -5,7 +5,7 @@ const displayArray = [];
 var currentDragObj;
 
 // class to instantiate nodes on the tree
-function treeNodeClass(level, parent, index, title, desc)
+function treeNodeClass(level, parent, index, title, desc, status)
 {
 	this.childs = [];
 
@@ -17,12 +17,13 @@ function treeNodeClass(level, parent, index, title, desc)
 
 	this.desc = (desc !== undefined) ? desc : "";
 
-	this.status = 0;
+	this.status = status;
 
 	// adds a new instance to "childs" array
 	this.newChild = function(newTitle, newDesc)
 	{
-		this.childs.push(new treeNodeClass(this.level + 1, this, this.childs.length, newTitle, newDesc));
+		this.childs.push(new treeNodeClass(this.level + 1, this, this.childs.length,
+			newTitle, newDesc, this.status));
 	}
 
 	this.newAddBtnRec = function()
@@ -92,7 +93,22 @@ function treeNodeClass(level, parent, index, title, desc)
 		selectedNode.refreshNodeEdit();
 		this.parent.selectedChild = newIndex;
 		selectedNode.domBody.style.backgroundColor = "#CCFFCC";
+		this.parent.setStatusRec();
 
+		this.draw();
+	}
+
+	this.setSelectedNode = function()
+	{
+		selectedNode.domBody.style.backgroundColor = "#CCCCFF";
+
+		// set this node to be the selected child, on the parent
+		this.parent.selectedChild = this.indexOfThis;
+		selectedNode = this;
+
+		this.domBody.style.backgroundColor = "#CCFFCC";
+
+		this.refreshNodeEdit();
 		this.draw();
 	}
 
@@ -108,20 +124,46 @@ function treeNodeClass(level, parent, index, title, desc)
 		this.desc = nodeDesc.value;
 	}
 
-	this.setStatusRec = function(newStatus)
+	this.tryStatus = function(newStatus)
 	{
-		// return if not allowed to set to newStatus
-		if (!this.getCanBeStatus(newStatus)) return;
+		if ( (this.childs.length > 1) || (this.status === newStatus) ) return;
 
+		this.setStatus(newStatus);
+	}
+
+	this.setStatus = function(newStatus)
+	{
 		// setting to newStatus allowed
 		this.status = newStatus;
 
 		const statusColor = (newStatus > 0) ? ( (newStatus > 1) ? "#0F0" : "#FF0" ) : "#F00";
 		this.domElem.style.borderColor = statusColor;
 
-		// setting to 'done' is not recursive, dont call on root
-		if ( (newStatus < 2) && (this.level > 1) )
-			this.parent.setStatusRec(newStatus);
+		if (this.level > 1)
+			this.parent.setStatusRec();
+	}
+
+	this.setStatusRec = function()
+	{
+		var canBeGreen = true;
+
+		if (this.childs.length === 1) return;
+
+		for (child of this.childs)
+		{
+			if ( (child.status < 2) &&
+				 (child.selectedChild !== undefined) )
+			{
+				if (child.status === 1)
+				{
+					this.setStatus(1);
+					return;
+				}
+				else canBeGreen = false;
+			}
+		}
+
+		this.setStatus((canBeGreen) ? 2 : 0);
 	}
 
 	this.setLevelRec = function()
@@ -130,20 +172,6 @@ function treeNodeClass(level, parent, index, title, desc)
 
 		for (child of this.childs)
 			child.setLevelRec();
-	}
-
-	this.getCanBeStatus = function(newStatus)
-	{
-		// always allowed to set to 'in progress'
-		if (newStatus === 1) return true;
-
-		for (let i = 0; i < this.childs.length; i++)
-		{
-			if ( (this.childs[i].status !== newStatus) &&
-				 (this.childs[i].selectedChild !== undefined) ) return false;
-		}
-
-		return true;
 	}
 
 	////////////////////////////////////
@@ -194,16 +222,7 @@ function treeNodeClass(level, parent, index, title, desc)
 
 	this.domElem.onclick = function()
 	{
-		selectedNode.domBody.style.backgroundColor = "#CCCCFF";
-
-		// set this node to be the selected child, on the parent
-		this.treeNode.parent.selectedChild = this.treeNode.indexOfThis;
-		selectedNode = this.treeNode;
-
-		selectedNode.domBody.style.backgroundColor = "#CCFFCC";
-
-		this.treeNode.refreshNodeEdit();
-		this.treeNode.draw();
+		this.treeNode.setSelectedNode();
 	}
 
 	this.domElem.ondragstart = function()
@@ -287,5 +306,5 @@ function dragDropMove(targetObj)
 	currentDragObj.draw();
 	currentDragObj.refreshNodeEdit();
 
-	currentDragObj.setStatusRec(currentDragObj.status);
+	currentDragObj.setStatus(currentDragObj.status);
 }

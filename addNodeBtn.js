@@ -43,8 +43,6 @@ function addNodeBtnClass(level, parent, index)
 		selectedNode.refreshNodeEdit();
 		selectedNode.domBody.style.backgroundColor = "#CCFFCC";
 
-		selectedNode.setStatusRec(0);
-
 		parent.selectedChild = this.treeNode.indexOfThis++;
 		parent.childs.push(this.treeNode);
 
