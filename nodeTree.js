@@ -197,12 +197,14 @@ function moveEditContainer(rightOrleft)
 		editContainer.style.transform = "translate(0%, 0%)";
 		editContainer.style.borderRight = "1px solid";
 		treeDiv.style.width = "80vw";
+
 		nodeTitle.focus();
 		toggleEditCont = true;
 	}
 	else {
-		editContainer.style.transform = "translate(-100%, 0%)";
-		editContainer.style.borderRight = "50px solid black";
+		editContainer.style.transform = "translate(-105%, 0%)";
+		editContainer.style.borderRight = "10px solid #9c9c9c";
+
 		treeDiv.style.width = "95vw";
 		toggleEditCont = false;
 	}

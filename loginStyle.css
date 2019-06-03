@@ -125,7 +125,6 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 0.7rem 1rem;
 	height: 2.7rem;
 	display: block;
-	border: 1px solid #006685 ;
 	border-radius: 4px;
 	font-weight: 500;
 	background: none;
@@ -191,6 +190,7 @@ h1, h2, h3, h4, h5, h6 {
 #showcase .secondary-btn {
 	width: 60%;
 	margin: auto;
+	border: 1px #006685 solid;
 }
 
 /*******FOOTER*******/
@@ -246,7 +246,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .modal-body {
-	background: #85e0fc;;
+	background: #85e0fc;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -385,10 +385,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /******KEYFRAMES*********/
 
-	@keyframes modalOpen {
+@keyframes modalOpen {
 		from{transform: scale(0)}
 		to{transform: scale(1)}
-	}
+}
 
 @keyframes shake {
 	from {

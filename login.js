@@ -7,9 +7,13 @@ var signupName = document.getElementById('signup-username');
 var password1 = document.getElementById('signup-password');
 var password2 = document.getElementById('signup-repeat');
 
-signinBtn.addEventListener('click', checkLogIn);
+signinBtn.addEventListener('click', checkValues);
 signupSubmit.addEventListener('click', checkInput);
-
+signinName.addEventListener('keyup', enterSignin);
+signinPass.addEventListener('keyup', enterSignin);
+signupName.addEventListener('keyup', enterSignup);
+password1.addEventListener('keyup', enterSignup);
+password2.addEventListener('keyup', enterSignup);
 
 function checkInput() 
 {
@@ -56,35 +60,38 @@ function checkInput()
 }
 
 //CHECK LOGIN CREDENTIALS
+function checkValues() 
+{
+    if(signinPass.value.length > 0 && signinPass.value.length >0) 
+    {
+        checkLogIn();
+    }
+    else 
+    {
+        signinPass.nextElementSibling.innerHTML = "Username and password is required";
+    }
+}
+
 function checkLogIn() 
 {
-    for (let i = 0; i < usersArr.length; i++) 
+    let username = document.getElementById("signin-name").value;
+    let password = document.getElementById("signin-password").value;
+
+    for(let i = 0; i < usersArr.length; i++) 
     {
 
-        if (signinName.value == usersArr[i].username) 
+        if(username == usersArr[i].username)
         {
-            console.log('succes username')
-            if (signinPass.value == usersArr[i].password) 
+            if(password == usersArr[i].password)
             {
-                console.log('success password');
-    
+                console.log("success");
+                window.location.assign('Overview.html');
+                return;
             }
-            else 
-            {
-                console.log('Wrong password');
-                loginErr();
-                
-            }
-            return;  
-        }
-        else 
-        {
-            console.log('Wrong username');
-            loginErr();
-            
-     
-        }
+        } 
     }
+    
+    loginErr();
     return;
 }
 
@@ -124,5 +131,18 @@ function removeMessage()
     });
 }
 
+function enterSignin(event) 
+{
+    if(signinName.value.length > 0 && signinPass.value.length > 0 && event.key === 'Enter') {
+        checkLogIn();
+    }
+}
+
+function enterSignup(event) 
+{
+    if(event.key === 'Enter') {
+        checkInput();
+    }
+}
 
 

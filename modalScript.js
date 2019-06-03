@@ -3,7 +3,7 @@
 // Get modal elements
 var signupModal = document.getElementById('signup-modal');
 var signedUp = document.getElementById('signed-up-modal')
-var signUpForm = document.getElementById('signup-form')
+var signUpForm = document.getElementById('signup-form');
 var easterEgg = document.getElementById("reasons-modal");
 
 //Get open modal button
@@ -13,7 +13,7 @@ var easterEggBtn = document.getElementById('why-btn');
 // Get close button
 var closeBtn = document.getElementById('close-modal');
 var closeBtn2 = document.getElementById('close-modal2');
-var closeBtn3 = document.getElementById('close-modal3')
+var closeBtn3 = document.getElementById('close-modal3');
 
 //Listen for open click
 modalBtn.addEventListener('click', openModal);
