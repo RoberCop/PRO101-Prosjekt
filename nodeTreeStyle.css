@@ -11,7 +11,7 @@
 html, body
 {
     margin: 0;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
     
 }
@@ -26,7 +26,6 @@ body {
     height: 100%;
     justify-content: center;
     align-items: center;
-   
     overflow: hidden;
 }
 
@@ -141,10 +140,13 @@ header > #largeInput {
 }
 
 main {
+    border: 2px red solid;
+    height: 100%;
+    width: 100%;
+    justify-content: flex-end;
     grid-area: main;
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .edit-container
@@ -184,6 +186,15 @@ main {
 
 .edit-container #notDoneNode:hover {
     color: #dd2c00;
+}
+
+.edit-container #inProgNode {
+    width: auto;
+    cursor: pointer;
+}
+
+.edit-container #inProgNode:hover {
+    color: #ffeb3b;
 }
 
 
@@ -450,10 +461,10 @@ textarea:focus, input:focus
     justify-content: center;
     align-items: center;
     position: relative;
-    overflow: auto;
+    overflow-x: hidden;
     margin: 0 2.7vw 0 0;
     -webkit-overflow-scrolling: touch;
-    
+    border: 2px hotpink solid;
 }
 
 #treeDiv::-webkit-scrollbar {
@@ -472,8 +483,9 @@ textarea:focus, input:focus
 }
 
 .treeStack {
-    width: 100%;
-    height: 100%;
+    border: 1px lime solid;
+    width: 100vw;
+    height: 100vh;
 	display: flex;
     flex-direction: row;
     align-items: center;
@@ -492,8 +504,9 @@ textarea:focus, input:focus
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    width: 150px;
-    min-width: 150px;
+    width: 8%;
+    min-width: 8%;
+    max-width: 8%;
     height: auto;
     margin-right: 5px;
     border: 3px solid;

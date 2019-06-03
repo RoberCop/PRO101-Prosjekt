@@ -176,6 +176,7 @@ function moveQuickAdd(downOrUp)
 		header.style.transform = "translate(0%, 0%)";
 		menuBar.style.transform = "translate(0, 0%)";
 		largeInput.style.transform = "translate(-50%, 100%)";
+		treeDiv.style.height = "70vh";
 		quickAddInput.focus();
 		toggleQuickAdd = true;
 	}
@@ -183,6 +184,7 @@ function moveQuickAdd(downOrUp)
 		header.style.transform = "translate(0%, -100%)";
 		menuBar.style.transform = "translate(0, 100%)";
 		largeInput.style.transform = "translate(-50%, -100%)";
+		treeDiv.style.height = "80vh";
 		toggleQuickAdd = false;
 	}
 }
