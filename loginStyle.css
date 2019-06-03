@@ -289,6 +289,70 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
+#reasons-modal .modal-content {
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+	height: 80%;
+	width: 60%;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	background: transparent;
+}
+
+#reasons-modal .modal-content::-webkit-scrollbar {
+	background: #b0bec5;
+	width: 0.6rem;
+	border-radius: 0 10px 10px 0;
+}
+
+#reasons-modal .modal-content::-webkit-scrollbar-thumb {
+	background: linear-gradient(70deg, #cfd8dc, #eceff1);
+	border-radius: 50px;
+}
+
+#reasons-modal section {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: auto;
+	justify-content: space-around;
+	padding-top: 1.3rem;
+	padding-bottom: 1.1rem;
+}
+
+.mod-sec-1 {
+
+	border-radius: 10px 10px 0 0;
+	background: #eceff1; 
+	
+}
+
+.mod-sec-1 img {
+	height: 15rem;
+
+}
+
+.mod-sec-2 {	
+	background: #cfd8dc; 
+}
+.mod-sec-2 img {
+	height: 15rem;
+}
+
+.mod-sec-3 {
+	background: #eceff1; 
+}
+
+.mod-sec-3 img {
+	height: 15rem;
+}
+
+.text-modal {
+	width: 46%;
+}
+
+
 .wrong-input {
 	font-size: 1.1rem;
 	margin-bottom: 1.3rem;
@@ -299,21 +363,6 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 0.5rem 1rem;
 	line-height: 1.3rem;
 	border: 2px solid red;
-	animation: shake 0.2s;
-	animation-iteration-count: 2;
-
-}
-
-.valid-input {
-	font-size: 1.1rem;
-	margin-bottom: 1.3rem;
-	width: 100%;
-	border-radius: 4px;
-	background: beige;
-	color: #006685;
-	padding: 0.5rem 1rem;
-	line-height: 1.3rem;
-	border: 2px solid rgb(0, 255, 34);
 	animation: shake 0.2s;
 	animation-iteration-count: 2;
 
