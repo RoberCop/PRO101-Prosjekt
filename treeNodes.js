@@ -145,6 +145,10 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		}
 		else if (canEdit)
 		{
+			doneNode.style.visibility = "hidden";
+			inProgNode.style.visibility = "hidden";
+			notDoneNode.style.visibility = "hidden";
+
 			deleteNode.style.filter = "grayscale(100%)";
 			refreshNode.style.filter = "grayscale(100%)";
 			saveNode.style.filter = "grayscale(100%)";
