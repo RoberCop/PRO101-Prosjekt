@@ -9,6 +9,13 @@
     background: #ffb333;
 }
 
+.flex-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .edit-container #setStatus-div {
     align-self: flex-start;
     display: inline-block;
