@@ -1,5 +1,3 @@
-<html>
-
 <head>
 	<title>ThinkTask</title>
 	<link rel="stylesheet" type="text/css" href="nodeTreeStyle.css">
@@ -12,15 +10,17 @@
 	<section class="gridSection">
 		<header>
 			<div class="navBox" id="menuBar">
-				<!--
-				<div class="hamburger"></div>
-				<div class="hamburger"></div>
-				<div class="hamburger"></div>
-				-->
+				<div id="back-btn">
+					<i class="fas fa-arrow-left fa-4x"></i>
+				</div>
 			</div>
 
 			<h1>Think Task</h1>
-			<div class="userDiv">User</div>
+			<img id="top-logo" src="img/61353474_306219480311384_5531898451110920192_n.png" alt="">
+			<div class="userDiv">
+				<p id="userText">Username: </p>
+				<i class="fas fa-user fa-2x"></i>
+			</div>
 
 			<div id="largeInput">
 				<input id="quickAddInput" type="text" placeholder="Add task">
@@ -34,8 +34,20 @@
 			<div id="treeDiv">
 			</div>
 		</main>
+		<div id="chat-window">
+			<header class="chat-header">
+				<h2 class="chat-title">Chat</h2>
+				<span id="close-chat">&times;</span>
+			</header>
+			<div id="chat-body">
+			</div>
+			<input id="chat-input" type="text">
+			<i id="chat-send" class="fas fa-paper-plane"></i>
+			
+		</div>
 
 		<footer>
+			<div id="chat-container"><i class="fas fa-comment-alt"></i></div>
 		</footer>
 	</section>
 
@@ -51,10 +63,11 @@
 		</div>
 
 		<div id="setStatus-div">
-			<!-- change this to an image -->
-			<div id="doneNode"><p>Done</p></div>
-			<div id="notDoneNode"><p>Not Done</p></div>
-		</div>
+			<div class="task-status"><h2>Task status:</h2></div>
+			<div id="doneNode"><p>Done<i class="fas fa-check"></i></p></div>
+			<div id="inProgNode"><p>In Progress<i class="fas fa-angle-double-right" ></i></p></div>
+			<div id="notDoneNode"><p>Not Done<i class="fas fa-times" ></i></p></div>
+		 </div>
 
 		<div class="edit-btn-container">
 			<img id="deleteNode" class="red" src="img/icons/rubbish-bin.svg">
@@ -65,8 +78,10 @@
 
 	<script src="treeNodes.js"></script>
 	<script src="projectData.js"></script>
+	<script src="users.js"></script>
 	<script src="addNodeBtn.js"></script>
 	<script src="nodeTree.js"></script>
+	<script src="chat.js"></script>
 </body>
 
 </html>
