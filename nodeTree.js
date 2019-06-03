@@ -29,6 +29,7 @@ var toggleQuickAdd = false;
 var toggleEditCont = false;
 
 var delPromptActive = false;
+var canEdit = false;
 
 // Sets transition on elements
 header.style.transition = "0.1s transform ease-in-out";
@@ -104,7 +105,7 @@ document.onkeydown = function(event)
 	}
 
 	// arrow down
-	if ( (keyPressed === 40) && (selectedNode.level > 1) )
+	if ( (keyPressed === 40) && (selectedNode.getLevel() > 1) )
 	{
 		selectedParent.setSelectedNode();
 		return;
@@ -127,8 +128,8 @@ quickAddPlus.onclick = function()
 
 function quickNodeAdd()
 {
-	// always check if input is empty first
-	if (quickAddInput.value == "") return;
+	// always check if input is empty first, then also check authorization
+	if ( (quickAddInput.value == "") || (!selectedNode.recAccessCheck()) ) return;
 
 	selectedNode.childs.splice(selectedNode.childs.length - 1, 1);
 	selectedNode.newChild(quickAddInput.value, "Sample Desc");
@@ -143,31 +144,29 @@ document.onmousemove = (e) => {
 	if (delPromptActive) return;
 
 	// Gets mouse position
-	let mouseY = e.clientY;
-	let mouseX = e.clientX;
+	const mouseY = e.clientY;
+	const mouseX = e.clientX;
 
-	// Lowers header
-	if (mouseY < 200)
+	// Closes header
+	if ( (mouseY < 200) && (!toggleQuickAdd) )
 	{
 		moveQuickAdd(true);
 		return;
 	}
 
-	// Rises header
-	if (mouseY > 200)
+	// Opens header
+	if ( (mouseY > 270) && (toggleQuickAdd) )
+	{
 		moveQuickAdd(false);
+	}
 
 	// Hides the editContainer
-	if (mouseX > 300)
+	if ( (mouseX > 350) && (toggleEditCont) )
 		moveEditContainer(false);
-}
 
-// Displays the editContainer
-editContainer.onmouseover = (e) => {
-
-	if ( (delPromptActive) || (toggleEditCont) ) return;
-
-	moveEditContainer(true);
+	// Opens the editContainer
+	if ( (mouseX < 100) && (mouseY > 200) && (!toggleEditCont) )
+		moveEditContainer(true);
 }
 
 function moveQuickAdd(downOrUp)
@@ -192,6 +191,9 @@ function moveEditContainer(rightOrleft)
 {
 	if (rightOrleft)
 	{
+		// only update content when opening or refreshing, to reduce processing of authorization
+		selectedNode.refreshNodeEdit();
+
 		editContainer.style.transform = "translate(0%, 0%)";
 		editContainer.style.borderRight = "1px solid";
 		treeDiv.style.width = "80vw";
@@ -262,6 +264,8 @@ function createWarningElem()
 
 deleteNode.onclick = function()
 {
+	if (!canEdit) return;
+
 	body.appendChild(shader);
 	delPromptActive = true;
 }
@@ -273,6 +277,8 @@ refreshNode.onclick = function()
 
 saveNode.onclick = function()
 {
+	if (!canEdit) return;
+
 	selectedNode.saveNodeEdit();
 }
 
@@ -342,5 +348,9 @@ createWarningElem();
 var selectedNode = root.childs[0];
 selectedNode.domBody.style.backgroundColor = "#CCFFCC";
 selectedNode.refreshNodeEdit();
+
+// todo: add process of getting user from login
+var activeUser = usersArr[0];
+document.getElementById("userText").innerText = "Username: " + activeUser.username;
 
 firstDraw();

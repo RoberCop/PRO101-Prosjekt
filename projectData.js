@@ -6,7 +6,7 @@ function getTreeData()
 	root.newChild("Project", "Prosjekt description");
 
 	root.childs[0].newChild("Make a house", "I need a house asap :)");
-	root.childs[0].newChild("Make a car", "Custom made supercar");
+	root.childs[0].newChild("Make a car", "Custom made supercar", usersArr[1]);
 	root.childs[0].newChild("Make a computer", "njljnjklkn");
 
 	//House
@@ -28,7 +28,7 @@ function getTreeData()
 	newChild("Get some wood");
 
 	//Car
-	root.childs[0].childs[1].newChild("Make a engine");
+	root.childs[0].childs[1].newChild("Make an engine", "", usersArr[0]);
 	root.childs[0].childs[1].newChild("Make a frame");
 	root.childs[0].childs[1].newChild("Make some wheels");
 

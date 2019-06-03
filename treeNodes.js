@@ -8,25 +8,28 @@ var currentDragObj;
 function treeNodeClass(level, parent, index, title, desc, status)
 {
 	this.childs = [];
-
-	this.level = level;
 	this.parent = parent;
-
 	this.selectedChild = -1;
 	this.indexOfThis = index;
-
-	this.desc = (desc !== undefined) ? desc : "";
-
 	this.status = status;
 
-	// adds a new instance to "childs" array
-	this.newChild = function(newTitle, newDesc)
-	{
-		this.childs.push(new treeNodeClass(this.level + 1, this, this.childs.length,
-			newTitle, newDesc, 0));
+	if (title === undefined) title = "";
 
-		if (this.level > 0)
-			this.setStatusRec();
+	if (desc === undefined) desc = "";
+
+	var user;
+
+	// adds a new instance to "childs" array
+	this.newChild = function(newTitle, newDesc, newUser)
+	{
+		const preLength = this.childs.length;
+
+		// create a child based on own variables, and current arguments
+		this.childs.push(new treeNodeClass(level + 1, this, preLength, newTitle, newDesc, 0));
+
+		if (newUser !== undefined) this.childs[preLength].setUser(newUser);
+
+		if (level > 0) this.setStatusRec();
 	}
 
 	this.newAddBtnRec = function()
@@ -38,14 +41,13 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		const checkIndex = this.childs.length - 1;
 
 		if ( (checkIndex === -1) || (this.childs[checkIndex].selectedChild !== undefined) )
-			this.childs.push(new addNodeBtnClass(this.level + 1, this, this.childs.length));
+			this.childs.push(new addNodeBtnClass(level + 1, this, this.childs.length));
 	}
 
 	this.addToDisplay = function(isSelected, isStart)
 	{
 		// add this node to the displayArray if its not the starter object
-		if (!isStart)
-			displayArray[this.level - 1].push(this);
+		if (!isStart) displayArray[level - 1].push(this);
 
 		const statusColor = (this.status > 0) ? ( (this.status > 1) ? "#0F0" : "#FF0" ) : "#F00";
 		this.domElem.style.borderColor = statusColor;
@@ -58,19 +60,20 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		}
 		else {
 			// style for when node is unselected
-			this.domBody.style.backgroundColor = "#FFFFFF";
+			this.domBody.style.backgroundColor = "#FFF";
 		}
 	}
 
 	this.draw = function()
 	{
 		// clear this stack and outwards in the display array
-		for (let i = this.level - 1; i < displayArray.length; i++)
-			displayArray[i] = [];
+		for (let i = level - 1; i < displayArray.length; i++) displayArray[i] = [];
 
-		// recursively add to display based on selected nodes from parent node, and draw the new nodes
+		/* recursively add to display based on selected nodes 
+		 * from parent node, and draw the new nodes
+		 */
 		this.parent.addToDisplay(true, true);
-		drawNodes(this.level - 1);
+		drawNodes(level - 1);
 	}
 
 	// only used when removing with remove button
@@ -85,18 +88,17 @@ function treeNodeClass(level, parent, index, title, desc, status)
 
 		let newIndex = this.indexOfThis;
 
-		if (this.parent.childs[newIndex].selectedChild === undefined)
-			newIndex--;
+		if (this.parent.childs[newIndex].selectedChild === undefined) newIndex--;
 
 		if (newIndex < 0)
 			selectedNode = this.parent;
-		else
+		else {
+			this.parent.setStatusRec();
 			selectedNode = this.parent.childs[newIndex];
-		
-		selectedNode.refreshNodeEdit();
+		}
+
 		this.parent.selectedChild = newIndex;
 		selectedNode.domBody.style.backgroundColor = "#CCFFCC";
-		this.parent.setStatusRec();
 
 		this.draw();
 	}
@@ -111,20 +113,55 @@ function treeNodeClass(level, parent, index, title, desc, status)
 
 		this.domBody.style.backgroundColor = "#CCFFCC";
 
-		this.refreshNodeEdit();
 		this.draw();
 	}
 
 	this.refreshNodeEdit = function()
 	{
-		nodeTitle.value = this.childH4.innerText;
-		nodeDesc.value = this.desc;
+		nodeTitle.value = title;
+		nodeDesc.value = desc;
+
+		if (this.recAccessCheck())
+		{
+			if (!canEdit)
+			{
+				doneNode.style.visibility = "visible";
+				inProgNode.style.visibility = "visible";
+				notDoneNode.style.visibility = "visible";
+
+				deleteNode.style.filter = "grayscale(0%)";
+				refreshNode.style.filter = "grayscale(0%)";
+				saveNode.style.filter = "grayscale(0%)";
+
+				canEdit = true;
+				nodeTitle.disabled = false;
+				nodeDesc.disabled = false;
+			}
+		}
+		else if (canEdit)
+		{
+			doneNode.style.visibility = "hidden";
+			inProgNode.style.visibility = "hidden";
+			notDoneNode.style.visibility = "hidden";
+
+			deleteNode.style.filter = "grayscale(100%)";
+			refreshNode.style.filter = "grayscale(100%)";
+			saveNode.style.filter = "grayscale(100%)";
+
+			canEdit = false;
+			nodeTitle.disabled = true;
+			nodeDesc.disabled = true;
+		}
 	}
 
 	this.saveNodeEdit = function()
 	{
-		this.childH4.innerText = nodeTitle.value;
-		this.desc = nodeDesc.value;
+		title = nodeTitle.value;
+		desc = nodeDesc.value;
+
+		this.childH4.innerText = (title != "") ? title : "-No Title-";
+
+		// todo: add saving of owner
 	}
 
 	this.tryStatus = function(newStatus)
@@ -142,8 +179,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		const statusColor = (newStatus > 0) ? ( (newStatus > 1) ? "#0F0" : "#FF0" ) : "#F00";
 		this.domElem.style.borderColor = statusColor;
 
-		if (this.level > 1)
-			this.parent.setStatusRec();
+		if (level > 1) this.parent.setStatusRec();
 	}
 
 	this.setStatusRec = function()
@@ -169,21 +205,48 @@ function treeNodeClass(level, parent, index, title, desc, status)
 
 	this.setLevelRec = function()
 	{
-		this.level = this.parent.level + 1;
+		level = this.parent.getLevel() + 1;
 
-		for (child of this.childs)
-			child.setLevelRec();
+		for (child of this.childs) child.setLevelRec();
+	}
+
+	// returns if active user is allowed to modify node
+	this.recAccessCheck = function()
+	{
+		if (user == activeUser) return true;
+
+		// return true recursivly when autorized
+		if (level > 1)
+			if (this.parent.recAccessCheck()) return true;
+
+		// return false, over and over to make statement fail
+		return false;
+	}
+
+	this.setUser = function(newUser)
+	{
+		user = newUser;
+	}
+
+	this.getLevel = function()
+	{
+		return level;
+	}
+
+	// ! test method !
+	this.getUser = function()
+	{
+		return user;
 	}
 
 	////////////////////////////////////
 	// Dom element
 	
+	// public elements
 	this.domElem = document.createElement("div");
 	this.domHeader = document.createElement("div");
 	this.childH4 = document.createElement("h4");
 	this.domBody = document.createElement("div");
-	this.icon = document.createElement("i");
-	this.light = document.createElement("div");
 
 	this.domElem.className = "treeNode";
 	this.domElem.draggable = "true";
@@ -200,15 +263,20 @@ function treeNodeClass(level, parent, index, title, desc, status)
 
 	this.domBody.className = "node-body";
 
-	this.icon.className = "fas fa-user";
+	// private elements
+	const icon = document.createElement("i");
+	const light = document.createElement("div");
 
-	this.light.className = "light";
-	this.light.style.visibility = "hidden";
+	icon.className = "fas fa-user";
 
+	light.className = "light";
+	light.style.visibility = "hidden";
+
+	// append to set structure
 	this.domHeader.appendChild(this.childH4);
 
-	this.domBody.appendChild(this.icon);
-	this.domBody.appendChild(this.light);
+	this.domBody.appendChild(icon);
+	this.domBody.appendChild(light);
 
 	this.domElem.appendChild(this.domHeader);
 	this.domElem.appendChild(this.domBody);
@@ -217,9 +285,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 	 * neccessary due to how drag and drop works.
 	 */
 	for (let i = 0; i < this.domElem.childNodes.length; i++)
-	{
 		this.domElem.childNodes[i].style.pointerEvents = "none";
-	}
 
 	this.domElem.onclick = function()
 	{
@@ -252,7 +318,7 @@ function dragDropMove(targetObj)
 	 * still allow moving unselected nodes upwards,
 	 * using 'and' condition makes moving nodes backwards allowed
 	 */
-	if ( (targetObj.level > currentDragObj.level) && 
+	if ( (targetObj.getLevel() > currentDragObj.getLevel()) && 
 		 (currentDragObj.parent.selectedChild === currentDragObj.indexOfThis) ) return;
 
 	currentDragObj.parent.childs.splice(currentDragObj.indexOfThis, 1);
@@ -305,7 +371,6 @@ function dragDropMove(targetObj)
 
 	currentDragObj.setLevelRec();
 	currentDragObj.draw();
-	currentDragObj.refreshNodeEdit();
 
 	currentDragObj.setStatus(currentDragObj.status);
 }

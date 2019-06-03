@@ -1,27 +1,26 @@
 function addNodeBtnClass(level, parent, index)
 {
-	this.level = level;
 	this.parent = parent;
 	this.indexOfThis = index;
 
-	this.addToDisplay = function (isSelected)
+	this.addToDisplay = function(isSelected)
 	{
-		displayArray[this.level - 1].push(this);
+		displayArray[level - 1].push(this);
 	}
 
 	// same as in treeNodeClass()
-	this.draw = function ()
+	this.draw = function()
 	{
-		for (let i = this.level - 1; i < displayArray.length; i++)
+		for (let i = level - 1; i < displayArray.length; i++)
 			displayArray[i] = [];
 
 		this.parent.addToDisplay(true, true);
-		drawNodes(this.level - 1);
+		drawNodes(level - 1);
 	}
 
 	this.setLevelRec = function()
 	{
-		this.level = this.parent.level + 1;
+		level = this.parent.getLevel() + 1;
 	}
 
 	///////////////////////////////
@@ -33,6 +32,8 @@ function addNodeBtnClass(level, parent, index)
 
 	this.domElem.onclick = function ()
 	{
+		if (!this.treeNode.parent.recAccessCheck()) return;
+
 		selectedNode.domBody.style.backgroundColor = "#CCCCFF";
 
 		this.treeNode.parent.childs.splice(this.treeNode.indexOfThis, 1);
@@ -40,7 +41,6 @@ function addNodeBtnClass(level, parent, index)
 		this.treeNode.parent.childs[this.treeNode.indexOfThis].newAddBtnRec();
 
 		selectedNode = this.treeNode.parent.childs[this.treeNode.indexOfThis];
-		selectedNode.refreshNodeEdit();
 		selectedNode.domBody.style.backgroundColor = "#CCFFCC";
 
 		this.treeNode.parent.selectedChild = this.treeNode.indexOfThis++;
