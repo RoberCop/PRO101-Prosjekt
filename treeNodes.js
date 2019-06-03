@@ -128,10 +128,6 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		{
 			if (!canEdit)
 			{
-				doneNode.style.visibility = "visible";
-				inProgNode.style.visibility = "visible";
-				notDoneNode.style.visibility = "visible";
-
 				deleteNode.style.filter = "grayscale(0%)";
 				refreshNode.style.filter = "grayscale(0%)";
 				saveNode.style.filter = "grayscale(0%)";
@@ -140,13 +136,15 @@ function treeNodeClass(level, parent, index, title, desc, status)
 				nodeTitle.disabled = false;
 				nodeDesc.disabled = false;
 			}
+
+			const visState = (childs.length === 1) ? "visible" : "hidden";
+
+			doneNode.style.visibility = visState;
+			inProgNode.style.visibility = visState;
+			notDoneNode.style.visibility = visState;
 		}
 		else if (canEdit)
 		{
-			doneNode.style.visibility = "hidden";
-			inProgNode.style.visibility = "hidden";
-			notDoneNode.style.visibility = "hidden";
-
 			deleteNode.style.filter = "grayscale(100%)";
 			refreshNode.style.filter = "grayscale(100%)";
 			saveNode.style.filter = "grayscale(100%)";
@@ -155,7 +153,6 @@ function treeNodeClass(level, parent, index, title, desc, status)
 			nodeTitle.disabled = true;
 			nodeDesc.disabled = true;
 		}
-
 	}
 
 	this.saveNodeEdit = function()
