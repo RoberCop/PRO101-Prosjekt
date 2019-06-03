@@ -1,8 +1,14 @@
 <head>
 	<title>ThinkTask</title>
-	<link rel="stylesheet" type="text/css" href="nodeTreeStyle.css">
-	<link rel="stylesheet" type="text/css" href="chatStyle.css">
-	<link rel="stylesheet" type="text/css" href="editNode.css">
+	<link rel="stylesheet" type="text/css" href="css/mainGridStyle.css">
+	<link rel="stylesheet" type="text/css" href="css/headerItems.css">
+	<link rel="stylesheet" type="text/css" href="css/chatStyle.css">
+	<link rel="stylesheet" type="text/css" href="css/editNodesCntr.css">
+	<link rel="stylesheet" type="text/css" href="css/treeStructure.css">
+	<link rel="stylesheet" type="text/css" href="css/treeNodes.css">
+	<link rel="stylesheet" type="text/css" href="css/warningModule.css">
+	<link rel="stylesheet" type="text/css" href="css/colors.css">
+	<link rel="stylesheet" type="text/css" href="css/keyframes.css">
 	<link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,500,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
 		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
@@ -36,6 +42,7 @@
 			<div id="treeDiv">
 			</div>
 		</main>
+
 		<div id="chat-window">
 			<header class="chat-header">
 				<h2 class="chat-title">Chat</h2>
@@ -45,14 +52,13 @@
 			</div>
 			<input id="chat-input" type="text">
 			<i id="chat-send" class="fas fa-paper-plane"></i>
-			
 		</div>
 
 		<footer>
 			<div id="chat-container"><i class="fas fa-comment-alt"></i></div>
 		</footer>
 	</section>
-
+	<!--The container for editing nodes. Is outside of section because it is not part of the grid-->
 	<div class="edit-container flex-center" id="editContainer">
 		<div id="title-div" class="flex-center">
 			<h3>Title:</h3>
