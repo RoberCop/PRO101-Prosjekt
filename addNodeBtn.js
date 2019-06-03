@@ -23,6 +23,11 @@ function addNodeBtnClass(level, parent, index)
 		level = this.parent.getLevel() + 1;
 	}
 
+	this.getLevel = function()
+	{
+		return level;
+	}
+
 	///////////////////////////////
 	// Dom element
 

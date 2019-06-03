@@ -100,6 +100,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		this.parent.selectedChild = newIndex;
 		selectedNode.domBody.style.backgroundColor = "#CCFFCC";
 
+		this.parent.refreshNodeEdit();
 		this.draw();
 	}
 
@@ -121,14 +122,16 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		nodeTitle.value = title;
 		nodeDesc.value = desc;
 
+		const visState = (this.childs.length === 1) ? "visible" : "hidden";
+
+		doneNode.style.visibility = visState;
+		inProgNode.style.visibility = visState;
+		notDoneNode.style.visibility = visState;
+
 		if (this.recAccessCheck())
 		{
 			if (!canEdit)
 			{
-				doneNode.style.visibility = "visible";
-				inProgNode.style.visibility = "visible";
-				notDoneNode.style.visibility = "visible";
-
 				deleteNode.style.filter = "grayscale(0%)";
 				refreshNode.style.filter = "grayscale(0%)";
 				saveNode.style.filter = "grayscale(0%)";
@@ -140,10 +143,6 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		}
 		else if (canEdit)
 		{
-			doneNode.style.visibility = "hidden";
-			inProgNode.style.visibility = "hidden";
-			notDoneNode.style.visibility = "hidden";
-
 			deleteNode.style.filter = "grayscale(100%)";
 			refreshNode.style.filter = "grayscale(100%)";
 			saveNode.style.filter = "grayscale(100%)";
@@ -320,6 +319,9 @@ function dragDropMove(targetObj)
 	 */
 	if ( (targetObj.getLevel() > currentDragObj.getLevel()) && 
 		 (currentDragObj.parent.selectedChild === currentDragObj.indexOfThis) ) return;
+
+	// only allow if user has access to both nodes
+	if ( (!currentDragObj.parent.recAccessCheck()) || (!targetObj.parent.recAccessCheck()) ) return;
 
 	currentDragObj.parent.childs.splice(currentDragObj.indexOfThis, 1);
 
