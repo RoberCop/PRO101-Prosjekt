@@ -140,7 +140,6 @@ header > #largeInput {
 }
 
 main {
-    border: 2px red solid;
     height: 100%;
     width: 100%;
     justify-content: flex-end;
@@ -167,12 +166,15 @@ main {
     display: inline-block;
     margin: 0.7rem;
     font-weight: 700;
+    
    
 }
 
 .edit-container #doneNode {
     width: auto;
     cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.2s linear;
 }
 
 .edit-container #doneNode:hover {
@@ -182,6 +184,8 @@ main {
 .edit-container #notDoneNode {
     width: auto;
     cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.2s linear;
 }
 
 .edit-container #notDoneNode:hover {
@@ -191,6 +195,8 @@ main {
 .edit-container #inProgNode {
     width: auto;
     cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.2s linear;
 }
 
 .edit-container #inProgNode:hover {
@@ -461,10 +467,9 @@ textarea:focus, input:focus
     justify-content: center;
     align-items: center;
     position: relative;
-    overflow-x: hidden;
+    overflow-x: auto;
     margin: 0 2.7vw 0 0;
     -webkit-overflow-scrolling: touch;
-    border: 2px hotpink solid;
 }
 
 #treeDiv::-webkit-scrollbar {
@@ -483,10 +488,10 @@ textarea:focus, input:focus
 }
 
 .treeStack {
-    border: 1px lime solid;
-    width: 100vw;
-    height: 100vh;
-	display: flex;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -545,12 +550,6 @@ textarea:focus, input:focus
     /*box-shadow: 0 0 20px 10px rgba(255, 0, 0, 0);*/
     border-radius: 50px;
     animation: lightPulse 0.5s  infinite;
-}
-
-.addButton r{
-	width: 10px;
-	height: 10px;
-	color: #fff;
 }
 
 .addButton:hover {
