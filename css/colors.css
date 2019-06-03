@@ -1,0 +1,15 @@
+/*--- Style for keeping track of colors of the project ---*/
+.green
+{
+    background-color: #4caf50;
+}
+
+.red
+{
+    background-color: #d46464;
+}
+
+.orange
+{
+    background-color: #ffb333;
+}
