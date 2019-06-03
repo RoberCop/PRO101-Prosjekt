@@ -213,7 +213,7 @@ body{ }
     
 }
 
-@media only screen and (max-width: 650px){
+@media only screen and (max-width: 660px){
     
 .projectcontainer{ width: 100%;}
     .projectFeed{display: none;}
@@ -276,31 +276,25 @@ transform: scale(1.05);
 
 
 .NewProjectButton{
+ 
     text-align: center;
-    font-size: 18px;
-    font-family: sans-serif;
-    width: 60px;
-    height: 60px;
+    font-size: 125%;
+    width: 20%;
+    height: 20%;
     grid:projectcontainer;
     position: absolute;
-    top: 10%;
-    right: 6%;
+    top:9%;
+    right: -0.5%;
+}
+
+#createbutton1{
+    width: 40%;
+    height: 60%;
+    
     
 }
 
-#Buttoncircle{
-    width: 70px;
-    height: 70px;
-    border: solid green 1px;
-    background: green;
-    border-radius: 50%;
-    margin:20%;
-    margin-top: 3%;
-    position: absolute;
-    left: 10px;
-    
-    
-}
+
 
 .Newprojectbutton:hover{
 animation: nextarrow 1s forwards;
@@ -308,29 +302,10 @@ animation: nextarrow 1s forwards;
 }
 
 
-#line1{
-    position: absolute;
-  
-    width: 50px;
-    height: 5px;
-    background: white;
-    top:32px;
-    left:10px;
-    
-}
 
-
-#line2{
-    position: absolute;
-   
-    width: 5px;
-    height: 50px;
-    background: white;
-    top:10;
-    left:33px;
-}
 
 #projectform{
+    
     width: 500px;
     height: 200px;
     position: absolute;
