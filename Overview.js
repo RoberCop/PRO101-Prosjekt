@@ -8,9 +8,7 @@ const contcomp= document.getElementById("CompProject1");
 const contupc= document.getElementById("UpProject1");
     
 
-upcCon.style.display ="none";
-impCon.style.display="block";
-compCon.style.display="none";
+
 form.style.display="none";
 
 
@@ -20,33 +18,14 @@ var upcomPro=[];
 var completePro=[];
 
 
-
-function showupc() {
-    upcCon.style.display ="block";
-    impCon.style.display="none";
-    compCon.style.display="none";
-}
-
-
-function showimp() {
-    upcCon.style.display ="none";
-    impCon.style.display="block";
-    compCon.style.display="none";
-}
-   
-
-
-function showcomp() {
-    upcCon.style.display ="none";
-    impCon.style.display="none";
-    compCon.style.display="block";
-}
    
 
 
 function showform() {
 
    form.style.display = "block";
+    
+    
    
 }
 
