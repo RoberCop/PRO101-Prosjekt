@@ -84,23 +84,23 @@ document.onkeydown = function(event)
 	// arrow left
 	if ( (keyPressed === 37) && (selectedNode.indexOfThis > 0) )
 	{
-		selectedParent.childs[selectedParent.selectedChild - 1].setSelectedNode();
+		selectedParent.getChilds()[selectedParent.selectedChild - 1].setSelectedNode();
 		return;
 	}
 
 	// arrow right
-	if ( (keyPressed === 39) && (selectedNode.indexOfThis < (selectedParent.childs.length - 2)) )
+	if ( (keyPressed === 39) && (selectedNode.indexOfThis < (selectedParent.getChilds().length - 2)) )
 	{
-		selectedParent.childs[selectedParent.selectedChild + 1].setSelectedNode();
+		selectedParent.getChilds()[selectedParent.selectedChild + 1].setSelectedNode();
 		return;
 	}
 
 	// arrow up
-	if ( (keyPressed === 38) && (selectedNode.childs.length > 1) )
+	if ( (keyPressed === 38) && (selectedNode.getChilds().length > 1) )
 	{
 		const childIndex = (selectedNode.selectedChild > -1) ? selectedNode.selectedChild : 0;
 
-		selectedNode.childs[childIndex].setSelectedNode();
+		selectedNode.getChilds()[childIndex].setSelectedNode();
 		return;
 	}
 
@@ -131,7 +131,7 @@ function quickNodeAdd()
 	// always check if input is empty first, then also check authorization
 	if ( (quickAddInput.value == "") || (!selectedNode.recAccessCheck()) ) return;
 
-	selectedNode.childs.splice(selectedNode.childs.length - 1, 1);
+	selectedNode.getChilds().splice(selectedNode.getChilds().length - 1, 1);
 	selectedNode.newChild(quickAddInput.value, "Sample Desc");
 	quickAddInput.value = "";
 	selectedNode.newAddBtnRec();
@@ -329,8 +329,8 @@ function drawNodes(level)
 function firstDraw()
 {
 	// fill in the displayArray from root
-	for (childIndex in root.childs)
-		root.childs[childIndex].addToDisplay(childIndex == root.selectedChild);
+	for (childIndex in root.getChilds())
+		root.getChilds()[childIndex].addToDisplay(childIndex == root.selectedChild);
 
 	drawNodes(0);
 }
@@ -345,7 +345,7 @@ root.selectedChild = 0;
 
 createWarningElem();
 
-var selectedNode = root.childs[0];
+var selectedNode = root.getChilds()[0];
 selectedNode.domBody.style.backgroundColor = "#CCFFCC";
 selectedNode.refreshNodeEdit();
 

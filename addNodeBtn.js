@@ -1,5 +1,7 @@
 function addNodeBtnClass(level, parent, index)
 {
+	var self = this;
+
 	this.parent = parent;
 	this.indexOfThis = index;
 
@@ -33,25 +35,24 @@ function addNodeBtnClass(level, parent, index)
 
 	this.domElem = document.createElement("i");
 	this.domElem.className = "addButton fas fa-plus";
-	this.domElem.treeNode = this;
 
-	this.domElem.onclick = function ()
+	this.domElem.onclick = function()
 	{
-		if (!this.treeNode.parent.recAccessCheck()) return;
+		if (!self.parent.recAccessCheck()) return;
 
 		selectedNode.domBody.style.backgroundColor = "#CCCCFF";
 
-		this.treeNode.parent.childs.splice(this.treeNode.indexOfThis, 1);
-		this.treeNode.parent.newChild("Sample Text", "Sample Desc");
-		this.treeNode.parent.childs[this.treeNode.indexOfThis].newAddBtnRec();
+		self.parent.getChilds().splice(self.indexOfThis, 1);
+		self.parent.newChild("Sample Text", "Sample Desc");
+		self.parent.getChilds()[self.indexOfThis].newAddBtnRec();
 
-		selectedNode = this.treeNode.parent.childs[this.treeNode.indexOfThis];
+		selectedNode = self.parent.getChilds()[self.indexOfThis];
 		selectedNode.domBody.style.backgroundColor = "#CCFFCC";
 
-		this.treeNode.parent.selectedChild = this.treeNode.indexOfThis++;
-		this.treeNode.parent.childs.push(this.treeNode);
+		self.parent.selectedChild = self.indexOfThis++;
+		self.parent.getChilds().push(self);
 
-		this.treeNode.draw();
+		self.draw();
 	}
 
 	this.domElem.ondragover = function(event)
@@ -61,6 +62,6 @@ function addNodeBtnClass(level, parent, index)
 
 	this.domElem.ondrop = function()
 	{
-		dragDropMove(this.treeNode);
+		dragDropMove(self);
 	}
 }
