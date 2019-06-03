@@ -1,3 +1,4 @@
+/*---Style for the container that edits nodes---*/
 .edit-container {
     grid-area: edit;
     position: absolute;

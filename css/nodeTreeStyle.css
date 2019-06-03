@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
 
-
 *
 {
     font-weight: 500;
@@ -82,6 +81,10 @@ header i:hover {
     width: 10%;
 }
 
+#back-btn:hover {
+    cursor: pointer;
+}
+
 header > #largeInput {
     position: absolute;
     transform: translate(-50%, 100%);
@@ -100,10 +103,6 @@ header > #largeInput {
     background: #c9c9c9;
 }
 
-#back-btn:hover {
-    cursor: pointer;
-}
-
 #largeInput > input {
     grid-area: input;
     height: 100%;
@@ -116,6 +115,7 @@ header > #largeInput {
     font-size: 50px;
     border: none;
 }
+
 #largeInput > .addIcon {
     grid-area: icon;
     height: 100%;
@@ -131,7 +131,6 @@ header > #largeInput {
     font-size: 80%;
     margin-left: 1rem;
     color: #ffb333;
-    
 }
 
 .addIcon i:hover {
@@ -147,47 +146,6 @@ main {
     align-items: center;
 }
 
-.edit-container
-{
-    grid-area: edit;
-    position: absolute;
-    display: flex;
-    border-radius: 4px;
-    margin-left: 20px;
-    padding: 1rem;
-    background: #ffb333;
-}
-
-
-
-.edit-container #setStatus-div {
-    align-self: flex-start;
-    display: inline-block;
-    margin: 0.7rem;
-    font-weight: 700;
-   
-}
-
-.edit-container #doneNode {
-    width: auto;
-    cursor: pointer;
-}
-
-.edit-container #doneNode:hover {
-    color: #4caf50;
-}
-
-.edit-container #notDoneNode {
-    width: auto;
-    cursor: pointer;
-}
-
-.edit-container #notDoneNode:hover {
-    color: #dd2c00;
-}
-
-
-
 footer
 {
     grid-area: foot;
@@ -197,138 +155,6 @@ footer
     width: 100%;
 }
 
-footer #chat-container {
-    display: flex;
-    height: 4rem;
-    width: 4rem;
-    border-radius: 50px;
-    background: #f9a825;
-    color: #fff;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-    align-self: flex-end;
-    cursor: pointer;
-    transition: 0.2s linear;
-}
-
-footer #chat-container i {
-    font-size: 2rem;
-    margin: auto;
-    
-}
-
-footer #chat-container:hover {
-    transform: scale(1.1);
-    background: #4caf50;
-    box-shadow: 0 5px 8px 0 rgba(10, 10, 10, 0.514);
-}
-
-#chat-window {
-    display: none;
-    height: 30rem;
-    right: 2rem;
-    bottom: 5rem;
-    position: fixed;
-    background-color: #f9a825;
-    border: 1px #ffb333 solid;
-	border-radius: 10px;
-	margin: auto;
-	width: 20rem;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(145, 55, 55, 0.17);
-    animation: chatOpening 0.4s linear;
-}
-
-
-.chat-header {
-    height: 5%;
-    border-radius: 10px 10px 0 0;
-	background: orange;
-}
-
-.chat-title {
-    opacity: 0;
-    margin-left: 0.4rem;
-    font-weight: 600;
-    animation: inputSendAnim 0.4s 0.4s linear forwards;
-}
-#chat-body {
-    display: block;
-    height: 84%;
-    width: 100%;
-    background: #fff;
-	display: flex;
-    flex-direction: column;
-    overflow: auto;
-    -webkit-scrollbar: touch;
-}
-
-#chat-body::-webkit-scrollbar {
-    background: transparent;
-    width: 0.6rem;
-}
-
-#chat-body::-webkit-scrollbar-thumb {
-    background: linear-gradient(70deg, orange, orangered);
-    border-radius: 50px;
-}
-
-#chat-input {
-    opacity: 0;
-    border: none;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 0.6rem;
-    margin-left: 0.3rem;
-    padding: 0 0.5rem;
-    width: 86%;
-    line-height: 1.7rem;
-    animation: inputSendAnim 0.4s 0.4s linear forwards;
-
-}
-
-#chat-send {
-    opacity: 0;
-    font-size: 1.7rem;
-    color: #6d6d6d;
-    cursor: pointer;
-    transition: 0.2s linear;
-    animation: inputSendAnim 0.4s 0.4s linear forwards;
-}
-
-#chat-send:hover {
-    color: aliceblue;
-}
-
-.chat-msg {
-    box-sizing: border-box;
-    display: block;
-    word-wrap: break-word;
-    background: #4caf50;
-    color: #fff;
-    width: max-content;
-    max-width: 70%;
-    padding: 1rem;
-    margin-top: 1rem;
-    margin-left: 1rem;
-    font-weight: 600;
-    border-radius: 5px;
-    animation: inputSendAnim 0.4s  linear forwards;
-    
-}
-
-#close-chat {
-    opacity: 0;
-    float: right;
-    margin-bottom: 0.1rem;
-    margin-right: 0.4rem;
-    font-size: 2rem;
-    cursor: pointer;
-    animation: inputSendAnim 0.4s 0.4s linear forwards;
-}
-
-#close-chat:hover {
-    color: aliceblue;
-}
 
 header > .navBox, .userDiv
 {
@@ -344,41 +170,12 @@ header > .navBox, .userDiv
 }
 
 
-
-.edit-container input, textarea
-{
-    width: 98%;
-    border: none;
-    border-radius: 4px;
-    resize: none;
-}
-
 .flex-center
 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-}
-
-.edit-btn-container
-{
-    height: 10%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.edit-btn-container > img
-{
-    height: 25px;
-    padding: 15px;
-    border: 1px solid;
-    border-radius: 4px;
-    transition: 0.3s all ease;
-    cursor: pointer;
 }
 
 .green
@@ -396,40 +193,11 @@ header > .navBox, .userDiv
     background-color: #ffb333;
 }
 
-#title-div > input
-{
-    font-size: 20px;
-    text-align: center;
-    padding: 0.7em;
-}
-
-#descript-div > textarea
-{
-    font-size: 20px;
-    text-align: center;
-    padding: 0.7em;
-    height: 200px;
-}
-
-textarea:focus, input:focus
-{
-    outline: none;
-    border: 2px #ee9b4c solid;
-}
-
 .navBox
 {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.hamburger
-{
-    margin: 4px 0 4px 0;
-    border: 3px solid;
-    width: 80%;
-    border-radius: 4px;
 }
 
 .project
@@ -545,7 +313,6 @@ textarea:focus, input:focus
     color: #4caf50;
     animation: addBtnAnim 0.7s linear 0s infinite alternate;
 }
-
 
 .module {
     width: 40vw;
