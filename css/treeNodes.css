@@ -1,0 +1,60 @@
+/*-- Style for the nodes in the tree structure --*/
+
+.treeNode:hover {
+    cursor: pointer;
+    transform: scale(1.06);
+    z-index: 1;
+    box-shadow: 0 5px 8px 0 rgba(31, 31, 31, 0.2), 0 7px 20px 0 rgba(31, 31, 31, 0.2);
+}
+
+.treeNode {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    width: 150px;
+    min-width: 150px;
+    height: auto;
+    margin-right: 5px;
+    border: 3px solid;
+    transition: 0.2s linear;
+}
+
+.node-header h4{
+    margin: 0;
+    padding: 0;
+}
+
+.node-header {
+    font-size: 1rem;
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+    background: #ffca28;
+    text-align: center;
+    align-self: flex-start;
+}
+
+.node-body {
+    font-size: 1.3rem;
+    padding: 1rem;
+    background: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 0 0 5px 5px;
+}
+
+.light {
+    height: 1rem;
+    width: 1rem;
+    background-color: #dd2c00;
+    opacity: 0.6;
+    /*box-shadow: 0 0 20px 10px rgba(255, 0, 0, 0);*/
+    border-radius: 50px;
+    animation: lightPulse 0.5s  infinite;
+}
+
+.addButton:hover {
+    cursor: pointer;
+    color: #4caf50;
+    animation: addBtnAnim 0.7s linear 0s infinite alternate;
+}
