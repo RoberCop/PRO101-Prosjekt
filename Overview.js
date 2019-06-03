@@ -1,23 +1,17 @@
 const upcCon = document.getElementById('upcommingContainer');
-
 const impCon = document.getElementById('InprogressContainer');
-    
 const compCon = document.getElementById('CompletedContainer');
-
 const form = document.getElementById('projectform');
-
-
 
 const contimp= document.getElementById("IpProject1");
 const contcomp= document.getElementById("CompProject1");
 const contupc= document.getElementById("UpProject1");
     
 
-
-    upcCon.style.display ="none";
-    impCon.style.display="block";
-    compCon.style.display="none";
-    form.style.display="none";
+upcCon.style.display ="none";
+impCon.style.display="block";
+compCon.style.display="none";
+form.style.display="none";
 
 
 
@@ -27,42 +21,37 @@ var completePro=[];
 
 
 
-
-function showupc() 
-{
+function showupc() {
     upcCon.style.display ="block";
     impCon.style.display="none";
     compCon.style.display="none";
-    
-    
-   
 }
 
-function showimp() 
-{
+
+function showimp() {
     upcCon.style.display ="none";
     impCon.style.display="block";
     compCon.style.display="none";
 }
    
 
-function showcomp() 
-{
+
+function showcomp() {
     upcCon.style.display ="none";
     impCon.style.display="none";
     compCon.style.display="block";
 }
    
 
-function showform() 
-{
+
+function showform() {
 
    form.style.display = "block";
    
 }
 
-function closeform() 
-{
+
+function closeform() {
 form.style.display = "none";
 }   
 
@@ -142,14 +131,13 @@ console.table(inProgressPro);
 }
 
 
-
-
 /* drag and drop funtion START with const */
 
 
 const proheadcomp= document.getElementById("CompletedHeader");
 const proheadimp= document.getElementById("InprogressHeader");
 const proheadcupc= document.getElementById("UpcomingHeader");
+const deleteElement=document.getElementById("Deleteprojectcont");
 
 function opentabdragComp(){
 
@@ -158,7 +146,6 @@ showcomp();
 proheadcomp.style.transform="scale(1.2)"; 
 
 }
-
 
 
 function opentabdragImp(){
@@ -177,11 +164,13 @@ allowDrop(event);
 showupc();    
 }
 
+
 function allowDrop(ev) {
     
      
     ev.preventDefault(); 
 }
+
 
 function drag(ev) {
     
@@ -192,59 +181,68 @@ ev.dataTransfer.setData("text", ev.target.id);
 
 }
 
+
 function drop(ev) {
   
-    
-   
-  ev.preventDefault();
+ ev.preventDefault();
   var data = ev.dataTransfer.getData("text");
-   
-    
-    
-    ev.target.appendChild(document.getElementById(data));
+   ev.target.appendChild(document.getElementById(data));
 
-    
-  
 }
 
 
 function dragleaveComp(){
     proheadcomp.style.transform="scale(1.0)"; 
-    console.log("draging of element is over");
+   
 }
+
 
 function dragleaveImp(){
     proheadimp.style.transform="scale(1.0)"; 
-    console.log("draging of element is over");
+    
 }
+
 
 function dragleaveUpc(){
     proheadcupc.style.transform="scale(1.0)"; 
-    console.log("draging of element is over");
+    
 }
 
 
+function dragleaveDel(){
+  
+ 
+}
 
 
-function deldrop(ev)
-{
+function dragoverdel(){
+   
+allowDrop(event);
     
+    
+}
+
+
+function deldrop(ev){
     
 var feedpro = document.createElement("div");
- feedpro.className="feeddiv";    
+feedpro.className="feeddiv";    
     
 ev.preventDefault();
 var data=ev.dataTransfer.getData("Text");
 var el = document.getElementById(data);
 el.parentNode.removeChild(el);
    
-    document.getElementById("Feedup1").appendChild(feedpro);   
+document.getElementById("Feedup1").appendChild(feedpro);   
     
-    feedpro.innerHTML="User DELETED Project"+"<br />"+ " Called: "+data;
+feedpro.innerHTML="User DELETED Project"+"<br />"+ " Called: "+data;
+    
+
+    
 }
 
 
-
+/* drag and drop funtion END*/
 
 
 
