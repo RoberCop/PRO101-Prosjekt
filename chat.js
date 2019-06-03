@@ -9,6 +9,7 @@ openChat.addEventListener('click', openChatWindow);
 closeChatBtn.addEventListener('click', closeChat);
 sendMsgBtn.addEventListener('click', sendMessage);
 msgInput.addEventListener('keyup', enterSend);
+chatWindow.addEventListener('keyup', escCloseChat);
 
 function openChatWindow()
 {
@@ -22,14 +23,16 @@ function closeChat()
 }
 
 function sendMessage() 
-{
+{ 
+    if(msgInput.value.length > 0) 
+    {
     var contentDiv = document.createElement('div');
     contentDiv.className = 'chat-msg'; 
     contentDiv.innerHTML = 'You: ' + msgInput.value; 
     chatBody.appendChild(contentDiv);
     msgInput.value ="";
     msgInput.focus();
-    
+    }  
 }
 
 function enterSend(event) 
@@ -38,5 +41,12 @@ function enterSend(event)
         sendMessage();
     }
 }
+
+function escCloseChat(evt) {
+    evt = evt || window.event;
+    if (evt.keyCode == 27) {
+        closeChat();
+    }
+};
    
 

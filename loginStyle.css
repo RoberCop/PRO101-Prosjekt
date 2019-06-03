@@ -190,6 +190,7 @@ h1, h2, h3, h4, h5, h6 {
 #showcase .secondary-btn {
 	width: 60%;
 	margin: auto;
+	border: 1px #006685 solid;
 }
 
 /*******FOOTER*******/
@@ -384,10 +385,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /******KEYFRAMES*********/
 
-	@keyframes modalOpen {
+@keyframes modalOpen {
 		from{transform: scale(0)}
 		to{transform: scale(1)}
-	}
+}
 
 @keyframes shake {
 	from {
