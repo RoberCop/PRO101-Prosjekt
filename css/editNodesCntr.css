@@ -1,6 +1,5 @@
 /*---Style for the container that edits nodes---*/
 .edit-container {
-    grid-area: edit;
     position: absolute;
     display: flex;
     border-radius: 4px;
@@ -16,26 +15,24 @@
     align-items: center;
 }
 
-.edit-container #setStatus-div {
-    align-self: flex-start;
-    display: inline-block;
-    margin: 0.7rem;
+.edit-container > #setStatus-div {
     font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px red solid;
+    height: 25vh;
 
 }
-
-.edit-container #doneNode {
-    width: auto;
+#setStatus-div * {
+    margin: 5px;
     cursor: pointer;
+    border: red 1px solid;
 }
 
 .edit-container #doneNode:hover {
     color: #4caf50;
-}
-
-.edit-container #notDoneNode {
-    width: auto;
-    cursor: pointer;
 }
 
 .edit-container #notDoneNode:hover {
