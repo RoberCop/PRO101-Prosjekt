@@ -7,43 +7,30 @@ var currentDragObj;
 // class to instantiate nodes on the tree
 function treeNodeClass(level, parent, index, title, desc, status)
 {
-	// used when this gets replaced, alternative to adding properties to dom
+	// extends baseNodeClass()
+	baseNodeClass.call(this, level, parent, index);
+
+	// used when 'this' gets replaced, alternative to adding properties to dom
 	var self = this;
 	var user;
-	var childs = [];
 
-	this.parent = parent;
-	this.selectedChild = -1;
-	this.indexOfThis = index;
 	this.status = status;
 
 	if (title === undefined) title = "";
 
 	if (desc === undefined) desc = "";
 
-	// adds a new instance to "childs" array
+	// adds a new instance to "this.childs" array
 	this.newChild = function(newTitle, newDesc, newUser)
 	{
-		const preLength = childs.length;
+		const preLength = this.childs.length;
 
 		// create a child based on own variables, and current arguments
-		childs.push(new treeNodeClass(level + 1, this, preLength, newTitle, newDesc, 0));
+		this.childs.push(new treeNodeClass(level + 1, this, preLength, newTitle, newDesc, 0));
 
-		if (newUser !== undefined) childs[preLength].setUser(newUser);
+		if (newUser !== undefined) this.childs[preLength].setUser(newUser);
 
-		if (level > 0) this.setStatusRec();
-	}
-
-	this.newAddBtnRec = function()
-	{
-		for (child of childs)
-			if (child.selectedChild !== undefined)
-				child.newAddBtnRec();
-
-		const checkIndex = childs.length - 1;
-
-		if ( (checkIndex === -1) || (childs[checkIndex].selectedChild !== undefined) )
-			childs.push(new addNodeBtnClass(level + 1, this, childs.length));
+		this.setStatusRec();
 	}
 
 	this.addToDisplay = function(isSelected, isStart)
@@ -57,8 +44,8 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		if (isSelected)
 		{
 			// if selected, call this same method on child objects
-			for (childIndex in childs)
-				childs[childIndex].addToDisplay(childIndex == this.selectedChild, false);
+			for (childIndex in this.childs)
+				this.childs[childIndex].addToDisplay(childIndex == this.selectedChild, false);
 		}
 		else {
 			// style for when node is unselected
@@ -66,37 +53,25 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		}
 	}
 
-	this.draw = function()
-	{
-		// clear this stack and outwards in the display array
-		for (let i = level - 1; i < displayArray.length; i++) displayArray[i] = [];
-
-		/* recursively add to display based on selected nodes 
-		 * from parent node, and draw the new nodes
-		 */
-		this.parent.addToDisplay(true, true);
-		drawNodes(level - 1);
-	}
-
 	// only used when removing with remove button
 	this.removeNode = function()
 	{
 		// remove selected node
-		this.parent.getChilds().splice(this.indexOfThis, 1);
+		this.parent.childs.splice(this.indexOfThis, 1);
 
 		// update indicies on other nodes to the right of deleted node(reference members)
-		for (let i = this.indexOfThis; i < this.parent.getChilds().length; i++)
-			this.parent.getChilds()[i].indexOfThis--;
+		for (let i = this.indexOfThis; i < this.parent.childs.length; i++)
+			this.parent.childs[i].indexOfThis--;
 
 		let newIndex = this.indexOfThis;
 
-		if (this.parent.getChilds()[newIndex].selectedChild === undefined) newIndex--;
+		if (this.parent.childs[newIndex].selectedChild === undefined) newIndex--;
 
 		if (newIndex < 0)
 			selectedNode = this.parent;
 		else {
 			this.parent.setStatusRec();
-			selectedNode = this.parent.getChilds()[newIndex];
+			selectedNode = this.parent.childs[newIndex];
 		}
 
 		this.parent.selectedChild = newIndex;
@@ -137,7 +112,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 				nodeDesc.disabled = false;
 			}
 
-			const visState = (childs.length === 1) ? "visible" : "hidden";
+			const visState = (this.childs.length === 1) ? "visible" : "hidden";
 
 			doneNode.style.visibility = visState;
 			inProgNode.style.visibility = visState;
@@ -171,7 +146,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 
 	this.tryStatus = function(newStatus)
 	{
-		if ( (childs.length > 1) || (this.status === newStatus) ) return;
+		if ( (this.childs.length > 1) || (this.status === newStatus) ) return;
 
 		this.setStatus(newStatus);
 	}
@@ -191,7 +166,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 	{
 		var canBeGreen = true;
 
-		for (child of childs)
+		for (child of this.childs)
 		{
 			if ( (child.status < 2) &&
 				 (child.selectedChild !== undefined) )
@@ -208,45 +183,26 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		this.setStatus((canBeGreen) ? 2 : 0);
 	}
 
-	this.setLevelRec = function()
-	{
-		level = this.parent.getLevel() + 1;
-
-		for (child of childs) child.setLevelRec();
-	}
-
 	// returns if active user is allowed to modify node
 	this.recAccessCheck = function()
 	{
-		if (user == activeUser) return true;
+		if (user == activeUser) {
+			console.log("dwa2");
+			return true;
+		}
 
 		// return true recursivly when autorized
-		if (level > 1)
-			if (this.parent.recAccessCheck()) return true;
-
-		// return false, over and over to make statement fail
-		return false;
+		if (this.parent.recAccessCheck())
+			return true;
+		else {
+			// return false, over and over to make statement fail
+			return false;
+		}
 	}
 
 	this.setUser = function(newUser)
 	{
 		user = newUser;
-	}
-
-	this.getChilds = function()
-	{
-		return childs;
-	}
-
-	this.getLevel = function()
-	{
-		return level;
-	}
-
-	// ! test method !
-	this.getUser = function()
-	{
-		return user;
 	}
 
 	////////////////////////////////////
@@ -333,7 +289,7 @@ function dragDropMove(targetObj)
 	// only allow if user has access to both nodes
 	if ( (!currentDragObj.parent.recAccessCheck()) || (!targetObj.parent.recAccessCheck()) ) return;
 
-	currentDragObj.parent.getChilds().splice(currentDragObj.indexOfThis, 1);
+	currentDragObj.parent.childs.splice(currentDragObj.indexOfThis, 1);
 
 	if (currentDragObj.indexOfThis == currentDragObj.parent.selectedChild)
 	{
@@ -344,7 +300,7 @@ function dragDropMove(targetObj)
 			newIndex = 0;
 		else {
 			// in this case, backgroundColor needs changes, not else
-			currentDragObj.parent.getChilds()[newIndex].domBody.style.backgroundColor = "#CCCCFF";
+			currentDragObj.parent.childs[newIndex].domBody.style.backgroundColor = "#CCCCFF";
 		}
 
 		currentDragObj.parent.selectedChild = newIndex;
@@ -353,21 +309,21 @@ function dragDropMove(targetObj)
 	/* update indicies on other nodes to the right of currentDragObj,
 	 * and possibly fix parent's selected child, when to the right of currentDragObj
 	 */
-	for (let i = currentDragObj.indexOfThis; i < currentDragObj.parent.getChilds().length; i++)
+	for (let i = currentDragObj.indexOfThis; i < currentDragObj.parent.childs.length; i++)
 	{
-		currentDragObj.parent.getChilds()[i].indexOfThis--;
+		currentDragObj.parent.childs[i].indexOfThis--;
 
 		if ((i + 1) === currentDragObj.parent.selectedChild)
 			currentDragObj.parent.selectedChild--;
 	}
 
-	targetObj.parent.getChilds().splice(targetObj.indexOfThis, 0, currentDragObj);
+	targetObj.parent.childs.splice(targetObj.indexOfThis, 0, currentDragObj);
 
 	oldTargetIndex = targetObj.indexOfThis;
 
 	// update indicies on other nodes to the right of targetObj
-	for (let i = targetObj.indexOfThis; i < targetObj.parent.getChilds().length; i++)
-		targetObj.parent.getChilds()[i].indexOfThis = i;
+	for (let i = targetObj.indexOfThis; i < targetObj.parent.childs.length; i++)
+		targetObj.parent.childs[i].indexOfThis = i;
 
 	// update dragged objects instance variables
 	currentDragObj.parent = targetObj.parent;
