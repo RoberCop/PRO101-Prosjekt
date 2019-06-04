@@ -65,9 +65,10 @@ function treeNodeClass(level, parent, index, title, desc, status)
 
 		let newIndex = this.indexOfThis;
 
-		if (this.parent.childs[newIndex].selectedChild === undefined) newIndex--;
+		if (this.parent.childs[newIndex] instanceof addNodeBtnClass) newIndex--;
 
 		if (newIndex < 0)
+
 			selectedNode = this.parent;
 		else {
 			this.parent.setStatusRec();
@@ -169,7 +170,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		for (child of this.childs)
 		{
 			if ( (child.status < 2) &&
-				 (child.selectedChild !== undefined) )
+				 (child instanceof treeNodeClass) )
 			{
 				if (child.status === 1)
 				{
@@ -186,10 +187,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 	// returns if active user is allowed to modify node
 	this.recAccessCheck = function()
 	{
-		if (user == activeUser) {
-			console.log("dwa2");
-			return true;
-		}
+		if (user == activeUser) return true;
 
 		// return true recursivly when autorized
 		if (this.parent.recAccessCheck())

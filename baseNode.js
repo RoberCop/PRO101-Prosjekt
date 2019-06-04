@@ -69,5 +69,4 @@ function baseNodeClass(level, parent, index)
 	{
 		return level;
 	}
-
 }
