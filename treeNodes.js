@@ -379,7 +379,7 @@ function dragDropMove(targetObj)
 
 	// set the dragged node to the new selectedNode
 	selectedNode = currentDragObj;
-	currentDragObj.domBody.style.backgroundColor = "#CCFFCC";
+	currentDragObj.domBody.style.backgroundColor = "#CCCCFF";
 
 	currentDragObj.setLevelRec();
 	currentDragObj.draw();

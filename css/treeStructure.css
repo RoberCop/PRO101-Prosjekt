@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    overflow: auto;
+    overflow-y: scroll;
     margin: 0 2.7vw 0 0;
     -webkit-overflow-scrolling: touch;
 
@@ -34,7 +34,7 @@
 
 .treeStack {
     width: 100%;
-    height: 100%;
+    height: auto;
     display: flex;
     flex-direction: row;
     align-items: center;
