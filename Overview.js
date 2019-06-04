@@ -26,8 +26,8 @@ var completePro=[];
 
 function showform() {
 document.getElementById("send").style.animation="show 0.3s forwards";
-    document.getElementById("close").style.animation="show 0.3s forwards";
-    document.getElementById("Projectname").style.animation="show 0.3s forwards";
+document.getElementById("close").style.animation="show 0.3s forwards";
+document.getElementById("Projectname").style.animation="show 0.3s forwards";
 form.style.display = "block";
 form.style.animation = 'growing 0.2s forwards';
    
@@ -92,6 +92,8 @@ document.getElementById("UpProject1").appendChild(divpro);
 const deleteElement=document.getElementById("Deleteprojectcont");
 
 
+
+
 function dragleaveComp(){
    compCon.style.transform="scale(1.0)"; 
    
@@ -109,15 +111,15 @@ function dragleaveUpc(){
     
 }
 
+
 function dragoverComp(ev){
    allowDrop(event);
     compCon.style.transform="scale(1.05)"; 
-
 }
 
 function dragoverImp(ev){
    allowDrop(event);
-    impCon.style.transform="scale(1.05)";  
+    impCon.style.transform="scale(1.05)"; 
 
 }
 function dragoverUpc(ev){
@@ -152,14 +154,17 @@ function drop(ev) {
  ev.preventDefault();
   var data = ev.dataTransfer.getData("text");
    ev.target.appendChild(document.getElementById(data));
-
+   
     if(ev.target.id == "CompProject1"){
     data={name:data};
     completePro.push(data);
+        compCon.style.transform="scale(1.0)"; 
 var feedpro = document.createElement("div");
 feedpro.className="feeddiv";
-        console.log(data.name+"was moved to array completePro");
-        console.table(completePro);
+console.log(data.name+"was moved to array completePro");
+console.table(completePro);
+document.getElementById(data.name).style.backgroundColor="#c5e1a5";
+        feedpro.style.backgroundColor="#c5e1a5";
         
 document.getElementById("Feedup1").appendChild(feedpro);   
     
@@ -186,11 +191,13 @@ feedpro.innerHTML="User moved <br />Project: "+data.name+ "<br /> to: Complete s
     data={name:data};
     upcomPro.push(data);
           console.log(data.name+"was moved from array upcomPro");
-          
+          upcCon.style.transform="scale(1.0)"; 
     var feedpro = document.createElement("div");
 feedpro.className="feeddiv";
+document.getElementById(data.name).style.backgroundColor="#f87371";
         
-document.getElementById("Feedup1").appendChild(feedpro);   
+document.getElementById("Feedup1").appendChild(feedpro); 
+          feedpro.style.backgroundColor="#f87371";
     
 feedpro.innerHTML="User moved<br /> Project: "+data.name+ "<br /> to: Upcoming section";
            console.table(upcomPro);  
@@ -218,11 +225,15 @@ feedpro.innerHTML="User moved<br /> Project: "+data.name+ "<br /> to: Upcoming s
     if(ev.target.id == "IpProject1"){
     data={name:data};
     inProgressPro.push(data);
+        impCon.style.transform="scale(1.0)"; 
 console.log(data.name+"was moved to array inProgressPro");
 var feedpro = document.createElement("div");
 feedpro.className="feeddiv";
         
-document.getElementById("Feedup1").appendChild(feedpro);   
+document.getElementById("Feedup1").appendChild(feedpro);  
+        
+document.getElementById(data.name).style.backgroundColor="#fff59d";
+        feedpro.style.backgroundColor="#fff59d";
     
 feedpro.innerHTML="User moved<br /> Project: "+data.name+ " <br />to: Inprogress section";
         console.table(inProgressPro);

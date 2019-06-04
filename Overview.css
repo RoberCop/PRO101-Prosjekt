@@ -58,7 +58,7 @@ body{ }
 
 
 #InprogressContainer{
-    background: rgba(128, 128, 128, 0.45);
+    
     display: block;
     left:45%;
    
@@ -67,24 +67,28 @@ body{ }
 
 
 #upcommingContainer{
-    background: rgba(128, 128, 128, 0.45);
+    
     display: block;
-    left:15%;
+    left:23%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
  
     
     }
 
 
 #CompletedContainer{
-    background: rgba(128, 128, 128, 0.45);
+    
     display: block;
-    left:75%;
+    left:67%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
   
 }
 
 
 .overcontainer{
-    display: flex;
+    
     position: absolute;
     top:-15%;
    padding: 1%;
@@ -92,12 +96,13 @@ body{ }
     margin-left: 1%;
     margin-right: 1%;
     margin-bottom: 1%;
-    border-radius: 15px;
+    background: rgba(242, 242, 242, 0.45);
     width: 20%;
     height: 130%;
     z-index: 100;
-    
-    box-shadow: -5px -2px 12px 1px rgba(136, 136, 136, 0.56),5px 20px 12px 1px rgba(136, 136, 136, 0.56);
+   
+    transition: all 0.3s;
+    box-shadow: -5px -2px 12px 1px rgba(136, 136, 136, 0.56),5px 2px 12px 1px rgba(136, 136, 136, 0.56);
 }
 
 
@@ -134,7 +139,7 @@ body{ }
     font-Size:25px; 
     font-family: sans-serif;
     display: block;
-    background:  rgb(255, 252, 164);
+    background:  #f87371;
     margin: 2%;
     overflow:hidden;
     border-radius: 5px;
@@ -151,14 +156,13 @@ body{ }
 
 .projectFeed{
     display: flex;
-    background: rgba(255, 179, 51, 0.56);
+    background: #ffffff;
     right:2%;
     top:15%;
     position: absolute;
     border-radius: 31px;
     width: 10%;
     height: 48%;
-    border:solid #c78a23;
     padding: 3%;
     box-shadow: 1px -5px 12px 1px rgba(136, 136, 136, 0.56);
   }
@@ -184,8 +188,8 @@ body{ }
     
 
 .FeedUpdate{
-    background: rgba(255, 180, 44, 0.58);
-    margin:5%;
+    background: #ffffff;
+    margin:4%;
     width: 75%;
     height: 80%;
     position: absolute;
@@ -200,13 +204,15 @@ body{ }
 
 .feeddiv{
     margin: 2px;
-    border: solid black;
+   padding: 1.3rem;
+    box-sizing: border-box;
     background: #cbf866;
     display: inline-block;
     position:relative;
-    overflow-y: auto;
-    width: 88%;
-    height: 20%;
+    overflow-y: none;
+    max-width: 88%;
+    height: auto;
+    width: max-content;
     font-size: 15px;
     font-style: italic;
     font-family: sans-serif;
@@ -219,9 +225,9 @@ body{ }
 .feeddiv:hover{transform: scale(1.1)rotate(180deg);}
 
 #Deleteproject1{
-    left: 7%;
+    left: 6%;
     width: 5%;
-    bottom: 18%;
+    bottom: -30%;
     height: auto;
     position: absolute;
    
@@ -237,30 +243,18 @@ transform: scale(1.05);
 }
 
 
-
-.NewProjectButton{
- 
-    text-align: center;
-    font-size: 125%;
-    width: 15%;
-    height: 20%;
-    grid:projectcontainer;
-    position: absolute;
-    top:5%;
-    left: 3.5%;
-    transition: 0.3s all;  
-}
-
 #createbutton1{
-    width: 40%;
-    height: 60%;
-    
+    width: 5%;
+    position: absolute;
+    left: 8%;
+    top: 20%;
+    transition: 0.3s all;
     
 }
 
 
 
-.Newprojectbutton:hover{
+#createbutton1:hover{
 transform: scale(1.15);
 }
 
@@ -275,12 +269,12 @@ transform: scale(1.15);
     position: absolute;
     font-size: 20px;
     font-family: sans-serif;
-    border-radius: 15px;
+    border-radius: 40px;
     border: solid black 1px;
     top:20%;
     left:15%;
     border-radius: 5px;
-    background: #cbf866;
+    background: rgb(235, 239, 227);
     display: block;
     text-align: center;
     z-index: 100;
@@ -289,27 +283,37 @@ transform: scale(1.15);
 
 
 
-
+#Projectname{bottom:10%;
+    height: 13%;
+border-radius: 4px;
+border:none;}
 
 #send{
      bottom:10%;
-    height: 13%;
-    right:100px;
+    width: 20%;
+    height: 15%;
+    right:10%;
     position: absolute;
     font-size: 18px;
     font-family: sans-serif;
     opacity: 0;
+    background: #4caf50;
+    border-radius: 10px;
 }
 
 
 #close{
+    height: 15%;
+    width: 20%;
     font-size: 18px;
     font-family: sans-serif;
      bottom:10%;
-    height: 13%;
-    left:150px;
+    
+    left:10%;
     position: absolute;
     opacity: 0;
+    background: rgb(235, 239, 227);
+    border-radius: 10px;
 }
 
 #Projectname{
@@ -341,7 +345,12 @@ transform: scale(1.15);
 }
     
  
-   
+    @keyframes dragover{
+        0%{}
+        
+        100%{width: 101%;}
+        
+    }
     
     
 
