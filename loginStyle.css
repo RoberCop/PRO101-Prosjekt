@@ -36,7 +36,9 @@ h1, h2, h3, h4, h5, h6 {
 	flex: 1;
 } 
 
-/*******SIGN IN********/
+/*****************
+*****SIGN IN*****
+*****************/
 #signin {
 	display: flex;
 	flex-direction: column;
@@ -84,7 +86,9 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-/*********BUTTONS*********/
+/*****************
+BUTTONS (Modal buttons not included)
+*****************/
 #signin .primary-btn, .modal-body .primary-btn {
 	width: 100%;
 }
@@ -152,7 +156,9 @@ h1, h2, h3, h4, h5, h6 {
 	
 }
 
-/*******OR*******/
+/**************
+******OR*******
+**************/
 #signin .or{
 	display: flex;
 	flex-direction: row;
@@ -174,7 +180,9 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 0 0.8rem;
 }
 
-/*******SHOWCASE******/
+/***************
+****SHOWCASE****
+****************/
 #showcase {
 	display: flex;
 	justify-content: center;
@@ -198,7 +206,9 @@ h1, h2, h3, h4, h5, h6 {
 	border: 1px #006685 solid;
 }
 
-/*******FOOTER*******/
+/****************
+*****FOOTER******
+****************/
 #main-footer {
 	color: #006685;
 	text-align: center;
@@ -214,7 +224,9 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-/*******MODALS********/
+/********************
+*******MODALS********
+*********************/
 .modal {
 	display: none;
 	position: fixed;
@@ -358,7 +370,9 @@ h1, h2, h3, h4, h5, h6 {
 	width: 46%;
 }
 
-
+/****************
+Wrong input also used for sign in form
+****************/
 .wrong-input {
 	font-size: 1.1rem;
 	margin-bottom: 1.3rem;
@@ -403,7 +417,9 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-/**********MEDIA QUERIES*************/
+/*****************
+**MEDIA QUERIES**
+******************/
 @media(min-width: 1200px) {
 	#left {
 		flex: 4;
@@ -446,7 +462,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 }
 
-/******KEYFRAMES*********/
+/*************
+**KEYFRAMES**
+*************/
 
 @keyframes modalOpen {
 		from{transform: scale(0)}
