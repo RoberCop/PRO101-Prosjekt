@@ -69,7 +69,7 @@ body{ }
 #upcommingContainer{
     background: rgba(128, 128, 128, 0.45);
     display: block;
-    left:15%;
+    left:23%;
  
     
     }
@@ -78,7 +78,7 @@ body{ }
 #CompletedContainer{
     background: rgba(128, 128, 128, 0.45);
     display: block;
-    left:75%;
+    left:67%;
   
 }
 
@@ -134,7 +134,7 @@ body{ }
     font-Size:25px; 
     font-family: sans-serif;
     display: block;
-    background:  rgb(255, 252, 164);
+    background:  #ef5350;
     margin: 2%;
     overflow:hidden;
     border-radius: 5px;
@@ -200,7 +200,7 @@ body{ }
 
 .feeddiv{
     margin: 2px;
-    border: solid black;
+   
     background: #cbf866;
     display: inline-block;
     position:relative;
