@@ -2,20 +2,20 @@
 
 footer #chat-container {
     display: flex;
-    height: 4rem;
-    width: 4rem;
-    border-radius: 50px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
     background: #f9a825;
     color: #fff;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-right: 20px;
     align-self: flex-end;
     cursor: pointer;
     transition: 0.2s linear;
+    border: 1px red solid;
 }
 
 footer #chat-container i {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin: auto;
 
 }
@@ -86,7 +86,6 @@ footer #chat-container:hover {
     width: 86%;
     line-height: 1.7rem;
     animation: inputSendAnim 0.4s 0.4s linear forwards;
-
 }
 
 #chat-send {
