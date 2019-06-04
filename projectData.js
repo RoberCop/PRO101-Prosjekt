@@ -3,7 +3,7 @@ function getTreeData()
 	const root = new baseNodeClass(0, null, 0);
 	
 	// Hard code sample nodes for testing
-	root.newChild("Project", "Prosjekt description");
+	root.newProject("Project", "Prosjekt description");
 
 	root.childs[0].newChild("Make a house", "I need a house asap :)");
 	root.childs[0].newChild("Make a car", "Custom made supercar", usersArr[1]);

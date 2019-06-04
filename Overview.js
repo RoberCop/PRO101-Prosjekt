@@ -8,6 +8,7 @@ const contimp= document.getElementById("IpProject1");
 const contcomp= document.getElementById("CompProject1");
 const contupc= document.getElementById("UpProject1");
 
+const wrapper = document.getElementById("wrapper");
 
 const inProgressPro=[];
 const upcomPro=[];
@@ -55,17 +56,28 @@ function createProject()
     var divpro = document.createElement("div");
     var feedpro = document.createElement("div");
 
+	const projectIndex = root.childs.length;
+	root.newProject(activeUser);
+	root.childs[projectIndex].newAddBtnRec();
+
     divpro.innerHTML=namepro;
     divpro.className="projectdiv";
     divpro.setAttribute("id",namepro);
     divpro.setAttribute("draggable",true);
     divpro.setAttribute("ondragstart","drag(event)","ondragend(dragend())");
+	
+	divpro.onclick = function()
+	{
+		root.selectedChild = projectIndex;
+		wrapper.style.display = "none";
+		section.style.display = "grid";
+		editContainer.style.display = "flex";
+	}
 
     feedpro.className="feeddiv";
 
     var upcs= " Upcoming";  
     feedpro.innerHTML="User Crated Project"+"<br />"+ " Called: "+namepro +"<br />"+" In the: "+ upcs+ " section.";
-
 
     document.getElementById("Feedup1").appendChild(feedpro);
 

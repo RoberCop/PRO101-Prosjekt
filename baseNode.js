@@ -1,4 +1,4 @@
-function baseNodeClass(level, parent, index)
+function baseNodeClass(level, parent, index, projectTitle)
 {
 	var self = this;
 	var owner;
@@ -17,6 +17,16 @@ function baseNodeClass(level, parent, index)
 		this.childs.push(new treeNodeClass(level + 1, this, preLength, newTitle, newDesc, 0));
 
 		if (newUser !== undefined) this.childs[preLength].setUser(newUser);
+	}
+
+	this.newProject = function(newUser)
+	{
+		const preLength = this.childs.length;
+
+		// create a child based on own variables, and current arguments
+		this.childs.push(new baseNodeClass(level + 1, this, preLength));
+
+		if (newUser !== undefined) this.childs[preLength].setOwner(newUser);
 	}
 
 	this.newAddBtnRec = function()

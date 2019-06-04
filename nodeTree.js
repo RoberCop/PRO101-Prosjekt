@@ -3,6 +3,7 @@ const treeDiv = document.getElementById("treeDiv");
 const html = document.querySelector("html");
 const body = document.querySelector("body");
 const header = document.querySelector("header");
+const section = document.getElementById("gridSection");
 
 const largeInput = document.querySelector("#largeInput");
 const menuBar = document.querySelector("#menuBar");
@@ -343,14 +344,11 @@ for (let i = 0; i < 10; i++)
 	newTreeStack();
 
 const root = getTreeData();
-root.newAddBtnRec();
 root.selectedChild = 0;
 
 createWarningElem();
 
-var selectedNode = root.childs[0];
-selectedNode.domBody.style.backgroundColor = "#CCFFCC";
-selectedNode.refreshNodeEdit();
+var selectedNode;
 
 // todo: add process of getting user from login
 var activeUser = usersArr[0];

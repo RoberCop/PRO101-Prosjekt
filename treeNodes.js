@@ -36,7 +36,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 	this.addToDisplay = function(isSelected, isStart)
 	{
 		// add this node to the displayArray if its not the starter object
-		if (!isStart) displayArray[level - 1].push(this);
+		if (!isStart) displayArray[level - 2].push(this);
 
 		const statusColor = (this.status > 0) ? ( (this.status > 1) ? "#0F0" : "#FF0" ) : "#F00";
 		this.domElem.style.borderColor = statusColor;
@@ -160,7 +160,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		const statusColor = (newStatus > 0) ? ( (newStatus > 1) ? "#0F0" : "#FF0" ) : "#F00";
 		this.domElem.style.borderColor = statusColor;
 
-		if (level > 1) this.parent.setStatusRec();
+		if (level > 2) this.parent.setStatusRec();
 	}
 
 	this.setStatusRec = function()
