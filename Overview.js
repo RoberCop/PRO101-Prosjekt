@@ -158,8 +158,9 @@ function drop(ev) {
     completePro.push(data);
 var feedpro = document.createElement("div");
 feedpro.className="feeddiv";
-        console.log(data.name+"was moved to array completePro");
-        console.table(completePro);
+console.log(data.name+"was moved to array completePro");
+console.table(completePro);
+document.getElementById(data.name).style.backgroundColor="#c5e1a5";
         
 document.getElementById("Feedup1").appendChild(feedpro);   
     
@@ -189,6 +190,7 @@ feedpro.innerHTML="User moved <br />Project: "+data.name+ "<br /> to: Complete s
           
     var feedpro = document.createElement("div");
 feedpro.className="feeddiv";
+document.getElementById(data.name).style.backgroundColor="#ef5350";
         
 document.getElementById("Feedup1").appendChild(feedpro);   
     
@@ -222,7 +224,9 @@ console.log(data.name+"was moved to array inProgressPro");
 var feedpro = document.createElement("div");
 feedpro.className="feeddiv";
         
-document.getElementById("Feedup1").appendChild(feedpro);   
+document.getElementById("Feedup1").appendChild(feedpro);  
+        
+document.getElementById(data.name).style.backgroundColor="#fff59d";
     
 feedpro.innerHTML="User moved<br /> Project: "+data.name+ " <br />to: Inprogress section";
         console.table(inProgressPro);
