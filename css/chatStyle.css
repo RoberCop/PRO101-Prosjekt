@@ -2,6 +2,8 @@
 
 footer #chat-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -10,14 +12,11 @@ footer #chat-container {
     margin-right: 20px;
     align-self: flex-end;
     cursor: pointer;
-    transition: 0.2s linear;
-    border: 1px red solid;
+    transition: 0.05s linear;
 }
 
 footer #chat-container i {
-    font-size: 1.5rem;
-    margin: auto;
-
+    font-size: 1.3rem;
 }
 
 footer #chat-container:hover {
@@ -38,7 +37,8 @@ footer #chat-container:hover {
     margin: auto;
     width: 20rem;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(145, 55, 55, 0.17);
-    animation: chatOpening 0.4s linear;
+    animation: chatOpening 0.3s linear;
+    z-index: 1500;
 }
 
 
