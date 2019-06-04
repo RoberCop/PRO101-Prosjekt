@@ -181,7 +181,7 @@ function moveQuickAdd(downOrUp)
 	}
 	else {
 		header.style.transform = "translate(0%, -100%)";
-		backBtn.style.transform = "translate(0, 100%)";
+		backBtn.style.transform = "translate(0, -100%)";
 		largeInput.style.transform = "translate(-50%, -100%)";
 		toggleQuickAdd = false;
 	}
