@@ -7,7 +7,10 @@ const contimp= document.getElementById("IpProject1");
 const contcomp= document.getElementById("CompProject1");
 const contupc= document.getElementById("UpProject1");
     
-
+window.setInterval(function() {
+  var elem = document.getElementById('Feedup1');
+  elem.scrollTop = elem.scrollHeight;
+}, 5000);
 
 form.style.display="none";
 
@@ -22,9 +25,11 @@ var completePro=[];
 
 
 function showform() {
-
+document.getElementById("send").style.animation="show 0.3s forwards";
+    document.getElementById("close").style.animation="show 0.3s forwards";
+    document.getElementById("Projectname").style.animation="show 0.3s forwards";
 form.style.display = "block";
-form.style.animation = 'growing 2s forwards';
+form.style.animation = 'growing 0.2s forwards';
    
     
    
@@ -153,20 +158,26 @@ function drop(ev) {
     completePro.push(data);
 var feedpro = document.createElement("div");
 feedpro.className="feeddiv";
+        console.log(data.name+"was moved to array completePro");
+        console.table(completePro);
         
 document.getElementById("Feedup1").appendChild(feedpro);   
     
-feedpro.innerHTML="User moved Project:"+data+ " to: Complete section";
+feedpro.innerHTML="User moved <br />Project: "+data.name+ "<br /> to: Complete section";
     
         for (var i=0; i < upcomPro.length; i++) {
-        if (upcomPro[i].name === data) {
-             upcomPro[i].splice(i, 1); ;
+        if (upcomPro[i].name === data.name) {
+             upcomPro.splice(i, 1); 
+            console.log(data.name+"was removed from array upcomPro");
+            console.table(upcomPro);  
         }
      }
         
         for (var i=0; i < inProgressPro.length; i++) {
-        if (inProgressPro[i].name === data) {
-             inProgressPro[i].splice(i, 1); ;
+        if (inProgressPro[i].name === data.name) {
+             inProgressPro.splice(i, 1);
+             console.log(data.name+"was removed from array inProgressPro");
+            console.table(inProgressPro);
         }
      }
   }
@@ -174,23 +185,29 @@ feedpro.innerHTML="User moved Project:"+data+ " to: Complete section";
       if(ev.target.id == "UpProject1"){
     data={name:data};
     upcomPro.push(data);
+          console.log(data.name+"was moved from array upcomPro");
           
     var feedpro = document.createElement("div");
 feedpro.className="feeddiv";
         
 document.getElementById("Feedup1").appendChild(feedpro);   
     
-feedpro.innerHTML="User moved Project"+data+ " to: Upcoming section";
+feedpro.innerHTML="User moved<br /> Project: "+data.name+ "<br /> to: Upcoming section";
+           console.table(upcomPro);  
     
         for (var i=0; i < completePro.length; i++) {
-        if (completePro[i].name === data) {
-             completePro[i].splice(i, 1); ;
+        if (completePro[i].name === data.name) {
+             completePro.splice(i, 1);
+            console.log(data.name+"was removed from array completePro");
+            console.table(completePro); 
         }
      }
         
         for (var i=0; i < inProgressPro.length; i++) {
-        if (inProgressPro[i].name === data) {
-             inProgressPro[i].splice(i, 1); ;
+        if (inProgressPro[i].name === data.name) {
+             inProgressPro.splice(i, 1); 
+            console.log(data.name+"was removed from array inProgressPro");
+            console.table(inProgressPro);
         }
      }
   }
@@ -201,34 +218,34 @@ feedpro.innerHTML="User moved Project"+data+ " to: Upcoming section";
     if(ev.target.id == "IpProject1"){
     data={name:data};
     inProgressPro.push(data);
-
+console.log(data.name+"was moved to array inProgressPro");
 var feedpro = document.createElement("div");
 feedpro.className="feeddiv";
         
 document.getElementById("Feedup1").appendChild(feedpro);   
     
-feedpro.innerHTML="User moved Project"+data+ " to: Inprogress section";
+feedpro.innerHTML="User moved<br /> Project: "+data.name+ " <br />to: Inprogress section";
+        console.table(inProgressPro);
     
         for (var i=0; i < completePro.length; i++) {
-        if (completePro[i].name === data) {
-             completePro[i].splice(i, 1); ;
+        if (completePro[i].name === data.name) {
+             completePro.splice(i, 1); 
+            console.log(data.name+"was removed from array completePro");
+            console.table(completePro);
         }
      }
         
         for (var i=0; i < upcomPro.length; i++) {
-        if (upcomPro[i].name === data) {
-             upcomPro[i].splice(i, 1); ;
+        if (upcomPro[i].name === data.name) {
+             upcomPro.splice(i, 1);  
+            console.log(data.name+"was removed from array upcomPro");
+            console.table(upcomPro);  
         }
      }
   }
     
-  console.table(inProgressPro);
-    console.table(upcomPro);  
-    console.table(completePro); 
+  
 }
-
-
-
 
 
 
