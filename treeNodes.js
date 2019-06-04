@@ -181,7 +181,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		// setting to newStatus allowed
 		this.status = newStatus;
 
-		const statusColor = (newStatus > 0) ? ( (newStatus > 1) ? "#0F0" : "#FF0" ) : "#F00";
+		const statusColor = (newStatus > 0) ? ( (newStatus > 1) ? "#92e668" : "#fff13b" ) : "#ff706d";
 		this.domElem.style.borderColor = statusColor;
 
 		if (level > 1) this.parent.setStatusRec();
