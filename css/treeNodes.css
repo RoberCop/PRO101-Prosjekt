@@ -1,5 +1,17 @@
 /*-- Style for the nodes in the tree structure --*/
 
+.treeNode {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    width: 200px;
+    min-width: 150px;
+    height: auto;
+    margin-right: 15px;
+    border: 1px solid;
+    transition: 0.2s linear;
+}
+
 .treeNode:hover {
     cursor: pointer;
     transform: scale(1.06);
@@ -7,21 +19,10 @@
     box-shadow: 0 5px 8px 0 rgba(31, 31, 31, 0.2), 0 7px 20px 0 rgba(31, 31, 31, 0.2);
 }
 
-.treeNode {
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    width: 150px;
-    min-width: 150px;
-    height: auto;
-    margin-right: 5px;
-    border: 1px solid;
-    transition: 0.2s linear;
-}
 
 .node-header h4{
     margin: 0;
-    padding: 0;
+    padding: 20px;
 }
 
 .node-header {
@@ -34,13 +35,12 @@
 }
 
 .node-body {
-    font-size: 1.3rem;
-    padding: 1rem;
+    font-size: 0.9rem;
+    padding: 0.5rem;
     background: white;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-radius: 0 0 5px 5px;
 }
 
 .light {
