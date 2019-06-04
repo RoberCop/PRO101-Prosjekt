@@ -5,7 +5,7 @@ const body = document.querySelector("body");
 const header = document.querySelector("header");
 
 const largeInput = document.querySelector("#largeInput");
-const menuBar = document.querySelector("#menuBar");
+const backBtn = document.querySelector("#backBtn");
 const editContainer = document.querySelector("#editContainer");
 const shader = document.createElement("div");
 shader.setAttribute("class", "shader");
@@ -34,7 +34,7 @@ var canEdit = false;
 // Sets transition on elements
 header.style.transition = "0.1s transform ease-in-out";
 largeInput.style.transition = "0.1s transform ease-in-out";
-menuBar.style.transition = "0.1s transform ease-in-out";
+backBtn.style.transition = "0.1s transform ease-in-out";
 editContainer.style.transition = "0.1s all ease-in-out";
 treeDiv.style.transition = "0.1s all ease-in-out";
 
@@ -174,14 +174,14 @@ function moveQuickAdd(downOrUp)
 	if (downOrUp)
 	{
 		header.style.transform = "translate(0%, 0%)";
-		menuBar.style.transform = "translate(0, 0%)";
+		backBtn.style.transform = "translate(0, 0%)";
 		largeInput.style.transform = "translate(-50%, 100%)";
 		quickAddInput.focus();
 		toggleQuickAdd = true;
 	}
 	else {
 		header.style.transform = "translate(0%, -100%)";
-		menuBar.style.transform = "translate(0, 100%)";
+		backBtn.style.transform = "translate(0, 100%)";
 		largeInput.style.transform = "translate(-50%, -100%)";
 		toggleQuickAdd = false;
 	}
