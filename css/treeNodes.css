@@ -8,7 +8,6 @@
     min-width: 150px;
     height: auto;
     margin-right: 15px;
-    border: 1px solid;
     transition: 0.2s linear;
 }
 
@@ -27,7 +26,9 @@
 
 .node-header {
     font-size: 1rem;
+    border: 1px solid;
     width: 100%;
+    border-bottom: none;
     border-radius: 5px 5px 0 0;
     background: #ffca28;
     text-align: center;
@@ -37,20 +38,11 @@
 .node-body {
     font-size: 0.9rem;
     padding: 0.5rem;
-    background: white;
     display: flex;
+    border: 1px solid;
     flex-direction: row;
     justify-content: space-between;
-}
-
-.light {
-    height: 1rem;
-    width: 1rem;
-    background-color: #dd2c00;
-    opacity: 0.6;
-    /*box-shadow: 0 0 20px 10px rgba(255, 0, 0, 0);*/
-    border-radius: 50px;
-    animation: lightPulse 0.5s  infinite;
+    border-radius: 0 0 5px 5px;
 }
 
 .addButton:hover {
