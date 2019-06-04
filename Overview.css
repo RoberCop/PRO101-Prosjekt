@@ -219,9 +219,9 @@ body{ }
 .feeddiv:hover{transform: scale(1.1)rotate(180deg);}
 
 #Deleteproject1{
-    left: 7%;
+    left: 6%;
     width: 5%;
-    bottom: 18%;
+    bottom: -30%;
     height: auto;
     position: absolute;
    
@@ -237,24 +237,11 @@ transform: scale(1.05);
 }
 
 
-
-.NewProjectButton{
- 
-    text-align: center;
-    font-size: 125%;
-    width: 15%;
-    height: 20%;
-    grid:projectcontainer;
-    position: absolute;
-    top:5%;
-    left: 3.5%;
-    transition: 0.3s all;  
-}
-
 #createbutton1{
-    width: 40%;
-    height: 60%;
-    
+    width: 5%;
+    position: absolute;
+    left: 8%;
+    top: 20%;
     
 }
 
