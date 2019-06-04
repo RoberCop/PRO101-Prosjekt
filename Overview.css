@@ -11,7 +11,10 @@ padding:0;
         height: 100vh;
         width: 100vw;
         display: flex;
-   
+    background-image: url(img/logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
     }
   
 
@@ -26,13 +29,7 @@ padding:0;
 
 
 
-#headerlogo{
-    min-height: 100px;
-    width: 30%;
-    height: 30%;
-    position: absolute;
-    left:35%;
-    }
+
 
 
 
@@ -44,163 +41,146 @@ body{ }
     min-width: 250px;
     position: absolute;
     display: flex;
-    left:15%;
-    top:25%;
-    width: 50%;
+    top:15%;
+    width: 80%;
     height: 60%;
-    
-    
-    
 }
 
 
 .overlayTab{
     display: flex;
-    
     width: 100%;
     height: 100%;
     
-  
-    }
-
-
-.overlayHeader{
-display: flex;
-position: absolute;
-top:-3.5%;
-text-align: center;
-box-shadow: 1px -5px 12px 1px rgba(136, 136, 136, 0.56);
-width: 15%;
-height: 9%;
-font-size: 100%;
-border-radius: 10px 10px 0px 0px;
-z-index: 100;
-margin-left: 2%;
-margin-right: 2%;
 }
 
-.headercont{
-    margin: auto;
-    
-    
-    
-}
 
-.overlayHeader:hover{animation: nextarrow 1s forwards;}
 
-#CompletedHeader{
-     
-   
-  left:42%;
-    background: #9DCEA7;
-    border-top: outset green 2px;
-    border-left:outset green 2px;
-    border-right:outset green 2px;
-    }
-#InprogressHeader{
-    
-    left:22%;
-    background: #FFFCA4;
-    border-top: outset yellow 2px;
-    border-left:outset yellow 2px;
-    border-right:outset yellow 2px;
-    
-    
-    }
-#UpcomingHeader{
-    left:2%;
-    background: #FA9C9C;
-    border-top: outset red 2px;
-    border-left:outset red 2px;
-    border-right:outset red 2px;
-    
-    }
-#UpcomingHeader:hover ~ .headerContainer{display: inline-block;}
 
 #InprogressContainer{
-   background: #FFFCA4;
-
-border-bottom: outset yellow 2px;
-    border-left:outset yellow 2px;
-    border-right:outset yellow 2px;
+    
+    display: block;
+    left:45%;
    
 
 }
 
 
 #upcommingContainer{
-    background: #FA9C9C;
-    border-bottom: outset red 2px;
-    border-left:outset red 2px;
-    border-right:outset red 2px;
-       
-  
+    
+    display: block;
+    left:23%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+ 
+    
     }
 
 
 #CompletedContainer{
-    background: #9DCEA7;
-    border-bottom: outset green 2px;
-    border-left:outset green 2px;
-    border-right:outset green 2px;
-   }
+    
+    display: block;
+    left:67%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+  
+}
 
 
 .overcontainer{
-    display: flex;
+    
     position: absolute;
-    top:1%;
-    left:1%;
+    top:-15%;
+   padding: 1%;
     margin-top: 3%;
     margin-left: 1%;
     margin-right: 1%;
     margin-bottom: 1%;
-    border-radius: 15px;
-   width: 100%;
-    height: 100%;
-    z-index: 0;
-    box-shadow: -5px -2px 12px 1px rgba(136, 136, 136, 0.56),5px 20px 12px 1px rgba(136, 136, 136, 0.56);
+    background: rgba(242, 242, 242, 0.45);
+    width: 20%;
+    height: 130%;
+    z-index: 100;
+   
+    transition: all 0.3s;
+    box-shadow: -5px -2px 12px 1px rgba(136, 136, 136, 0.56),5px 2px 12px 1px rgba(136, 136, 136, 0.56);
 }
 
 
 .headerContainer{
     display: flex;
-    margin-left: 10%;
-    margin-right: 10%;
-    font-size: 30px;
+    margin-left: 3%;
+    margin-right: 3%;
+    font-size: 26px;
+    font-family: sans-serif;
+    text-decoration: underline;
     padding: 2%;
+    
   }
 
 
 .UserProjecttab{
-    display: inline-block;
-    margin: 1%;
+    display:block;
+   padding: 1%;
     width: 90%;
-    height: 80%;
+    height: 90%;
+   margin: 4%;
     border-radius: 15px;
     overflow-y: auto;
-}
+  }
 
 .usUserProjecttab.div:hover{transform: scale(1.1);}
 
-.projectFeed{
-    
-    display: flex;
-    background: #ffb42c;
-    left:70%;
-    top:25%;
-    position: absolute;
+
+.projectdiv{
+    width: 90%;
+    height : 30%;
     text-align: center;
-    font-size: 20px;
+    color : Black;
+    font-Size:25px; 
+    font-family: sans-serif;
+    display: block;
+    background:  #f87371;
+    margin: 2%;
+    overflow:hidden;
+    border-radius: 5px;
+    cursor:pointer;
+    z-index: 100;
+    grid-area:projectcontainer;    
+    
+}
+
+.projectdiv:hover{
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px 5px #8d8282;
+}
+
+.projectFeed{
+    display: flex;
+    background: #ffffff;
+    right:2%;
+    top:15%;
+    position: absolute;
     border-radius: 31px;
     width: 10%;
-    height: 60%;
-    border:solid black;
+    height: 48%;
     padding: 3%;
-    box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, -24px -6px 41px 20px rgba(0,0,0,0);
-        }
+    box-shadow: 1px -5px 12px 1px rgba(136, 136, 136, 0.56);
+  }
 
-@media only screen and (max-width: 360px){
+#feedover {
+    display: flex;
+    text-align: center;
+    font-size: 25px;
+    font-family: sans-serif;
+    width: 300%;
+    position: absolute;
+    left: 23%;
+    top: 5%;
+    text-decoration: underline;
+    
+}
+
+@media only screen and (max-width: 660px){
     
 .projectcontainer{ width: 100%;}
     .projectFeed{display: none;}
@@ -208,11 +188,13 @@ border-bottom: outset yellow 2px;
     
 
 .FeedUpdate{
-    
-    background: #ffb42c;
-    margin:5%;
-    width: 100%;
-    height: 90%;
+    background: #ffffff;
+    margin:4%;
+    width: 75%;
+    height: 80%;
+    position: absolute;
+    top: 10%;
+    left: 8%;
     display:inline-block;
     border-radius: 15px;
     overflow-y: auto;
@@ -221,31 +203,34 @@ border-bottom: outset yellow 2px;
 }
 
 .feeddiv{
-    
     margin: 2px;
-    border: solid black;
+   padding: 1.3rem;
+    box-sizing: border-box;
     background: #cbf866;
     display: inline-block;
     position:relative;
-    overflow-y: auto;
-    width: 200px;
-    height: 100px;
+    overflow-y: none;
+    max-width: 88%;
+    height: auto;
+    width: max-content;
     font-size: 15px;
     font-style: italic;
+    font-family: sans-serif;
     border-radius: 15px;
     z-index: 0;
+    margin: 4%;
     transform: rotate(180deg);
 }
 
 .feeddiv:hover{transform: scale(1.1)rotate(180deg);}
 
 #Deleteproject1{
-    right:5%;
+    left: 6%;
     width: 5%;
-    bottom: 3%;
+    bottom: -30%;
     height: auto;
     position: absolute;
-    background: red;
+   
     padding:10px;
     border-radius: 4px;
     z-index: 100;
@@ -258,130 +243,95 @@ transform: scale(1.05);
 }
 
 
-
-.NewProjectButton{
-    text-align: center;
-    font-size: 20px;
-    width: 150px;
-    height: 150px;
-    grid:projectcontainer;
+#createbutton1{
+    width: 5%;
     position: absolute;
-    top:9%;
-    right: 3%;
+    left: 8%;
+    top: 20%;
+    transition: 0.3s all;
     
 }
 
-#Buttoncircle{
-    width: 70px;
-    height: 70px;
-    border: solid green 1px;
-    background: green;
-    border-radius: 50%;
-    margin:20%;
-    margin-top: 3%;
-    position: absolute;
-    left: 10px;
-    
-    
+
+
+#createbutton1:hover{
+transform: scale(1.15);
 }
 
-.Newprojectbutton:hover{
-animation: nextarrow 1s forwards;
+
    
-}
 
 
-#line1{
-    position: absolute;
-  
-    width: 50px;
-    height: 5px;
-    background: white;
-    top:32px;
-    left:10px;
-    
-}
-
-
-#line2{
-    position: absolute;
-   
-    width: 5px;
-    height: 50px;
-    background: white;
-    top:10;
-    left:33px;
-}
 
 #projectform{
-    width: 500px;
-    height: 200px;
+    min-width: 0%;
+    min-height: 0%;
     position: absolute;
     font-size: 20px;
-    border: solid blue 5px;
+    font-family: sans-serif;
+    border-radius: 40px;
+    border: solid black 1px;
     top:20%;
-    right:-40%;
+    left:15%;
     border-radius: 5px;
-    background: orange;
+    background: rgb(235, 239, 227);
     display: block;
     text-align: center;
     z-index: 100;
     padding: 20px;
-    
-}
+  }
 
 
-#type{
-    position: absolute;
-    left:200px;  
-    height:25px; 
-}
 
+#Projectname{bottom:10%;
+    height: 13%;
+border-radius: 4px;
+border:none;}
 
 #send{
-     bottom:25px;
-    height: 25px;
-    right:100px;
+     bottom:10%;
+    width: 20%;
+    height: 15%;
+    right:10%;
     position: absolute;
     font-size: 18px;
+    font-family: sans-serif;
+    opacity: 0;
+    background: #4caf50;
+    border-radius: 10px;
 }
 
 
 #close{
+    height: 15%;
+    width: 20%;
     font-size: 18px;
-     bottom:25px;
-    height: 25px;
-    left:150px;
+    font-family: sans-serif;
+     bottom:10%;
+    
+    left:10%;
     position: absolute;
+    opacity: 0;
+    background: rgb(235, 239, 227);
+    border-radius: 10px;
 }
 
-
-.projectdiv{
-   width: 30%;
-height : 30%;
-text-align: center;
-color : Black;
-font-Size:25px;   
-
-display:  inline-block;
-position:relative;
-border:solid black;
-margin: 1%;
-overflow:hidden;
-border-radius: 5px;
-cursor:pointer;
-z-index: 100;
-grid-area:projectcontainer;    
+#Projectname{
+    opacity: 0;
     
 }
 
-.projectdiv:hover{
-    transform: scale(1.05);
-    box-shadow: 5px 5px 5px 5px #8d8282;
+
+@keyframes show{
+    0% {opacity:0;}
+    100% { opacity:1;}}
+
+
+
+@keyframes growing {
+    0% { height:0%;width: 0%; opacity:0;}
+    100% { height: 50%; width: 30%;}
 }
-
-
-
 
 
 
@@ -394,9 +344,13 @@ grid-area:projectcontainer;
      
 }
     
-
-    
-   
+ 
+    @keyframes dragover{
+        0%{}
+        
+        100%{width: 101%;}
+        
+    }
     
     
 
