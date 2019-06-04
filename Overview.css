@@ -58,11 +58,8 @@ body{ }
 
 
 #InprogressContainer{
-    background: rgba(255, 252, 164, 0.48);
-    border-bottom: outset yellow 2px;
-    border-left:outset yellow 2px;
-    border-right:outset yellow 2px;
-   display: block;
+    background: rgba(128, 128, 128, 0.45);
+    display: block;
     left:45%;
    
 
@@ -70,11 +67,8 @@ body{ }
 
 
 #upcommingContainer{
-    background: rgba(250, 156, 156, 0.6);
-    border-bottom: outset red 2px;
-    border-left:outset red 2px;
-    border-right:outset red 2px;
-      display: block;
+    background: rgba(128, 128, 128, 0.45);
+    display: block;
     left:15%;
  
     
@@ -82,10 +76,7 @@ body{ }
 
 
 #CompletedContainer{
-    background: rgba(157, 206, 167, 0.58);
-    border-bottom: outset green 2px;
-    border-left:outset green 2px;
-    border-right:outset green 2px;
+    background: rgba(128, 128, 128, 0.45);
     display: block;
     left:75%;
   
@@ -118,6 +109,7 @@ body{ }
     font-family: sans-serif;
     text-decoration: underline;
     padding: 2%;
+    
   }
 
 
@@ -129,13 +121,35 @@ body{ }
    margin: 4%;
     border-radius: 15px;
     overflow-y: auto;
-  
-}
+  }
 
 .usUserProjecttab.div:hover{transform: scale(1.1);}
 
-.projectFeed{
+
+.projectdiv{
+    width: 90%;
+    height : 30%;
+    text-align: center;
+    color : Black;
+    font-Size:25px; 
+    font-family: sans-serif;
+    display: block;
+    background:  rgb(255, 252, 164);
+    margin: 2%;
+    overflow:hidden;
+    border-radius: 5px;
+    cursor:pointer;
+    z-index: 100;
+    grid-area:projectcontainer;    
     
+}
+
+.projectdiv:hover{
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px 5px #8d8282;
+}
+
+.projectFeed{
     display: flex;
     background: rgba(255, 179, 51, 0.56);
     right:2%;
@@ -147,8 +161,7 @@ body{ }
     border:solid #c78a23;
     padding: 3%;
     box-shadow: 1px -5px 12px 1px rgba(136, 136, 136, 0.56);
-  
-        }
+  }
 
 #feedover {
     display: flex;
@@ -211,7 +224,7 @@ body{ }
     bottom: 18%;
     height: auto;
     position: absolute;
-    /*background: red;*/
+   
     padding:10px;
     border-radius: 4px;
     z-index: 100;
@@ -235,6 +248,7 @@ transform: scale(1.05);
     position: absolute;
     top:5%;
     left: 3.5%;
+    transition: 0.3s all;  
 }
 
 #createbutton1{
@@ -247,8 +261,7 @@ transform: scale(1.05);
 
 
 .Newprojectbutton:hover{
-animation: nextarrow 1s forwards;
-   
+transform: scale(1.15);
 }
 
 
@@ -257,88 +270,65 @@ animation: nextarrow 1s forwards;
 
 
 #projectform{
-    
-    width: 500px;
-    height: 200px;
+    min-width: 0%;
+    min-height: 0%;
     position: absolute;
     font-size: 20px;
     font-family: sans-serif;
-    border: solid rgba(0, 0, 255, 0.51) 5px;
+    border-radius: 15px;
+    border: solid black 1px;
     top:20%;
-    right:50%;
+    left:15%;
     border-radius: 5px;
-    background: rgba(255, 165, 0, 0.41);
+    background: #cbf866;
     display: block;
     text-align: center;
     z-index: 100;
     padding: 20px;
-     transition: all 4s ease-out;
-    
-}
+  }
 
 
-#type{
-    position: absolute;
-    left:200px;  
-    height:25px; 
-}
+
 
 
 #send{
-     bottom:25px;
-    height: 25px;
+     bottom:10%;
+    height: 13%;
     right:100px;
     position: absolute;
     font-size: 18px;
     font-family: sans-serif;
+    opacity: 0;
 }
 
 
 #close{
     font-size: 18px;
     font-family: sans-serif;
-     bottom:25px;
-    height: 25px;
+     bottom:10%;
+    height: 13%;
     left:150px;
     position: absolute;
+    opacity: 0;
 }
 
-
-.projectdiv{
-    width: 90%;
-    height : 30%;
-    text-align: center;
-    color : Black;
-    font-Size:25px; 
-    font-family: sans-serif;
-
-    display: block;
-    
-    border:solid black;
-    margin: 2%;
-    overflow:hidden;
-    border-radius: 5px;
-    cursor:pointer;
-    z-index: 100;
-    grid-area:projectcontainer;    
+#Projectname{
+    opacity: 0;
     
 }
 
-.projectdiv:hover{
-    transform: scale(1.05);
-    box-shadow: 5px 5px 5px 5px #8d8282;
+
+@keyframes show{
+    0% {opacity:0;}
+    100% { opacity:1;}}
+
+
+
+@keyframes growing {
+    0% { height:0%;width: 0%; opacity:0;}
+    100% { height: 50%; width: 30%;}
 }
 
-
-
-@keyframes formapear{
-    0%{ width: 0%; height: 0% }
-    10%{width: 20%; height: 20% }
-    40%{width: 40%; height: 40% }
-    60%{width: 60%; height: 60% }
-    80%{width: 80%; height: 80% }
-    100%{width: 100%; height: 100% }
-}
 
 
 @keyframes nextarrow {
@@ -350,8 +340,7 @@ animation: nextarrow 1s forwards;
      
 }
     
-
-    
+ 
    
     
     

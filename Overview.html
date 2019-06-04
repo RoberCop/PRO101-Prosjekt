@@ -20,6 +20,9 @@
       
             <div class="projectcontainer" id="projectcontainer1" >
                 
+                
+                 
+                
                 <div class="NewProjectButton" id="NewProjectButton1" type="button" name="answer" value="Show form" onclick="showform()">
            <div id="Buttontxt"><p>New Project</p></div>
            <img class="createbutton" id="createbutton1" src="img/taskbutton.png">
@@ -32,14 +35,14 @@
 
             <!--THE inprogresstab div start-->
             <div class="overlayTab"id="InProgress">
-               
+              
 
                 <div class="overcontainer"id="InprogressContainer">
                     <div class="headerContainer" id="HCinprog">
                     <p>Projects in Progress:</p>
                     </div>
 
-                    <div class="UserProjecttab" id="IpProject1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <div class="UserProjecttab" id="IpProject1" ondrop="drop(event)" ondragover="dragoverImp()" ondragleave="dragleaveImp()"></div>
                     
                 </div>
             </div>
@@ -55,7 +58,7 @@
                         <p>Projects Upcomming:</p>
                     </div>
 
-                    <div class="UserProjecttab" id="UpProject1" draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ></div>
+                    <div class="UserProjecttab" id="UpProject1" draggable="true" ondrop="drop(event)" ondragover="dragoverUpc()" ondragleave="dragleaveUpc()" ></div>
                   
                 </div>
 
@@ -72,7 +75,7 @@
                         <p>Projects Completed:</p>
                     </div>
 
-                    <div class="UserProjecttab" id="CompProject1" draggable="true"  ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <div class="UserProjecttab" id="CompProject1" draggable="true"  ondrop="drop(event)" ondragover="dragoverComp()" ondragleave="dragleaveComp()"></div>
                     
                 </div>
             </div>
@@ -88,11 +91,8 @@
                 <br>
                 Project Name: <br>  
                 <input type="text" name="Project Name" id="Projectname"><br>
-                Chose its Phase:<br>
-                <select id="type" name="In progress/ Upcoming">
-                    <option value="inprogress">In Progress</option>
-                        <option value="upcoming">Upcoming</option>
-                </select>
+               <p id="warning1"></p>
+               
                 <br>
                 <input type="button" id="send" name="answer" value="Create Project" onclick="createProject()">
                 
