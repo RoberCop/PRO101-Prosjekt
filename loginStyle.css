@@ -290,14 +290,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #reasons-modal .modal-content {
-	display: flex;
+	display: block;
 	flex-direction: column;
 	border-radius: 10px;
 	height: 80%;
 	width: 60%;
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
-	background: transparent;
+	background: #cfd8dc;
 }
 
 #reasons-modal .modal-content::-webkit-scrollbar {
@@ -308,7 +308,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #reasons-modal .modal-content::-webkit-scrollbar-thumb {
 	background: linear-gradient(70deg, #cfd8dc, #eceff1);
-	border-radius: 50px;
+	border-radius: 0 10px 10px 0;
 }
 
 #reasons-modal section {
@@ -321,31 +321,32 @@ h1, h2, h3, h4, h5, h6 {
 	padding-bottom: 1.1rem;
 }
 
-.mod-sec-1 {
-
-	border-radius: 10px 10px 0 0;
-	background: #eceff1; 
-	
+#close-modal3 {
+	margin-right: 1rem;
+	margin-bottom: 0.3rem;
 }
-
-.mod-sec-1 img {
+.mod-sec img {
 	height: 15rem;
-
 }
 
-.mod-sec-2 {	
+#mod-sec-1 {
+	background: #eceff1; 	
+}
+
+#mod-sec-2 {	
 	background: #cfd8dc; 
 }
-.mod-sec-2 img {
-	height: 15rem;
-}
 
-.mod-sec-3 {
+#mod-sec-3 {
 	background: #eceff1; 
 }
 
-.mod-sec-3 img {
-	height: 15rem;
+#mod-sec-4 {
+	background: #cfd8dc;
+}
+
+#mod-sec-5 {
+	background: #eceff1;
 }
 
 .text-modal {
@@ -429,6 +430,14 @@ h1, h2, h3, h4, h5, h6 {
 	}
 .modal-content {
 	width: 80%;
+}
+.img-div {
+	display: none;
+}
+#reasons-modal .text-modal {
+	text-align: center;
+	margin: auto;
+	width: 100%;
 }
 }
 
