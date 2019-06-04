@@ -21,14 +21,11 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    border: 1px red solid;
     height: 25vh;
-
 }
 #setStatus-div * {
     margin: 5px;
     cursor: pointer;
-    border: red 1px solid;
 }
 
 .edit-container #doneNode:hover {
