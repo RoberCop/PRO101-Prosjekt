@@ -32,6 +32,9 @@ var toggleEditCont = false;
 var delPromptActive = false;
 var canEdit = false;
 
+// false when overview, true when treeview
+var currentPage = false;
+
 // Sets transition on elements
 header.style.transition = "0.1s transform ease-in-out";
 largeInput.style.transition = "0.1s transform ease-in-out";
@@ -46,6 +49,8 @@ moveQuickAdd(false);
 
 document.onkeydown = function(event)
 {
+	if (!currentPage) return;
+
 	var keyPressed = event.which || event.keycode;
 
 	if (delPromptActive)
@@ -115,6 +120,9 @@ document.onkeydown = function(event)
 
 quickAddInput.onkeydown = function(event)
 {
+
+	if (!currentPage) return;
+
 	var keyPressed = event.which || event.keycode;
 
 	// enter tries to make a new node
@@ -142,7 +150,7 @@ function quickNodeAdd()
 // Trigger events based on mouseXY
 document.onmousemove = (e) => {
 
-	if (delPromptActive) return;
+	if ( (delPromptActive) || (!currentPage) ) return;
 
 	// Gets mouse position
 	const mouseY = e.clientY;
@@ -332,9 +340,17 @@ function drawNodes(level)
 // draw all the nodes from root the first time
 function firstDraw()
 {
+	const currentChilds = root.childs[root.selectedChild];
+
+	for (i in displayArray)
+	{
+		displayArray[i] = [];
+		treeDiv.children[i].innerHTML = "";
+	}
+
 	// fill in the displayArray from root
-	for (childIndex in root.childs)
-		root.childs[childIndex].addToDisplay(childIndex == root.selectedChild);
+	for (childIndex in currentChilds.childs)
+		currentChilds.childs[childIndex].addToDisplay(childIndex == currentChilds.selectedChild);
 
 	drawNodes(0);
 }
@@ -343,15 +359,4 @@ function firstDraw()
 for (let i = 0; i < 10; i++)
 	newTreeStack();
 
-const root = getTreeData();
-root.selectedChild = 0;
-
 createWarningElem();
-
-var selectedNode;
-
-// todo: add process of getting user from login
-var activeUser = usersArr[0];
-document.getElementById("userText").innerText = "Username: " + activeUser.username;
-
-firstDraw();

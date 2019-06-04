@@ -1,4 +1,4 @@
-function baseNodeClass(level, parent, index, projectTitle)
+function baseNodeClass(level, parent, index)
 {
 	var self = this;
 	var owner;
@@ -54,7 +54,7 @@ function baseNodeClass(level, parent, index, projectTitle)
 			displayArray[i] = [];
 
 		this.parent.addToDisplay(true, true);
-		drawNodes(level - 1);
+		drawNodes(level - 2);
 	}
 
 	this.recAccessCheck = function()

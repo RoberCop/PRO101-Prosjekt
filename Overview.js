@@ -14,14 +14,13 @@ const inProgressPro=[];
 const upcomPro=[];
 const completePro=[];
 
-
+const root = new baseNodeClass(0, null, 0);
 
 window.setInterval(function() 
 {
     var elem = document.getElementById('Feedup1');
     elem.scrollTop = elem.scrollHeight;
 }, 5000);
-
 
 form.style.display="none";
 function showform() 
@@ -31,24 +30,25 @@ function showform()
     document.getElementById("Projectname").style.animation="show 0.3s forwards";
     form.style.display = "block";
     form.style.animation = 'growing 0.2s forwards';
- }
-
+}
 
 function closeform()
 {
     form.style.display = "none";
 }
 
-
-
-function createProject() 
+function createProject(projectName, skipAddBtn) 
 {
-    var warning=document.getElementById("warning1");
-    var namepro= document.getElementById("Projectname").value;
-  
+    var warning = document.getElementById("warning1");
+    var namepro;
+
+	if (projectName !== undefined)
+		namepro = projectName;
+	else
+		namepro = document.getElementById("Projectname").value;
+	
     if(namepro == "")
     {
-
         warning.innerHTML="You must write something!";
         createProject();
     }
@@ -58,7 +58,9 @@ function createProject()
 
 	const projectIndex = root.childs.length;
 	root.newProject(activeUser);
-	root.childs[projectIndex].newAddBtnRec();
+
+	if (!skipAddBtn)
+		root.childs[projectIndex].newAddBtnRec();
 
     divpro.innerHTML=namepro;
     divpro.className="projectdiv";
@@ -72,6 +74,12 @@ function createProject()
 		wrapper.style.display = "none";
 		section.style.display = "grid";
 		editContainer.style.display = "flex";
+		currentPage = true;
+
+		if (root.childs[projectIndex].childs.length !== 1)
+			selectedNode = root.childs[projectIndex].childs[0];
+
+		firstDraw();
 	}
 
     feedpro.className="feeddiv";
@@ -80,18 +88,13 @@ function createProject()
     feedpro.innerHTML="User Crated Project"+"<br />"+ " Called: "+namepro +"<br />"+" In the: "+ upcs+ " section.";
 
     document.getElementById("Feedup1").appendChild(feedpro);
-
     document.getElementById("UpProject1").appendChild(divpro);
  
     namepro={name:namepro}
     upcomPro.push(namepro);
-    
-    
-    closeform();   
-   
-    
-}
 
+    closeform();   
+}
 
 /* drag and drop funtion START*/
 
@@ -100,18 +103,15 @@ function dragleaveComp()
     compCon.style.transform="scale(1.0)"; 
 }
 
-
 function dragleaveImp()
 {
     impCon.style.transform="scale(1.0)"; 
 }
 
-
 function dragleaveUpc()
 {
     upcCon.style.transform="scale(1.0)";     
 }
-
 
 function dragoverComp(ev)
 {
@@ -131,10 +131,8 @@ function dragoverUpc(ev)
     upcCon.style.transform="scale(1.05)"; 
 }
 
-
 function allowDrop(ev) 
 {
-   
     if(event.target.className == "projectdiv")
     {
         return;
@@ -142,7 +140,6 @@ function allowDrop(ev)
      
     ev.preventDefault(); 
 }
-
 
 function drag(ev)
 {
@@ -193,8 +190,6 @@ function drop(ev)
         }
     }
     
-    
-    
     if(ev.target.id == "UpProject1")
     {
         data={name:data};
@@ -231,9 +226,6 @@ function drop(ev)
             }
         }
     }
-    
-    
-    
     
     if(ev.target.id == "IpProject1")
     {
@@ -272,8 +264,6 @@ function drop(ev)
             }
         }
     }
-    
-  
 }
 // Drop funtion end
 
@@ -283,7 +273,6 @@ function dragoverdel()
     allowDrop(event);
     deldrop(ev);   
 }
-
 
 function deldrop(ev)
 {
@@ -300,18 +289,11 @@ function deldrop(ev)
     feedpro.innerHTML="User DELETED Project"+"<br />"+ " Called: "+data;
 }
 
-
 /* drag and drop funtion END*/
+getTreeData();
+root.newAddBtnRec();
+var selectedNode = root.childs[0].childs[0];
 
-
-
-
-
-    
-    
-    
-
-
-
-
-
+// todo: add process of getting user from login
+var activeUser = usersArr[0];
+document.getElementById("userText").innerText = "Username: " + activeUser.username;

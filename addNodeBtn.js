@@ -7,7 +7,7 @@ function addNodeBtnClass(level, parent, index)
 
 	this.addToDisplay = function(isSelected)
 	{
-		displayArray[level - 1].push(this);
+		displayArray[level - 2].push(this);
 	}
 
 	this.setLevelRec = function()

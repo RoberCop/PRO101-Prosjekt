@@ -160,7 +160,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		const statusColor = (newStatus > 0) ? ( (newStatus > 1) ? "#0F0" : "#FF0" ) : "#F00";
 		this.domElem.style.borderColor = statusColor;
 
-		if (level > 2) this.parent.setStatusRec();
+		if (level > 3) this.parent.setStatusRec();
 	}
 
 	this.setStatusRec = function()
