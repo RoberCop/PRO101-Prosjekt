@@ -174,14 +174,12 @@ function moveQuickAdd(downOrUp)
 	if (downOrUp)
 	{
 		header.style.transform = "translate(0%, 0%)";
-		backBtn.style.transform = "translate(0, 0%)";
 		largeInput.style.transform = "translate(-50%, 100%)";
 		quickAddInput.focus();
 		toggleQuickAdd = true;
 	}
 	else {
 		header.style.transform = "translate(0%, -100%)";
-		backBtn.style.transform = "translate(0, -100%)";
 		largeInput.style.transform = "translate(-50%, -100%)";
 		toggleQuickAdd = false;
 	}

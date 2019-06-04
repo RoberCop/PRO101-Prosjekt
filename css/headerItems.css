@@ -19,22 +19,19 @@ header > .navBox, .userDiv {
 }
 
 
-header i {
-    color: #c9c9c9;
-    transition: 0.2s linear;
+#backArrow {
+    color: #656565;
+    transition: 0.4s all ease;
 }
 
-header i:hover {
-    transform: scale(1.2);
-    color: #6d6d6d;
+#backArrow:hover {
+    transform: scale(1.15);
+    color: #282828;
+    cursor: pointer;
 }
 
 #top-logo {
     width: 10%;
-}
-
-#backBtn:hover {
-    cursor: pointer;
 }
 
 header > #largeInput {
