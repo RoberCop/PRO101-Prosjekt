@@ -30,7 +30,9 @@
 
 .edit-container #doneNode:hover {
     color: #4caf50;
-}.edit-container #inProgNode:hover {
+}
+
+.edit-container #inProgNode:hover {
     color: #ffeb3b;
 }
 

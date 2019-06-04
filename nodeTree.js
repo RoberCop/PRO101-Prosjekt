@@ -41,6 +41,15 @@ treeDiv.style.transition = "0.1s all ease-in-out";
 // Sets position on elements
 editContainer.style.left = "0";
 editContainer.style.transform = "translate(-100%, 0%)";
+
+/* Add img on container to see where it is
+const editCntrImg = document.createElement('div');
+editContainer.setAttribute('class', 'editCntrImg');
+editContainer.appendChild(editCntrImg);
+editCntrImg.style.height = '100%';
+editCntrImg.style.width = '10%';
+*/
+
 moveQuickAdd(false);
 
 document.onkeydown = function(event)
@@ -200,7 +209,7 @@ function moveEditContainer(rightOrleft)
 		toggleEditCont = true;
 	}
 	else {
-		editContainer.style.transform = "translate(-105%, 0%)";
+		editContainer.style.transform = "translate(-100%, 0%)";
 		editContainer.style.borderRight = "10px solid #9c9c9c";
 
 		treeDiv.style.width = "95vw";
