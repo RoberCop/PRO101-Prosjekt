@@ -2,10 +2,32 @@
 .edit-container {
     position: absolute;
     display: flex;
+    border: 1px solid;
     border-radius: 4px;
-    margin-left: 20px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-right: none;
+    margin-left: 0px;
     padding: 1rem;
-    background: #ffb333;
+    background-color: #ffb333;
+    z-index: 10;
+}
+
+.editCntrImg {
+    background-color: #4e4f50;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    position: absolute;
+    display: flex;
+    justifyConten: center;
+    alignItem: center;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+    zIndex: -10;
+    height: 70%;
+    width: 1.5%;
+    transition: 0.1s all ease-in-out;
 }
 
 .flex-center {

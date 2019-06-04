@@ -42,13 +42,10 @@ treeDiv.style.transition = "0.1s all ease-in-out";
 editContainer.style.left = "0";
 editContainer.style.transform = "translate(-100%, 0%)";
 
-/* Add img on container to see where it is
+/* Add img on the left to see where the sideMenu is*/
 const editCntrImg = document.createElement('div');
-editContainer.setAttribute('class', 'editCntrImg');
-editContainer.appendChild(editCntrImg);
-editCntrImg.style.height = '100%';
-editCntrImg.style.width = '10%';
-*/
+editCntrImg.setAttribute('class', 'editCntrImg');
+body.appendChild(editCntrImg);
 
 moveQuickAdd(false);
 
@@ -205,12 +202,15 @@ function moveEditContainer(rightOrleft)
 		editContainer.style.borderRight = "1px solid";
 		treeDiv.style.width = "80vw";
 
+		editCntrImg.style.transform = "translate(0%, -50%)";
+
 		nodeTitle.focus();
 		toggleEditCont = true;
 	}
 	else {
 		editContainer.style.transform = "translate(-100%, 0%)";
-		editContainer.style.borderRight = "10px solid #9c9c9c";
+		//editContainer.style.borderRight = "10px solid #9c9c9c";
+		editCntrImg.style.transform = "translate(0%, -50%)";
 
 		treeDiv.style.width = "95vw";
 		toggleEditCont = false;
