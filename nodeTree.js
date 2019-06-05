@@ -3,9 +3,10 @@ const treeDiv = document.getElementById("treeDiv");
 const html = document.querySelector("html");
 const body = document.querySelector("body");
 const header = document.querySelector("header");
+const section = document.getElementById("gridSection");
 
 const largeInput = document.querySelector("#largeInput");
-const menuBar = document.querySelector("#menuBar");
+const backBtn = document.querySelector("#backBtn");
 const editContainer = document.querySelector("#editContainer");
 const shader = document.createElement("div");
 shader.setAttribute("class", "shader");
@@ -24,27 +25,39 @@ const saveNode = document.getElementById("saveNode");
 const quickAddInput = document.getElementById("quickAddInput");
 const quickAddPlus = document.getElementById("quickAddPlus");
 
+const nodeOwnerSelect = document.getElementById("ownerSelect");
+
 // used toggle elements on and off with keyboard shortcuts
 var toggleQuickAdd = false;
 var toggleEditCont = false;
 
 var delPromptActive = false;
-var canEdit = false;
+var canEdit = true;
+
+// false when overview, true when treeview
+var currentPage = false;
 
 // Sets transition on elements
 header.style.transition = "0.1s transform ease-in-out";
 largeInput.style.transition = "0.1s transform ease-in-out";
-menuBar.style.transition = "0.1s transform ease-in-out";
+backBtn.style.transition = "0.1s transform ease-in-out";
 editContainer.style.transition = "0.1s all ease-in-out";
 treeDiv.style.transition = "0.1s all ease-in-out";
 
 // Sets position on elements
 editContainer.style.left = "0";
 editContainer.style.transform = "translate(-100%, 0%)";
+
+const editCntrImg = document.createElement('div');
+editCntrImg.setAttribute('class', 'editCntrImg');
+section.appendChild(editCntrImg);
+
 moveQuickAdd(false);
 
 document.onkeydown = function(event)
 {
+	if (!currentPage) return;
+
 	var keyPressed = event.which || event.keycode;
 
 	if (delPromptActive)
@@ -84,28 +97,28 @@ document.onkeydown = function(event)
 	// arrow left
 	if ( (keyPressed === 37) && (selectedNode.indexOfThis > 0) )
 	{
-		selectedParent.getChilds()[selectedParent.selectedChild - 1].setSelectedNode();
+		selectedParent.childs[selectedParent.selectedChild - 1].setSelectedNode();
 		return;
 	}
 
 	// arrow right
-	if ( (keyPressed === 39) && (selectedNode.indexOfThis < (selectedParent.getChilds().length - 2)) )
+	if ( (keyPressed === 39) && (selectedNode.indexOfThis < (selectedParent.childs.length - 2)) )
 	{
-		selectedParent.getChilds()[selectedParent.selectedChild + 1].setSelectedNode();
+		selectedParent.childs[selectedParent.selectedChild + 1].setSelectedNode();
 		return;
 	}
 
 	// arrow up
-	if ( (keyPressed === 38) && (selectedNode.getChilds().length > 1) )
+	if ( (keyPressed === 38) && (selectedNode.childs.length > 1) )
 	{
 		const childIndex = (selectedNode.selectedChild > -1) ? selectedNode.selectedChild : 0;
 
-		selectedNode.getChilds()[childIndex].setSelectedNode();
+		selectedNode.childs[childIndex].setSelectedNode();
 		return;
 	}
 
 	// arrow down
-	if ( (keyPressed === 40) && (selectedNode.getLevel() > 1) )
+	if ( (keyPressed === 40) && (selectedNode.level > 2) )
 	{
 		selectedParent.setSelectedNode();
 		return;
@@ -114,6 +127,9 @@ document.onkeydown = function(event)
 
 quickAddInput.onkeydown = function(event)
 {
+
+	if (!currentPage) return;
+
 	var keyPressed = event.which || event.keycode;
 
 	// enter tries to make a new node
@@ -131,8 +147,8 @@ function quickNodeAdd()
 	// always check if input is empty first, then also check authorization
 	if ( (quickAddInput.value == "") || (!selectedNode.recAccessCheck()) ) return;
 
-	selectedNode.getChilds().splice(selectedNode.getChilds().length - 1, 1);
-	selectedNode.newChild(quickAddInput.value, "Sample Desc");
+	selectedNode.childs.splice(selectedNode.childs.length - 1, 1);
+	selectedNode.newChild(quickAddInput.value, "Sample Desc", activeUser);
 	quickAddInput.value = "";
 	selectedNode.newAddBtnRec();
 	selectedNode.draw();
@@ -141,14 +157,14 @@ function quickNodeAdd()
 // Trigger events based on mouseXY
 document.onmousemove = (e) => {
 
-	if (delPromptActive) return;
+	if ( (delPromptActive) || (!currentPage) ) return;
 
 	// Gets mouse position
 	const mouseY = e.clientY;
 	const mouseX = e.clientX;
 
 	// Opens header
-	if ( (mouseY < 100) && (!toggleQuickAdd) )
+	if ( (mouseY < 70) && (!toggleQuickAdd) )
 	{
 		moveQuickAdd(true);
 		return;
@@ -160,10 +176,6 @@ document.onmousemove = (e) => {
 		moveQuickAdd(false);
 	}
 
-	// Hides the editContainer
-	if ( (mouseX > 350) && (toggleEditCont) )
-		moveEditContainer(false);
-
 	// Opens the editContainer
 	if ( (mouseX < 100) && (mouseY > 200) && (!toggleEditCont) )
 		moveEditContainer(true);
@@ -174,14 +186,12 @@ function moveQuickAdd(downOrUp)
 	if (downOrUp)
 	{
 		header.style.transform = "translate(0%, 0%)";
-		menuBar.style.transform = "translate(0, 0%)";
 		largeInput.style.transform = "translate(-50%, 100%)";
 		quickAddInput.focus();
 		toggleQuickAdd = true;
 	}
 	else {
 		header.style.transform = "translate(0%, -100%)";
-		menuBar.style.transform = "translate(0, 100%)";
 		largeInput.style.transform = "translate(-50%, -100%)";
 		toggleQuickAdd = false;
 	}
@@ -202,12 +212,19 @@ function moveEditContainer(rightOrleft)
 		toggleEditCont = true;
 	}
 	else {
-		editContainer.style.transform = "translate(-105%, 0%)";
-		editContainer.style.borderRight = "10px solid #9c9c9c";
+		editContainer.style.transform = "translate(-100%, 0%)";
+		//editContainer.style.borderRight = "10px solid #9c9c9c";
 
 		treeDiv.style.width = "95vw";
 		toggleEditCont = false;
 	}
+}
+
+backBtn.onclick = function()
+{
+	gridSection.style.display = "none";
+	editContainer.style.display = "none";
+	wrapper.style.display = "block";
 }
 
 // Warning element
@@ -309,6 +326,7 @@ function newTreeStack()
 	// Each stack holds divs representing nodes
 	const stackDiv = document.createElement("div");
 	stackDiv.className = "treeStack";
+	stackDiv.style.position = "relative";
 
 	treeDiv.appendChild(stackDiv);
 }
@@ -330,29 +348,34 @@ function drawNodes(level)
 // draw all the nodes from root the first time
 function firstDraw()
 {
+	const currentChilds = root.childs[root.selectedChild];
+
+	for (i in displayArray)
+	{
+		displayArray[i] = [];
+		treeDiv.children[i].innerHTML = "";
+	}
+
 	// fill in the displayArray from root
-	for (childIndex in root.getChilds())
-		root.getChilds()[childIndex].addToDisplay(childIndex == root.selectedChild);
+	for (childIndex in currentChilds.childs)
+		currentChilds.childs[childIndex].addToDisplay(childIndex == currentChilds.selectedChild);
 
 	drawNodes(0);
+}
+
+function makeUserSelection()
+{
+	for (let i = 0; i < usersArr.length; i++)
+	{
+		let newOption = document.createElement("option");
+		newOption.innerText = usersArr[i].username;
+		nodeOwnerSelect.appendChild(newOption);
+	}
 }
 
 // Makes 10 stacks to start with
 for (let i = 0; i < 10; i++)
 	newTreeStack();
 
-const root = getTreeData();
-root.newAddBtnRec();
-root.selectedChild = 0;
-
 createWarningElem();
-
-var selectedNode = root.getChilds()[0];
-selectedNode.domBody.style.backgroundColor = "#CCFFCC";
-selectedNode.refreshNodeEdit();
-
-// todo: add process of getting user from login
-var activeUser = usersArr[0];
-document.getElementById("userText").innerText = "Username: " + activeUser.username;
-
-firstDraw();
+makeUserSelection();

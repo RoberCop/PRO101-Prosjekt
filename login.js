@@ -84,15 +84,23 @@ function checkLogIn()
         {
             if(password == usersArr[i].password)
             {
-                console.log("success");
-                window.location.assign('Overview.html');
-                return;
+				redirectToOverview(i);
             }
         } 
     }
+
+	if (username == sessionStorage.getItem("newUsername"))
+		if (password == sessionStorage.getItem("newPassword"))
+			redirectToOverview(-1);
     
     loginErr();
     return;
+}
+
+function redirectToOverview(userIndex)
+{
+	sessionStorage.setItem("loginIndex", userIndex.toString());
+	window.location.assign('nodeTree.html');
 }
 
 //Alert login error
@@ -102,16 +110,12 @@ function loginErr()
     signinPass.nextElementSibling.innerHTML = "Wrong username or password"
     signinName.className = 'wrong-input';
     signinPass.className = 'wrong-input';
-    }
+}
 
 function storeUser() 
 {
-    usersArr.push(
-        {
-        username: signupName.value,
-        password: password2.value
-    });
-    console.log(usersArr);
+	sessionStorage.setItem("newUsername", signupName.value);
+	sessionStorage.setItem("newPassword", password2.value);
 };
 
 

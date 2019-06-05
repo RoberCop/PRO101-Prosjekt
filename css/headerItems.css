@@ -1,0 +1,89 @@
+/*-- Style for elements in header ---*/
+header > .navBox, .userDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0px solid;
+    border-radius: 50%;
+    margin: 0 35px 0 35px;
+    padding: 10px;
+    height: 50px;
+    width: 50px;
+}
+
+.navBox
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#backArrow {
+    color: #656565;
+    transition: 0.4s all ease;
+}
+
+#backArrow:hover {
+    transform: scale(1.15);
+    color: #282828;
+    cursor: pointer;
+}
+
+#top-logo {
+    width: 10%;
+}
+
+header > #largeInput {
+    position: absolute;
+    transform: translate(-50%, 100%);
+    left: 50%;
+    height: 100px;
+    width: 40%;
+    border: 2px #c9c9c9 solid;
+    border-radius: 5px;
+    font-size: 70px;
+    display: grid;
+    grid-template-areas: "input icon";
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 0.1fr;
+    align-items: center;
+    justify-content: space-between;
+    background: #c9c9c9;
+}
+
+#largeInput > input {
+    grid-area: input;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    border-radius: 5px 0 0 5px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size: 50px;
+    border: none;
+}
+
+#largeInput > .addIcon {
+    grid-area: icon;
+    height: 100%;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(0%, 0);
+    margin: 0 20px 0 0;
+}
+
+.addIcon > i {
+    font-size: 80%;
+    margin-left: 1rem;
+    color: #ffb333;
+}
+
+.addIcon i:hover {
+    cursor: pointer;
+    animation: addBtnAnim 0.7s linear 0s infinite alternate;
+    color: #4caf50;
+}

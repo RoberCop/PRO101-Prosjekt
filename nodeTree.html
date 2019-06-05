@@ -1,18 +1,112 @@
+<html>
+
 <head>
 	<title>ThinkTask</title>
-	<link rel="stylesheet" type="text/css" href="nodeTreeStyle.css">
+	<link rel="stylesheet" type="text/css" href="css/mainGridStyle.css">
+	<link rel="stylesheet" type="text/css" href="css/headerItems.css">
+	<link rel="stylesheet" type="text/css" href="css/chatStyle.css">
+	<link rel="stylesheet" type="text/css" href="css/editNodesCntr.css">
+	<link rel="stylesheet" type="text/css" href="css/treeStructure.css">
+	<link rel="stylesheet" type="text/css" href="css/treeNodes.css">
+	<link rel="stylesheet" type="text/css" href="css/warningModule.css">
+	<link rel="stylesheet" type="text/css" href="css/colors.css">
+	<link rel="stylesheet" type="text/css" href="css/keyframes.css">
 	<link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,500,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
 		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="Overview.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 
 <body>
-	<section class="gridSection">
-		<header>
-			<div class="navBox" id="menuBar">
-				<div id="back-btn">
-					<i class="fas fa-arrow-left fa-4x"></i>
+	<div id="wrapper"> 
+
+		<div class="griddiv" id="griddiv1">
+			<!--THE projectcontainer div start-->
+			<div class="projectcontainer" id="projectcontainer1" >
+				<div class="NewProjectButton" id="NewProjectButton1" type="button" name="answer" value="Show form" onclick="showform()">
+					<img class="createbutton" id="createbutton1" src="img/plusbutto%20.png">
+
 				</div>
+
+				<img class="Trashcanimg" id="Deleteproject1" src="img/trash_can.png" ondrop="deldrop(event)" ondragover="dragoverdel()" ondragleave="dragleaveDel()">
+
+				<!--THE inprogresstab div start-->
+				<div class="overlayTab"id="InProgress">
+
+					<div class="overcontainer"id="InprogressContainer">
+						<div class="headerContainer" id="HCinprog">
+							<p>Projects in Progress:</p>
+						</div>
+
+						<div class="UserProjecttab" id="IpProject1" ondrop="drop(event)" ondragover="dragoverImp()" ondragleave="dragleaveImp()"></div>
+
+					</div>
+				</div><!--THE inprogresstab div end-->	  
+
+				<!--THE upcomingtab div start-->
+				<div class="overlayTab"id="UpComing">
+
+					<div class="overcontainer"id="upcommingContainer">
+						<div class="headerContainer" id="HCupcoming">
+							<p>Projects Upcomming:</p>
+						</div>
+
+						<div class="UserProjecttab" id="UpProject1" draggable="true" ondrop="drop(event)" ondragover="dragoverUpc()" ondragleave="dragleaveUpc()" ></div>
+
+					</div>
+				</div>
+				<!--THE upcomingtab div end-->
+
+				<!--THE Completedtab div start-->
+				<div class="overlayTab"id="Completed">
+
+					<div class="overcontainer"id="CompletedContainer" >
+						<div class="headerContainer" id="HCcompleted">
+							<p>Projects Completed:</p>
+						</div>
+
+						<div class="UserProjecttab" id="CompProject1" draggable="true"  ondrop="drop(event)" ondragover="dragoverComp()" ondragleave="dragleaveComp()"></div>
+					</div>
+				</div><!--THE Completedtab div end-->
+			   
+				<div class="form" id="projectform">
+					<form id="formPro">
+						<div id="formHeader">Create your Project</div>
+
+						<br>
+						Project Name:
+						<br>
+
+						<input type="text" name="Project Name" id="Projectname">
+						<br>
+						<p id="warning1"></p>
+
+						<br>
+
+						<input type="button" id="send" name="answer" value="Create" onclick="createProject()">
+						<input type="button" id="close" name="answer" value="Cancel" onclick="closeform()">
+					</form>  
+				</div>
+
+			</div><!--THE projectcontainer div end-->
+			
+			<div class="ProjectFeed" id="ProjectFeed1">
+				<p id="feedover">Project Feed</p>
+				<div class=FeedUpdate id="Feedup1"></div>
+			</div>   
+
+		</div><!--griddivEnd-->
+	</div><!--wrapperEnd-->
+
+	<!-- PAGE BORDER -->
+
+	<section style="display: none;" class="gridSection" id="gridSection">
+		<header>
+			<div class="navBox" id="backBtn">
+				<i id="backArrow" class="fas fa-arrow-left fa-2x"></i>
 			</div>
 			<img id="top-logo" src="img/61353474_306219480311384_5531898451110920192_n.png" alt="">
 			<div class="userDiv">
@@ -32,6 +126,7 @@
 			<div id="treeDiv">
 			</div>
 		</main>
+
 		<div id="chat-window">
 			<header class="chat-header">
 				<h2 class="chat-title">Chat</h2>
@@ -41,7 +136,6 @@
 			</div>
 			<input id="chat-input" type="text">
 			<i id="chat-send" class="fas fa-paper-plane"></i>
-			
 		</div>
 
 		<footer>
@@ -49,23 +143,30 @@
 		</footer>
 	</section>
 
-	<div class="edit-container flex-center" id="editContainer">
+	<div style="display: none;" class="edit-container flex-center" id="editContainer">
 		<div id="title-div" class="flex-center">
 			<h3>Title:</h3>
-			<input id="nodeTitle" placeholder="Project title" type="text">
+			<input id="nodeTitle" placeholder="Task title" type="text">
 		</div>
 
 		<div id="descript-div" class="flex-center">
 			<h3>Description:</h3>
-			<textarea id="nodeDesc" placeholder="Give your project a description"></textarea>
+			<textarea id="nodeDesc" placeholder="Give your task a description"></textarea>
 		</div>
 
-		<div id="setStatus-div">
-			<div class="task-status"><h2>Task status:</h2></div>
-			<div id="doneNode"><p>Done <i class="fas fa-check"></i></p></div>
-			<div id="inProgNode"><p>In Progress <i class="fas fa-angle-double-right" ></i></p></div>
-			<div id="notDoneNode"><p>Not Done <i class="fas fa-times" ></i></p></div>
+		<div id="setStatus-div" class="flex-center">
+			<h2>Task status:</h2>
+			<p id="doneNode">Done<i class="fas fa-check"></i></p>
+			<p id="inProgNode">In Progress<i class="fas fa-angle-double-right" ></i></p>
+			<p id="notDoneNode">Not Done<i class="fas fa-times" ></i></p>
 		 </div>
+		 <div id="set-user-div">
+			 <h2>Assign user:</h2>
+			 <select id="ownerSelect">
+			</select>
+		 </div>
+
+		
 
 		<div class="edit-btn-container">
 			<img id="deleteNode" class="red" src="img/icons/rubbish-bin.svg">
@@ -74,12 +175,14 @@
 		</div>
 	</div>
 
+	<script src="baseNode.js"></script>
 	<script src="treeNodes.js"></script>
-	<script src="projectData.js"></script>
-	<script src="users.js"></script>
 	<script src="addNodeBtn.js"></script>
-	<script src="nodeTree.js"></script>
+	<script src="users.js"></script>
 	<script src="chat.js"></script>
+	<script src="projectData.js"></script>
+	<script src="Overview.js"></script>
+	<script src="nodeTree.js"></script>
 </body>
 
 </html>

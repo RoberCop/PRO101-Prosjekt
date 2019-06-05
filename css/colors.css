@@ -1,0 +1,16 @@
+/*--- Style for keeping track of colors of the project ---*/
+/*--- Fill inn colors here, and then you can add the color as a class on a specific element ---*/
+.green
+{
+    background-color: #4caf50;
+}
+
+.red
+{
+    background-color: #d46464;
+}
+
+.orange
+{
+    background-color: #ffb333;
+}
