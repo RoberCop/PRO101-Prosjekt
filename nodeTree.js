@@ -48,6 +48,8 @@ treeDiv.style.transition = "0.1s all ease-in-out";
 editContainer.style.left = "0";
 editContainer.style.transform = "translate(-100%, 0%)";
 
+
+
 /* Add img on the left to see where the sideMenu is*/
 const editCntrImg = document.createElement('div');
 editCntrImg.setAttribute('class', 'editCntrImg');
@@ -176,7 +178,7 @@ document.onmousemove = (e) => {
 	{
 		moveQuickAdd(false);
 	}
-
+/*
 	// Hides the editContainer
 	if ( (mouseX > 350) && (toggleEditCont) )
 		moveEditContainer(false);
@@ -184,6 +186,7 @@ document.onmousemove = (e) => {
 	// Opens the editContainer
 	if ( (mouseX < 100) && (mouseY > 200) && (!toggleEditCont) )
 		moveEditContainer(true);
+ */
 }
 
 function moveQuickAdd(downOrUp)

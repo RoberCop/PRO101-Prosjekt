@@ -222,6 +222,11 @@ function treeNodeClass(level, parent, index, title, desc, status)
 	//this.domElem.style.borderColor = "red";
 	//this.domElem.style.boxShadow = "0px 0px 4px";
 
+	//Open sideMenu onclick
+	this.domElem.addEventListener('click', () => {
+		console.log('click');
+		moveEditContainer(true);
+	})
 	this.domHeader.className = "node-header";
 
 	this.childH4.innerText = title;
