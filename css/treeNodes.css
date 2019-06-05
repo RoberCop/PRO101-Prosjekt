@@ -50,3 +50,7 @@
     color: #4caf50;
     animation: addBtnAnim 0.7s linear 0s infinite alternate;
 }
+
+.addButton {
+	filter: drop-shadow(3px 3px 3px #333);
+}

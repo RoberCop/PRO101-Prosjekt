@@ -8,6 +8,7 @@ function addNodeBtnClass(level, parent, index)
 	this.addToDisplay = function(isSelected)
 	{
 		displayArray[this.level - 2].push(this);
+		this.domElem.style.color = (this.parent.recAccessCheck()) ? "#0F0" : "#F00";
 	}
 
 	this.setLevelRec = function()

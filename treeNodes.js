@@ -99,6 +99,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 	{
 		nodeTitle.value = title;
 		nodeDesc.value = desc;
+		nodeOwnerSelect.selectedIndex = usersArr.indexOf(user).toString();
 
 		if (this.recAccessCheck())
 		{
@@ -111,6 +112,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 				canEdit = true;
 				nodeTitle.disabled = false;
 				nodeDesc.disabled = false;
+				nodeOwnerSelect.disabled = false;
 			}
 
 			const visState = (this.childs.length === 1) ? "visible" : "hidden";
@@ -132,6 +134,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 			canEdit = false;
 			nodeTitle.disabled = true;
 			nodeDesc.disabled = true;
+			nodeOwnerSelect.disabled = true;
 		}
 	}
 
@@ -145,6 +148,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		this.childH4.innerText = (title != "") ? title : "-No Title-";
 
 		this.refreshNodeEdit();
+		this.draw();
 	}
 
 	this.tryStatus = function(newStatus)
