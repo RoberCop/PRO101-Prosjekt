@@ -41,6 +41,8 @@ function createProject(projectName, skipAddBtn)
 {
     var warning = document.getElementById("warning1");
     var namepro;
+	var classget = document.getElementsByClassName("projectdiv");
+	
 
 	if (projectName !== undefined)
 		namepro = projectName;
@@ -52,7 +54,16 @@ function createProject(projectName, skipAddBtn)
         warning.innerHTML="You must write something!";
         createProject();
     }
-    
+	
+	for (var i=0; i < classget.length; i++) 
+        {
+            if (classget[i].id === namepro) 
+            {
+                warning.innerHTML="Its already a Project named: "+namepro;
+                createProject();
+            }
+        }
+	
     var divpro = document.createElement("div");
     var feedpro = document.createElement("div");
 
