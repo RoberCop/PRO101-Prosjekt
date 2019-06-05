@@ -84,8 +84,8 @@ function checkLogIn()
         {
             if(password == usersArr[i].password)
             {
-                console.log("success");
-                window.location.assign('Overview.html');
+				sessionStorage.setItem("loginIndex", i.toString());
+                window.location.assign('nodeTree.html');
                 return;
             }
         } 

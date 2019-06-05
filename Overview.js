@@ -307,6 +307,9 @@ getTreeData();
 root.childs[0].newAddBtnRec();
 var selectedNode = root.childs[0].childs[0];
 
-// todo: add process of getting user from login
-var activeUser = usersArr[0];
+const userIndex = Number(sessionStorage.getItem("loginIndex"));
+if (userIndex === NaN)
+	window.location.assign("index.html");
+
+var activeUser = usersArr[userIndex];
 document.getElementById("userText").innerText = "Username: " + activeUser.username;
