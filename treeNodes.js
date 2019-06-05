@@ -159,8 +159,8 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		// setting to newStatus allowed
 		this.status = newStatus;
 
-		const statusColor = (newStatus > 0) ? ( (newStatus > 1) ? "#92e668" : "#fff13b" ) : "#ff706d";
-		this.domBody.style.backgroundColor = statusColor;
+		const statusColor = (newStatus > 0) ? ( (newStatus > 1) ? "#4caf50" : "#fff13b" ) : "#ff4e44";
+		this.domElem.style.borderColor = statusColor;
 
 		if (this.level > 2) this.parent.setStatusRec();
 	}
@@ -217,9 +217,9 @@ function treeNodeClass(level, parent, index, title, desc, status)
 	this.domElem.className = "treeNode";
 	this.domElem.draggable = "true";
 
-	this.domElem.style.borderWidth = "2px";
+	this.domElem.style.borderWidth = "10px";
 	this.domElem.style.borderStyle = "solid";
-	this.domElem.style.borderColor = "red";
+	this.domElem.style.borderColor = "#ff4e44";
 	this.domElem.style.boxShadow = "0px 0px 4px";
 
 	this.domHeader.className = "node-header";
