@@ -20,7 +20,7 @@ window.setInterval(function()
 {
     var elem = document.getElementById('Feedup1');
     elem.scrollTop = elem.scrollHeight;
-}, 5000);
+}, 1000);
 
 form.style.display="none";
 function showform() 
@@ -281,7 +281,7 @@ function drop(ev)
 // Drop funtion end
 
 
-function dragoverdel()
+function dragoverdel(ev)
 {
     allowDrop(event);
     deldrop(ev);   
@@ -296,10 +296,41 @@ function deldrop(ev)
     var data=ev.dataTransfer.getData("Text");
     var el = document.getElementById(data);
     el.parentNode.removeChild(el);
-    
+    feedpro.style.backgroundColor = "red";
     document.getElementById("Feedup1").appendChild(feedpro);   
     
     feedpro.innerHTML="User DELETED Project"+"<br />"+ " Called: "+data;
+	
+		for (var i=0; i < completePro.length; i++) 
+        {
+            if (completePro[i].name === el.id) 
+                {
+                    completePro.splice(i, 1); 
+                    console.log(el.id+"was DELETED from array completePro");
+                    console.table(completePro);
+                }
+        }
+        
+        for (var i=0; i < upcomPro.length; i++) 
+        {
+            if (upcomPro[i].name === el.id) 
+            {
+                upcomPro.splice(i, 1);  
+                console.log(el.id+"was DELETED from array upcomPro");
+                console.table(upcomPro);  
+            }
+		}	
+		for (var i=0; i < inProgressPro.length; i++) 
+        {
+            if (inProgressPro[i].name === el.id) 
+            {
+                upcomPro.splice(i, 1);  
+                console.log(el.id+"was DELETED from array upcomPro");
+                console.table(upcomPro);  
+            }
+		
+		}	
+	
 }
 
 /* drag and drop funtion END*/
