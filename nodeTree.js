@@ -50,10 +50,11 @@ editContainer.style.transform = "translate(-100%, 0%)";
 
 
 
-/* Add img on the left to see where the sideMenu is*/
+/* Add img on the left to see where the sideMenu is
 const editCntrImg = document.createElement('div');
 editCntrImg.setAttribute('class', 'editCntrImg');
 body.appendChild(editCntrImg);
+ */
 
 moveQuickAdd(false);
 
@@ -178,6 +179,7 @@ document.onmousemove = (e) => {
 	{
 		moveQuickAdd(false);
 	}
+
 	// Hides the editContainer
 	if ( (mouseX > 350) && (toggleEditCont) )
 		moveEditContainer(false);
@@ -185,6 +187,7 @@ document.onmousemove = (e) => {
 	// Opens the editContainer
 	if ( (mouseX < 100) && (mouseY > 200) && (!toggleEditCont) )
 		moveEditContainer(true);
+
 }
 
 function moveQuickAdd(downOrUp)
@@ -214,15 +217,12 @@ function moveEditContainer(rightOrleft)
 		editContainer.style.borderRight = "1px solid";
 		treeDiv.style.width = "80vw";
 
-		editCntrImg.style.transform = "translate(0%, -50%)";
-
 		nodeTitle.focus();
 		toggleEditCont = true;
 	}
 	else {
 		editContainer.style.transform = "translate(-100%, 0%)";
 		//editContainer.style.borderRight = "10px solid #9c9c9c";
-		editCntrImg.style.transform = "translate(0%, -50%)";
 
 		treeDiv.style.width = "95vw";
 		toggleEditCont = false;

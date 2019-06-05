@@ -37,6 +37,8 @@ function addNodeBtnClass(level, parent, index)
 		self.parent.selectedChild = self.indexOfThis++;
 		self.parent.childs.push(self);
 
+		moveEditContainer(true);
+
 		self.draw();
 	}
 
