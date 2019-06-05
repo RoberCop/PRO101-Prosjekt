@@ -178,7 +178,6 @@ document.onmousemove = (e) => {
 	{
 		moveQuickAdd(false);
 	}
-/*
 	// Hides the editContainer
 	if ( (mouseX > 350) && (toggleEditCont) )
 		moveEditContainer(false);
@@ -186,7 +185,6 @@ document.onmousemove = (e) => {
 	// Opens the editContainer
 	if ( (mouseX < 100) && (mouseY > 200) && (!toggleEditCont) )
 		moveEditContainer(true);
- */
 }
 
 function moveQuickAdd(downOrUp)
