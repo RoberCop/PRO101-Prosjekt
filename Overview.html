@@ -6,30 +6,42 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
     </head>
     
-    <header id= "header1"><img id="headerlogo"src="Pictures/logo.png" >
+    <header id= "header1">
     </header>
     
     <body>
     <div id="wrapper"> 
+        
+        
     <div class="griddiv" id="griddiv1">
      
         
         <!--THE projectcontainer div start-->
       
             <div class="projectcontainer" id="projectcontainer1" >
+                
+                
+        
+                
+                <div class="NewProjectButton" id="NewProjectButton1" type="button" name="answer" value="Show form" onclick="showform()">
+           <img class="createbutton" id="createbutton1" src="img/plusbutto%20.png">
+       
+         </div>
+       
+        
+       
+    <img class="Trashcanimg" id="Deleteproject1" src="img/trash_can.png" ondrop="deldrop(event)" ondragover="dragoverdel()" ondragleave="dragleaveDel()">
 
             <!--THE inprogresstab div start-->
             <div class="overlayTab"id="InProgress">
-                <div class="overlayHeader"id="InprogressHeader" type="button" name="answer" value="Show imp" onclick="showimp()" draggable="true" ondragover="opentabdragImp()" ondragleave="dragleaveImp()">
-                    <p Class="headercont">In Progress</p>
-                </div>
+              
 
                 <div class="overcontainer"id="InprogressContainer">
                     <div class="headerContainer" id="HCinprog">
                     <p>Projects in Progress:</p>
                     </div>
 
-                    <div class="UserProjecttab" id="IpProject1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <div class="UserProjecttab" id="IpProject1" ondrop="drop(event)" ondragover="dragoverImp()" ondragleave="dragleaveImp()"></div>
                     
                 </div>
             </div>
@@ -38,15 +50,14 @@
 
             <!--THE upcomingtab div start-->          
             <div class="overlayTab"id="UpComing">
-                <div class="overlayHeader"id="UpcomingHeader"type="button" name="answer" value="Show upc" onclick="showupc()" draggable="true" ondragover="opentabdragcUpc()" ondragleave="dragleaveUpc()">              <p Class="headercont">UpComing</p>
-                </div>
+                
 
                 <div class="overcontainer"id="upcommingContainer">
                     <div class="headerContainer" id="HCupcoming">
                         <p>Projects Upcomming:</p>
                     </div>
 
-                    <div class="UserProjecttab" id="UpProject1" draggable="true" ondrop="drop(event)" ondragover="allowDrop(event)" ></div>
+                    <div class="UserProjecttab" id="UpProject1" draggable="true" ondrop="drop(event)" ondragover="dragoverUpc()" ondragleave="dragleaveUpc()" ></div>
                   
                 </div>
 
@@ -56,30 +67,20 @@
 
             <!--THE Completedtab div start-->
             <div class="overlayTab"id="Completed">
-                <div class="overlayHeader"id="CompletedHeader"type="button" name="answer" value="Show comp" onclick="showcomp()" draggable="true" ondragover="opentabdragComp()" ondragleave="dragleaveComp()" >  <p Class="headercont">Completed</p>
-                </div>
+                
 
                 <div class="overcontainer"id="CompletedContainer" >
                     <div class="headerContainer" id="HCcompleted">
                         <p>Projects Completed:</p>
                     </div>
 
-                    <div class="UserProjecttab" id="CompProject1" draggable="true"  ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <div class="UserProjecttab" id="CompProject1" draggable="true"  ondrop="drop(event)" ondragover="dragoverComp()" ondragleave="dragleaveComp()"></div>
                     
                 </div>
             </div>
             <!--THE Completedtab div end-->
 
-     <div class="NewProjectButton" id="NewProjectButton1" type="button" name="answer" value="Show form" onclick="showform()">
-            <div id="Buttontxt"><p>New Project</p></div>
-         <div id="Buttoncircle">
-            <div id="line1"></div>
-            <div id="line2"></div>
-         </div>
-        </div>
-        
-       
-    <img class="Trashcanimg" id="Deleteproject1" src="Pictures/trash_can.png" ondrop="deldrop(event)" ondragover="dragoverdel()" ondragleave="dragleaveDel()">
+ 
      
          
    
@@ -89,13 +90,10 @@
                 <br>
                 Project Name: <br>  
                 <input type="text" name="Project Name" id="Projectname"><br>
-                Chose its Phase:<br>
-                <select id="type" name="In progress/ Upcoming">
-                    <option value="inprogress">In Progress</option>
-                        <option value="upcoming">Upcoming</option>
-                </select>
+               <p id="warning1"></p>
+               
                 <br>
-                <input type="button" id="send" name="answer" value="Create Project" onclick="createProject()">
+                <input type="button" id="send" name="answer" value="Create" onclick="createProject()">
                 
                 <input type="button" id="close" name="answer" value="Cancel" onclick="closeform()">
             </form>  
@@ -108,9 +106,9 @@
                 
          </div>         
         <!--THE projectcontainer div end-->
-        
+    
            <div class="ProjectFeed" id="ProjectFeed1">
-            <p id="feedover">Project Feed:</p>
+            <p id="feedover">Project Feed</p>
             <div class=FeedUpdate id="Feedup1"></div>
            </div>   
                 
