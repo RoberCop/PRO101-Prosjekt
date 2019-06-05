@@ -87,9 +87,16 @@ function createProject(projectName, skipAddBtn)
 		editContainer.style.display = "flex";
 		currentPage = true;
 
+		moveEditContainer(false);
+
 		if (root.childs[projectIndex].childs.length !== 1)
 		{
 			root.childs[projectIndex].childs[0].setSelectedNode();
+			editCanOpen = true;
+		}
+		else {
+			editCanOpen = false;
+			selectedNode = undefined;
 		}
 
 		firstDraw();

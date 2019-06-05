@@ -43,6 +43,10 @@ function treeNodeClass(level, parent, index, title, desc, status)
 
 		if (isSelected)
 		{
+			// style for when node is selected, excluding styling of domBody backgroundColor
+			this.domHeader.style.backgroundColor = "#FFCA28";
+			this.childH4.style.color = "#000";
+
 			// if selected, call this same method on child objects
 			for (childIndex in this.childs)
 				this.childs[childIndex].addToDisplay(childIndex == this.selectedChild, false);
@@ -50,6 +54,8 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		else {
 			// style for when node is unselected
 			this.domBody.style.backgroundColor = "#FFF";
+			this.domHeader.style.backgroundColor = "#888";
+			this.childH4.style.color = "#FFF";
 		}
 	}
 
@@ -78,27 +84,29 @@ function treeNodeClass(level, parent, index, title, desc, status)
 
 		if (!(selectedNode instanceof baseNodeClass))
 		{
-			selectedNode.domBody.style.backgroundColor = "#CCFFCC";
+			selectedNode.domBody.style.backgroundColor = "#AFA";
 
-			if (this.level > 2)
+			if (this.level > 1)
 			{
 				this.parent.selectedChild = newIndex;
-				this.parent.refreshNodeEdit();
+				selectedNode.refreshNodeEdit();
 			}
 		}
+		else selectedNode = undefined;
 
+		moveEditContainer(false);
 		this.draw();
 	}
 
 	this.setSelectedNode = function()
 	{
-		selectedNode.domBody.style.backgroundColor = "#CCCCFF";
+		selectedNode.domBody.style.backgroundColor = "#AAF";
 
 		// set this node to be the selected child, on the parent
 		this.parent.selectedChild = this.indexOfThis;
 		selectedNode = this;
 
-		this.domBody.style.backgroundColor = "#CCFFCC";
+		this.domBody.style.backgroundColor = "#AFA";
 
 		this.draw();
 	}
@@ -229,7 +237,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 	this.domElem.className = "treeNode";
 	this.domElem.draggable = "true";
 
-	this.domElem.style.borderWidth = "10px";
+	this.domElem.style.borderWidth = "5px";
 	this.domElem.style.borderStyle = "solid";
 	this.domElem.style.borderColor = "#ff4e44";
 	this.domElem.style.boxShadow = "0px 0px 4px";
@@ -313,7 +321,7 @@ function dragDropMove(targetObj)
 			newIndex = 0;
 		else {
 			// in this case, backgroundColor needs changes, not else
-			currentDragObj.parent.childs[newIndex].domBody.style.backgroundColor = "#CCCCFF";
+			currentDragObj.parent.childs[newIndex].domBody.style.backgroundColor = "#AAF";
 		}
 
 		currentDragObj.parent.selectedChild = newIndex;
@@ -344,12 +352,12 @@ function dragDropMove(targetObj)
 	
 	currentDragObj.parent.selectedChild = currentDragObj.indexOfThis;
 
-	selectedNode.domBody.style.backgroundColor = "#CCCCFF";
+	selectedNode.domBody.style.backgroundColor = "#AAF";
 
 	// set the dragged node to the new selectedNode
 	selectedNode = currentDragObj;
 
-	currentDragObj.domBody.style.backgroundColor = "#CCCCFF";
+	currentDragObj.domBody.style.backgroundColor = "#AAF";
 
 	currentDragObj.setLevelRec();
 	currentDragObj.draw();

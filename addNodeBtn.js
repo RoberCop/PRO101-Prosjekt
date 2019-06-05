@@ -7,6 +7,8 @@ function addNodeBtnClass(level, parent, index)
 
 	this.addToDisplay = function(isSelected)
 	{
+		if (displayArray[this.level - 2] === undefined) return;
+
 		displayArray[this.level - 2].push(this);
 		this.domElem.style.color = (this.parent.recAccessCheck()) ? "#0F0" : "#F00";
 	}
@@ -26,17 +28,17 @@ function addNodeBtnClass(level, parent, index)
 	{
 		if (!self.parent.recAccessCheck()) return;
 
-		if (!(selectedNode instanceof baseNodeClass))
-			selectedNode.domBody.style.backgroundColor = "#CCF";
+		if (selectedNode !== undefined)
+			if (!(selectedNode instanceof baseNodeClass))
+				selectedNode.domBody.style.backgroundColor = "#AAF";
 
 		self.parent.childs.splice(self.indexOfThis, 1);
 		self.parent.newChild("Sample Text", "Sample Desc", activeUser);
 
-		if (this.level !== 7)
-			self.parent.childs[self.indexOfThis].newAddBtnRec();
+		self.parent.childs[self.indexOfThis].newAddBtnRec();
 
 		selectedNode = self.parent.childs[self.indexOfThis];
-		selectedNode.domBody.style.backgroundColor = "#CFC";
+		selectedNode.domBody.style.backgroundColor = "#AFA";
 
 		self.parent.selectedChild = self.indexOfThis++;
 		self.parent.childs.push(self);
