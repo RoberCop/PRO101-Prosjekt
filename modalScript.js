@@ -4,11 +4,11 @@
 var signupModal = document.getElementById('signup-modal');
 var signedUp = document.getElementById('signed-up-modal')
 var signUpForm = document.getElementById('signup-form');
-var easterEgg = document.getElementById("reasons-modal");
+var descModal = document.getElementById("reasons-modal");
 
 //Get open modal button
 var modalBtn = document.getElementById('signup-btn');
-var easterEggBtn = document.getElementById('why-btn');
+var descModalBtn = document.getElementById('why-btn');
 
 // Get close button
 var closeBtn = document.getElementById('close-modal');
@@ -17,7 +17,7 @@ var closeBtn3 = document.getElementById('close-modal3');
 
 //Listen for open click
 modalBtn.addEventListener('click', openModal);
-easterEggBtn.addEventListener('click', openModal3);
+descModalBtn.addEventListener('click', openModal3);
 
 //Listen for close click
 closeBtn.addEventListener('click', closeModal);
@@ -33,7 +33,7 @@ function openModal() {
 }
 
 function openModal3() {
-    easterEgg.style.display = 'flex';
+    descModal.style.display = 'flex';
 }
 //Function to close modal
 function closeModal() {
@@ -47,15 +47,15 @@ function closeModal2() {
 }
 
 function closeModal3() {
-    easterEgg.style.display = 'none';
+    descModal.style.display = 'none';
 }
 
 //Function for window click close
 function outsideClick(e) {
-    if (e.target == signupModal || e.target == signedUp || e.target == easterEgg) {
+    if (e.target == signupModal || e.target == signedUp || e.target == descModal) {
         signupModal.style.display = 'none';
         signedUp.style.display = 'none';
-        easterEgg.style.display = 'none';
+        descModal.style.display = 'none';
         signUpForm.reset();
         removeMessage();
     }
