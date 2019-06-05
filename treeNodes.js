@@ -26,7 +26,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		const preLength = this.childs.length;
 
 		// create a child based on own variables, and current arguments
-		this.childs.push(new treeNodeClass(level + 1, this, preLength, newTitle, newDesc, 0));
+		this.childs.push(new treeNodeClass(this.level + 1, this, preLength, newTitle, newDesc, 0));
 
 		if (newUser !== undefined) this.childs[preLength].setUser(newUser);
 
@@ -36,7 +36,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 	this.addToDisplay = function(isSelected, isStart)
 	{
 		// add this node to the displayArray if its not the starter object
-		if (!isStart) displayArray[level - 2].push(this);
+		if (!isStart) displayArray[this.level - 2].push(this);
 
 		const statusColor = (this.status > 0) ? ( (this.status > 1) ? "#0F0" : "#FF0" ) : "#F00";
 		this.domElem.style.borderColor = statusColor;
@@ -140,9 +140,11 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		title = nodeTitle.value;
 		desc = nodeDesc.value;
 
+		this.setUser(usersArr[nodeOwnerSelect.selectedIndex]);
+
 		this.childH4.innerText = (title != "") ? title : "-No Title-";
 
-		// todo: add saving of owner
+		this.refreshNodeEdit();
 	}
 
 	this.tryStatus = function(newStatus)
@@ -160,7 +162,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		const statusColor = (newStatus > 0) ? ( (newStatus > 1) ? "#0F0" : "#FF0" ) : "#F00";
 		this.domElem.style.borderColor = statusColor;
 
-		if (level > 3) this.parent.setStatusRec();
+		if (this.level > 2) this.parent.setStatusRec();
 	}
 
 	this.setStatusRec = function()
@@ -281,7 +283,7 @@ function dragDropMove(targetObj)
 	 * still allow moving unselected nodes upwards,
 	 * using 'and' condition makes moving nodes backwards allowed
 	 */
-	if ( (targetObj.getLevel() > currentDragObj.getLevel()) && 
+	if ( (targetObj.level > currentDragObj.level) && 
 		 (currentDragObj.parent.selectedChild === currentDragObj.indexOfThis) ) return;
 
 	// only allow if user has access to both nodes
@@ -334,7 +336,7 @@ function dragDropMove(targetObj)
 	// set the dragged node to the new selectedNode
 	selectedNode = currentDragObj;
 	currentDragObj.domBody.style.backgroundColor = "#CCFFCC";
-
+	
 	currentDragObj.setLevelRec();
 	currentDragObj.draw();
 	currentDragObj.setStatus(currentDragObj.status);

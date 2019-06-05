@@ -77,7 +77,9 @@ function createProject(projectName, skipAddBtn)
 		currentPage = true;
 
 		if (root.childs[projectIndex].childs.length !== 1)
-			selectedNode = root.childs[projectIndex].childs[0];
+		{
+			root.childs[projectIndex].childs[0].setSelectedNode();
+		}
 
 		firstDraw();
 	}
@@ -291,7 +293,7 @@ function deldrop(ev)
 
 /* drag and drop funtion END*/
 getTreeData();
-root.newAddBtnRec();
+root.childs[0].newAddBtnRec();
 var selectedNode = root.childs[0].childs[0];
 
 // todo: add process of getting user from login

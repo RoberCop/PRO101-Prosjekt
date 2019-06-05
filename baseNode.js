@@ -4,6 +4,7 @@ function baseNodeClass(level, parent, index)
 	var owner;
 
 	this.childs = [];
+	this.level = level
 	this.parent = parent;
 	this.indexOfThis = index;
 	this.selectedChild = -1;
@@ -14,7 +15,7 @@ function baseNodeClass(level, parent, index)
 		const preLength = this.childs.length;
 
 		// create a child based on own variables, and current arguments
-		this.childs.push(new treeNodeClass(level + 1, this, preLength, newTitle, newDesc, 0));
+		this.childs.push(new treeNodeClass(this.level + 1, this, preLength, newTitle, newDesc, 0));
 
 		if (newUser !== undefined) this.childs[preLength].setUser(newUser);
 	}
@@ -24,7 +25,7 @@ function baseNodeClass(level, parent, index)
 		const preLength = this.childs.length;
 
 		// create a child based on own variables, and current arguments
-		this.childs.push(new baseNodeClass(level + 1, this, preLength));
+		this.childs.push(new baseNodeClass(this.level + 1, this, preLength));
 
 		if (newUser !== undefined) this.childs[preLength].setOwner(newUser);
 	}
@@ -32,13 +33,13 @@ function baseNodeClass(level, parent, index)
 	this.newAddBtnRec = function()
 	{
 		for (child of this.childs)
-			if (child.selectedChild !== undefined)
+			if (child instanceof treeNodeClass)
 				child.newAddBtnRec();
 
 		const checkIndex = this.childs.length - 1;
 
-		if ( (checkIndex === -1) || (this.childs[checkIndex].selectedChild !== undefined) )
-			this.childs.push(new addNodeBtnClass(level + 1, this, this.childs.length));
+		if ( (checkIndex === -1) || (this.childs[checkIndex] instanceof treeNodeClass) )
+			this.childs.push(new addNodeBtnClass(this.level + 1, this, this.childs.length));
 	}
 
 	this.addToDisplay = function(isSelected, isStart)
@@ -50,11 +51,11 @@ function baseNodeClass(level, parent, index)
 
 	this.draw = function()
 	{
-		for (let i = level - 1; i < displayArray.length; i++)
+		for (let i = this.level - 2; i < displayArray.length; i++)
 			displayArray[i] = [];
 
 		this.parent.addToDisplay(true, true);
-		drawNodes(level - 2);
+		drawNodes(this.level - 2);
 	}
 
 	this.recAccessCheck = function()
@@ -65,18 +66,13 @@ function baseNodeClass(level, parent, index)
 
 	this.setLevelRec = function()
 	{
-		level = this.parent.getLevel() + 1;
+		this.level = this.parent.level + 1;
 
-		for (child of this.childs) this.child.setLevelRec();
+		for (child of this.childs) child.setLevelRec();
 	}
 
 	this.setOwner = function(newOwner)
 	{
 		owner = newOwner;
-	}
-
-	this.getLevel = function()
-	{
-		return level;
 	}
 }

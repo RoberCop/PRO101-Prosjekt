@@ -25,12 +25,14 @@ const saveNode = document.getElementById("saveNode");
 const quickAddInput = document.getElementById("quickAddInput");
 const quickAddPlus = document.getElementById("quickAddPlus");
 
+const nodeOwnerSelect = document.getElementById("ownerSelect");
+
 // used toggle elements on and off with keyboard shortcuts
 var toggleQuickAdd = false;
 var toggleEditCont = false;
 
 var delPromptActive = false;
-var canEdit = false;
+var canEdit = true;
 
 // false when overview, true when treeview
 var currentPage = false;
@@ -111,7 +113,7 @@ document.onkeydown = function(event)
 	}
 
 	// arrow down
-	if ( (keyPressed === 40) && (selectedNode.getLevel() > 1) )
+	if ( (keyPressed === 40) && (selectedNode.level > 2) )
 	{
 		selectedParent.setSelectedNode();
 		return;
@@ -355,8 +357,19 @@ function firstDraw()
 	drawNodes(0);
 }
 
+function makeUserSelection()
+{
+	for (let i = 0; i < usersArr.length; i++)
+	{
+		let newOption = document.createElement("option");
+		newOption.innerText = usersArr[i].username;
+		nodeOwnerSelect.appendChild(newOption);
+	}
+}
+
 // Makes 10 stacks to start with
 for (let i = 0; i < 10; i++)
 	newTreeStack();
 
 createWarningElem();
+makeUserSelection();
