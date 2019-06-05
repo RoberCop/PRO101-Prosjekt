@@ -48,13 +48,9 @@ treeDiv.style.transition = "0.1s all ease-in-out";
 editContainer.style.left = "0";
 editContainer.style.transform = "translate(-100%, 0%)";
 
-
-
-/* Add img on the left to see where the sideMenu is
 const editCntrImg = document.createElement('div');
 editCntrImg.setAttribute('class', 'editCntrImg');
-body.appendChild(editCntrImg);
- */
+section.appendChild(editCntrImg);
 
 moveQuickAdd(false);
 
@@ -152,7 +148,7 @@ function quickNodeAdd()
 	if ( (quickAddInput.value == "") || (!selectedNode.recAccessCheck()) ) return;
 
 	selectedNode.childs.splice(selectedNode.childs.length - 1, 1);
-	selectedNode.newChild(quickAddInput.value, "Sample Desc");
+	selectedNode.newChild(quickAddInput.value, "Sample Desc", activeUser);
 	quickAddInput.value = "";
 	selectedNode.newAddBtnRec();
 	selectedNode.draw();
@@ -167,23 +163,18 @@ document.onmousemove = (e) => {
 	const mouseY = e.clientY;
 	const mouseX = e.clientX;
 
-	// Closes header
-	if ( (mouseY < 200) && (!toggleQuickAdd) )
+	// Opens header
+	if ( (mouseY < 70) && (!toggleQuickAdd) )
 	{
 		moveQuickAdd(true);
 		return;
 	}
 
-	// Opens header
+	// Closes header
 	if ( (mouseY > 270) && (toggleQuickAdd) )
 	{
 		moveQuickAdd(false);
 	}
-/*
-	// Hides the editContainer
-	if ( (mouseX > 350) && (toggleEditCont) )
-		moveEditContainer(false);
-*/
 
 	// Opens the editContainer
 	if ( (mouseX < 100) && (mouseY > 200) && (!toggleEditCont) )

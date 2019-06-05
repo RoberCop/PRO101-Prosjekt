@@ -29,8 +29,10 @@ function addNodeBtnClass(level, parent, index)
 		selectedNode.domBody.style.backgroundColor = "#CCF";
 
 		self.parent.childs.splice(self.indexOfThis, 1);
-		self.parent.newChild("Sample Text", "Sample Desc");
-		self.parent.childs[self.indexOfThis].newAddBtnRec();
+		self.parent.newChild("Sample Text", "Sample Desc", activeUser);
+
+		if (this.level !== 7)
+			self.parent.childs[self.indexOfThis].newAddBtnRec();
 
 		selectedNode = self.parent.childs[self.indexOfThis];
 		selectedNode.domBody.style.backgroundColor = "#CFC";
