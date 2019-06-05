@@ -1,10 +1,22 @@
 var usersArr = [
     {
-        username: "kek",
-        password: "kek"
+        username: "Johrob",
+        password: "johrob"
     },
     {
-        username: "rob",
-        password: "rob"
+        username: "Hanmaa",
+        password: "hanmaa"
+    },
+    {
+        username: "Hovlas",
+        password: "hovlas"
+    },
+    {
+        username: "Batena",
+        password: "batena"
+    },
+    {
+        username: "Petlas",
+        password: "petlas"
     }
 ];
