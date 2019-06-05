@@ -197,9 +197,11 @@ function moveQuickAdd(downOrUp)
 	}
 }
 
-function moveEditContainer(rightOrleft)
+function moveEditContainer(rightOrLeft)
 {
-	if (rightOrleft)
+	if (selectedNode === undefined) rightOrLeft = false;
+
+	if (rightOrLeft)
 	{
 		// only update content when opening or refreshing, to reduce processing of authorization
 		selectedNode.refreshNodeEdit();

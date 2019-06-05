@@ -68,17 +68,25 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		if (this.parent.childs[newIndex] instanceof addNodeBtnClass) newIndex--;
 
 		if (newIndex < 0)
-
 			selectedNode = this.parent;
 		else {
-			this.parent.setStatusRec();
+			if (this.level > 2)
+				this.parent.setStatusRec();
+
 			selectedNode = this.parent.childs[newIndex];
 		}
 
-		this.parent.selectedChild = newIndex;
-		selectedNode.domBody.style.backgroundColor = "#CCFFCC";
+		if (!(selectedNode instanceof baseNodeClass))
+		{
+			selectedNode.domBody.style.backgroundColor = "#CCFFCC";
 
-		this.parent.refreshNodeEdit();
+			if (this.level > 2)
+			{
+				this.parent.selectedChild = newIndex;
+				this.parent.refreshNodeEdit();
+			}
+		}
+
 		this.draw();
 	}
 

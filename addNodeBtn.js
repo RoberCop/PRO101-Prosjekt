@@ -26,7 +26,8 @@ function addNodeBtnClass(level, parent, index)
 	{
 		if (!self.parent.recAccessCheck()) return;
 
-		selectedNode.domBody.style.backgroundColor = "#CCF";
+		if (!(selectedNode instanceof baseNodeClass))
+			selectedNode.domBody.style.backgroundColor = "#CCF";
 
 		self.parent.childs.splice(self.indexOfThis, 1);
 		self.parent.newChild("Sample Text", "Sample Desc", activeUser);
