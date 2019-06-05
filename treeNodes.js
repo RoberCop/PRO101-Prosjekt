@@ -217,10 +217,10 @@ function treeNodeClass(level, parent, index, title, desc, status)
 	this.domElem.className = "treeNode";
 	this.domElem.draggable = "true";
 
-	//this.domElem.style.borderWidth = "2px";
-	//this.domElem.style.borderStyle = "solid";
-	//this.domElem.style.borderColor = "red";
-	//this.domElem.style.boxShadow = "0px 0px 4px";
+	this.domElem.style.borderWidth = "2px";
+	this.domElem.style.borderStyle = "solid";
+	this.domElem.style.borderColor = "red";
+	this.domElem.style.boxShadow = "0px 0px 4px";
 
 	this.domHeader.className = "node-header";
 
@@ -255,6 +255,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 	this.domElem.onclick = function()
 	{
 		self.setSelectedNode();
+		moveEditContainer(false);
 	}
 
 	this.domElem.ondragstart = function()
