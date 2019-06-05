@@ -307,9 +307,18 @@ getTreeData();
 root.childs[0].newAddBtnRec();
 var selectedNode = root.childs[0].childs[0];
 
-const userIndex = Number(sessionStorage.getItem("loginIndex"));
-if (userIndex === NaN)
+const userIndex = parseInt(sessionStorage.getItem("loginIndex"));
+if (isNaN(userIndex))
 	window.location.assign("index.html");
 
-var activeUser = usersArr[userIndex];
+var activeUser;
+
+if (userIndex === -1)
+{
+	activeUser = { username: sessionStorage.getItem("newUsername"),
+					password: sessionStorage.getItem("newPassword") };
+	usersArr.push(activeUser);
+}
+else activeUser = usersArr[userIndex];
+
 document.getElementById("userText").innerText = "Username: " + activeUser.username;
