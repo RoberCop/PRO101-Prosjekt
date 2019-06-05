@@ -229,6 +229,13 @@ function moveEditContainer(rightOrleft)
 	}
 }
 
+backBtn.onclick = function()
+{
+	gridSection.style.display = "none";
+	editContainer.style.display = "none";
+	wrapper.style.display = "block";
+}
+
 // Warning element
 function createWarningElem()
 {
