@@ -8,19 +8,19 @@ const contimp= document.getElementById("IpProject1");
 const contcomp= document.getElementById("CompProject1");
 const contupc= document.getElementById("UpProject1");
 
+const wrapper = document.getElementById("wrapper");
 
 const inProgressPro=[];
 const upcomPro=[];
 const completePro=[];
 
-
+const root = new baseNodeClass(0, null, 0);
 
 window.setInterval(function() 
 {
     var elem = document.getElementById('Feedup1');
     elem.scrollTop = elem.scrollHeight;
 }, 5000);
-
 
 form.style.display="none";
 function showform() 
@@ -30,56 +30,84 @@ function showform()
     document.getElementById("Projectname").style.animation="show 0.3s forwards";
     form.style.display = "block";
     form.style.animation = 'growing 0.2s forwards';
- }
-
+}
 
 function closeform()
 {
     form.style.display = "none";
 }
 
-
-
-function createProject() 
+function createProject(projectName, skipAddBtn) 
 {
-    var warning=document.getElementById("warning1");
-    var namepro= document.getElementById("Projectname").value;
-  
+    var warning = document.getElementById("warning1");
+    var namepro;
+	var classget = document.getElementsByClassName("projectdiv");
+	
+
+	if (projectName !== undefined)
+		namepro = projectName;
+	else
+		namepro = document.getElementById("Projectname").value;
+	
     if(namepro == "")
     {
-
         warning.innerHTML="You must write something!";
         createProject();
     }
-    
+	
+	for (var i=0; i < classget.length; i++) 
+        {
+            if (classget[i].id === namepro) 
+            {
+                warning.innerHTML="Its already a Project named: "+namepro;
+                createProject();
+            }
+        }
+	
     var divpro = document.createElement("div");
     var feedpro = document.createElement("div");
+
+	const projectIndex = root.childs.length;
+	root.newProject(activeUser);
+
+	if (!skipAddBtn)
+		root.childs[projectIndex].newAddBtnRec();
 
     divpro.innerHTML=namepro;
     divpro.className="projectdiv";
     divpro.setAttribute("id",namepro);
     divpro.setAttribute("draggable",true);
     divpro.setAttribute("ondragstart","drag(event)","ondragend(dragend())");
+	
+	divpro.onclick = function()
+	{
+		root.selectedChild = projectIndex;
+		wrapper.style.display = "none";
+		section.style.display = "grid";
+		editContainer.style.display = "flex";
+		currentPage = true;
+
+		if (root.childs[projectIndex].childs.length !== 1)
+		{
+			root.childs[projectIndex].childs[0].setSelectedNode();
+		}
+
+		firstDraw();
+	}
 
     feedpro.className="feeddiv";
 
     var upcs= " Upcoming";  
     feedpro.innerHTML="User Crated Project"+"<br />"+ " Called: "+namepro +"<br />"+" In the: "+ upcs+ " section.";
 
-
     document.getElementById("Feedup1").appendChild(feedpro);
-
     document.getElementById("UpProject1").appendChild(divpro);
  
     namepro={name:namepro}
     upcomPro.push(namepro);
-    
-    
-    closeform();   
-   
-    
-}
 
+    closeform();   
+}
 
 /* drag and drop funtion START*/
 
@@ -88,18 +116,15 @@ function dragleaveComp()
     compCon.style.transform="scale(1.0)"; 
 }
 
-
 function dragleaveImp()
 {
     impCon.style.transform="scale(1.0)"; 
 }
 
-
 function dragleaveUpc()
 {
     upcCon.style.transform="scale(1.0)";     
 }
-
 
 function dragoverComp(ev)
 {
@@ -119,10 +144,8 @@ function dragoverUpc(ev)
     upcCon.style.transform="scale(1.05)"; 
 }
 
-
 function allowDrop(ev) 
 {
-   
     if(event.target.className == "projectdiv")
     {
         return;
@@ -130,7 +153,6 @@ function allowDrop(ev)
      
     ev.preventDefault(); 
 }
-
 
 function drag(ev)
 {
@@ -181,8 +203,6 @@ function drop(ev)
         }
     }
     
-    
-    
     if(ev.target.id == "UpProject1")
     {
         data={name:data};
@@ -219,9 +239,6 @@ function drop(ev)
             }
         }
     }
-    
-    
-    
     
     if(ev.target.id == "IpProject1")
     {
@@ -260,8 +277,6 @@ function drop(ev)
             }
         }
     }
-    
-  
 }
 // Drop funtion end
 
@@ -271,7 +286,6 @@ function dragoverdel()
     allowDrop(event);
     deldrop(ev);   
 }
-
 
 function deldrop(ev)
 {
@@ -288,18 +302,14 @@ function deldrop(ev)
     feedpro.innerHTML="User DELETED Project"+"<br />"+ " Called: "+data;
 }
 
-
 /* drag and drop funtion END*/
+getTreeData();
+root.childs[0].newAddBtnRec();
+var selectedNode = root.childs[0].childs[0];
 
+const userIndex = Number(sessionStorage.getItem("loginIndex"));
+if (userIndex === NaN)
+	window.location.assign("index.html");
 
-
-
-
-    
-    
-    
-
-
-
-
-
+var activeUser = usersArr[userIndex];
+document.getElementById("userText").innerText = "Username: " + activeUser.username;

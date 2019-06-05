@@ -1,4 +1,3 @@
-//VALIDATE SIGNUP
 var signinName = document.getElementById('signin-name');
 var signinPass = document.getElementById('signin-password');
 var signinBtn = document.getElementById('signin-btn')
@@ -15,6 +14,7 @@ signupName.addEventListener('keyup', enterSignup);
 password1.addEventListener('keyup', enterSignup);
 password2.addEventListener('keyup', enterSignup);
 
+//Validate signup
 function checkInput() 
 {
 
@@ -59,7 +59,7 @@ function checkInput()
 
 }
 
-//CHECK LOGIN CREDENTIALS
+//Check login credentials
 function checkValues() 
 {
     if(signinPass.value.length > 0 && signinPass.value.length >0) 
@@ -84,8 +84,8 @@ function checkLogIn()
         {
             if(password == usersArr[i].password)
             {
-                console.log("success");
-                window.location.assign('Overview.html');
+				sessionStorage.setItem("loginIndex", i.toString());
+                window.location.assign('nodeTree.html');
                 return;
             }
         } 
@@ -95,6 +95,7 @@ function checkLogIn()
     return;
 }
 
+//Alert login error
 function loginErr()
 {
     removeMessage();
@@ -115,7 +116,7 @@ function storeUser()
 
 
 
-
+//Remove error messages
 function removeMessage() 
 {
     var errorInput = document.querySelectorAll('.wrong-input');
@@ -131,6 +132,7 @@ function removeMessage()
     });
 }
 
+//Enter click to submit
 function enterSignin(event) 
 {
     if(signinName.value.length > 0 && signinPass.value.length > 0 && event.key === 'Enter') {

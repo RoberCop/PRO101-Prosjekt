@@ -7,8 +7,7 @@
 body{
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
-	background: #85e0fc;
-	color: rgb(0, 0, 0);
+	background: #ffb333;
 	overflow: hidden;
 	margin: 0;
 }
@@ -23,6 +22,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #left{
+	color: #fff;
 	flex: 1;
 	display: flex;
 	flex-direction: column;
@@ -36,7 +36,9 @@ h1, h2, h3, h4, h5, h6 {
 	flex: 1;
 } 
 
-/*******SIGN IN********/
+/*****************
+*****SIGN IN*****
+*****************/
 #signin {
 	display: flex;
 	flex-direction: column;
@@ -61,7 +63,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-size: 1.1rem;
 	line-height: 2rem;
 	font-weight: 500;
-	color: #006685;
+
 }
 
 #signin .text-input {
@@ -84,7 +86,9 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-/*********BUTTONS*********/
+/*****************
+BUTTONS (Modal buttons not included)
+*****************/
 #signin .primary-btn, .modal-body .primary-btn {
 	width: 100%;
 }
@@ -100,7 +104,12 @@ h1, h2, h3, h4, h5, h6 {
 	margin-bottom: 1rem;
 	text-align: center;
 	font-size: 0.9rem;
+	cursor: not-allowed;
 } 
+
+#main-footer a {
+	cursor: not-allowed;
+}
 .primary-btn {
 	padding: 0.7rem 1rem;
 	height: 2.7rem;
@@ -108,8 +117,8 @@ h1, h2, h3, h4, h5, h6 {
 	border: 0;
 	border-radius: 4px;
 	font-weight: 500;
-	background: #006685;
-	color: #85e0fc;;
+	background: #4caf50;
+	color: #fff;
 	text-decoration: none;
 	cursor: pointer;
 	text-align: center;
@@ -118,7 +127,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .primary-btn:hover {
-	background-color: #006685b9;
+	background-color: #38883b;
 }
 
 .secondary-btn {
@@ -147,7 +156,9 @@ h1, h2, h3, h4, h5, h6 {
 	
 }
 
-/*******OR*******/
+/**************
+******OR*******
+**************/
 #signin .or{
 	display: flex;
 	flex-direction: row;
@@ -169,7 +180,9 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 0 0.8rem;
 }
 
-/*******SHOWCASE******/
+/***************
+****SHOWCASE****
+****************/
 #showcase {
 	display: flex;
 	justify-content: center;
@@ -193,7 +206,9 @@ h1, h2, h3, h4, h5, h6 {
 	border: 1px #006685 solid;
 }
 
-/*******FOOTER*******/
+/****************
+*****FOOTER******
+****************/
 #main-footer {
 	color: #006685;
 	text-align: center;
@@ -209,7 +224,9 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-/*******MODALS********/
+/********************
+*******MODALS********
+*********************/
 .modal {
 	display: none;
 	position: fixed;
@@ -224,7 +241,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .modal-content {
-	background-color: #85e0fc;
+	background-color: #ffb333;
 	border-radius: 10px;
 	margin: auto;
 	width: 30%;
@@ -246,7 +263,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .modal-body {
-	background: #85e0fc;
+	background: #ffb333;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -289,6 +306,73 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
+#reasons-modal .modal-content {
+	display: block;
+	flex-direction: column;
+	border-radius: 10px;
+	height: 80%;
+	width: 60%;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	background: #cfd8dc;
+}
+
+#reasons-modal .modal-content::-webkit-scrollbar {
+	background: #b0bec5;
+	width: 0.6rem;
+	border-radius: 0 10px 10px 0;
+}
+
+#reasons-modal .modal-content::-webkit-scrollbar-thumb {
+	background: linear-gradient(70deg, #cfd8dc, #eceff1);
+	border-radius: 0 10px 10px 0;
+}
+
+#reasons-modal section {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: auto;
+	justify-content: space-around;
+	padding-top: 1.3rem;
+	padding-bottom: 1.1rem;
+}
+
+#close-modal3 {
+	margin-right: 1rem;
+	margin-bottom: 0.3rem;
+}
+.mod-sec img {
+	height: 15rem;
+}
+
+#mod-sec-1 {
+	background: #eceff1; 	
+}
+
+#mod-sec-2 {	
+	background: #cfd8dc; 
+}
+
+#mod-sec-3 {
+	background: #eceff1; 
+}
+
+#mod-sec-4 {
+	background: #cfd8dc;
+}
+
+#mod-sec-5 {
+	background: #eceff1;
+}
+
+.text-modal {
+	width: 46%;
+}
+
+/****************
+Wrong input also used for sign in form
+****************/
 .wrong-input {
 	font-size: 1.1rem;
 	margin-bottom: 1.3rem;
@@ -299,21 +383,6 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 0.5rem 1rem;
 	line-height: 1.3rem;
 	border: 2px solid red;
-	animation: shake 0.2s;
-	animation-iteration-count: 2;
-
-}
-
-.valid-input {
-	font-size: 1.1rem;
-	margin-bottom: 1.3rem;
-	width: 100%;
-	border-radius: 4px;
-	background: beige;
-	color: #006685;
-	padding: 0.5rem 1rem;
-	line-height: 1.3rem;
-	border: 2px solid rgb(0, 255, 34);
 	animation: shake 0.2s;
 	animation-iteration-count: 2;
 
@@ -336,19 +405,21 @@ h1, h2, h3, h4, h5, h6 {
 	margin-top: 0;
 }
 
-#got-a {
+/*#got-a {
 	font-size: 10rem;
 	margin: auto;
     background: linear-gradient(320deg, #2de907, #00f7ff);
     -webkit-background-clip: text;
     color: transparent;
     animation: gradient-anim 2s linear 0s infinite alternate;
-}
+}*/
 
 
 
 
-/**********MEDIA QUERIES*************/
+/*****************
+**MEDIA QUERIES**
+******************/
 @media(min-width: 1200px) {
 	#left {
 		flex: 4;
@@ -381,9 +452,19 @@ h1, h2, h3, h4, h5, h6 {
 .modal-content {
 	width: 80%;
 }
+.img-div {
+	display: none;
+}
+#reasons-modal .text-modal {
+	text-align: center;
+	margin: auto;
+	width: 100%;
+}
 }
 
-/******KEYFRAMES*********/
+/*************
+**KEYFRAMES**
+*************/
 
 @keyframes modalOpen {
 		from{transform: scale(0)}

@@ -1,0 +1,43 @@
+/*--- Style for the containers that holds the nodes ---*/
+#treeDiv {
+    height: 80vh;
+    width: 95vw;
+    display: flex;
+    background-image: url('../img/61353474_306219480311384_5531898451110920192_n.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    overflow-y: scroll;
+    margin: 0 2.7vw 0 0;
+    -webkit-overflow-scrolling: touch;
+
+}
+
+#treeDiv::-webkit-scrollbar {
+    width: 0.6rem;
+    height: 0.6rem;
+    background: transparent;
+}
+
+#treeDiv::-webkit-scrollbar-thumb {
+    background: linear-gradient(70deg, orange, orangered);
+    border-radius: 50px;
+}
+
+#treeDiv::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+.treeStack {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}

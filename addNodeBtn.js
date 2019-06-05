@@ -1,33 +1,19 @@
 function addNodeBtnClass(level, parent, index)
 {
-	var self = this;
+	// extends baseNodeClass()
+	baseNodeClass.call(this, level, parent, index);
 
-	this.parent = parent;
-	this.indexOfThis = index;
+	var self = this;
 
 	this.addToDisplay = function(isSelected)
 	{
-		displayArray[level - 1].push(this);
-	}
-
-	// same as in treeNodeClass()
-	this.draw = function()
-	{
-		for (let i = level - 1; i < displayArray.length; i++)
-			displayArray[i] = [];
-
-		this.parent.addToDisplay(true, true);
-		drawNodes(level - 1);
+		displayArray[this.level - 2].push(this);
+		this.domElem.style.color = (this.parent.recAccessCheck()) ? "#0F0" : "#F00";
 	}
 
 	this.setLevelRec = function()
 	{
-		level = this.parent.getLevel() + 1;
-	}
-
-	this.getLevel = function()
-	{
-		return level;
+		this.level = this.parent.level + 1;
 	}
 
 	///////////////////////////////
@@ -40,17 +26,21 @@ function addNodeBtnClass(level, parent, index)
 	{
 		if (!self.parent.recAccessCheck()) return;
 
-		selectedNode.domBody.style.backgroundColor = "#CCCCFF";
+		selectedNode.domBody.style.backgroundColor = "#CCF";
 
-		self.parent.getChilds().splice(self.indexOfThis, 1);
-		self.parent.newChild("Sample Text", "Sample Desc");
-		self.parent.getChilds()[self.indexOfThis].newAddBtnRec();
+		self.parent.childs.splice(self.indexOfThis, 1);
+		self.parent.newChild("Sample Text", "Sample Desc", activeUser);
 
-		selectedNode = self.parent.getChilds()[self.indexOfThis];
-		selectedNode.domBody.style.backgroundColor = "#CCFFCC";
+		if (this.level !== 7)
+			self.parent.childs[self.indexOfThis].newAddBtnRec();
+
+		selectedNode = self.parent.childs[self.indexOfThis];
+		selectedNode.domBody.style.backgroundColor = "#CFC";
 
 		self.parent.selectedChild = self.indexOfThis++;
-		self.parent.getChilds().push(self);
+		self.parent.childs.push(self);
+
+		moveEditContainer(true);
 
 		self.draw();
 	}
