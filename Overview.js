@@ -39,6 +39,19 @@ function showform()
 		document.getElementById("send").click();
 		}
 	});
+	
+	
+	input.addEventListener("keydown", function(event) 
+	{
+
+		if (event.keyCode === 27) 
+		{
+
+		event.preventDefault();
+		document.getElementById("close").click();
+		}
+	});
+	
     document.getElementById("send").style.animation="show 0.3s forwards";
     document.getElementById("close").style.animation="show 0.3s forwards";
     document.getElementById("Projectname").style.animation="show 0.3s forwards";
