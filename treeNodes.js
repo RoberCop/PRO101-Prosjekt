@@ -60,11 +60,8 @@ function treeNodeClass(level, parent, index, title, desc, status)
 			// style for when node is unselected
 			this.domBody.style.backgroundColor = "#FFF";
 
-			if (this.level >= selectedNode.level)
-			{
-				this.domHeader.style.backgroundColor = "#888";
-				this.childH4.style.color = "#FFF";
-			}
+			this.domHeader.style.backgroundColor = "#888";
+			this.childH4.style.color = "#FFF";
 		}
 	}
 
