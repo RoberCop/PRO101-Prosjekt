@@ -16,11 +16,18 @@ const completePro=[];
 
 const root = new baseNodeClass(0, null, 0);
 
-window.setInterval(function() 
+function scrollupdate()
 {
-    var elem = document.getElementById('Feedup1');
-    elem.scrollTop = elem.scrollHeight;
-}, 1000);
+	window.setTimeout(function() 
+	{
+		var elem = document.getElementById('Feedup1');
+		elem.scrollTop = elem.scrollHeight;
+	},1000)
+	
+	
+}
+
+
 
 form.style.display="none";
 
@@ -71,8 +78,9 @@ function createProject(projectName, skipAddBtn)
     var namepro;
     var classget = document.getElementsByClassName("projectdiv");
     var projectTop = document.getElementById("project-top");
+	scrollupdate();
 	
-
+	
     if (projectName !== undefined) 
         namepro = projectName;
     else
@@ -201,6 +209,8 @@ function drop(ev)
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     ev.target.appendChild(document.getElementById(data));
+	
+	scrollupdate();
    
     if(ev.target.id == "CompProject1")
     {
@@ -346,6 +356,8 @@ function deldrop(ev)
     el.parentNode.removeChild(el);
     feedpro.style.backgroundColor = "red";
     document.getElementById("Feedup1").appendChild(feedpro);   
+	scrollupdate();
+	
     
     feedpro.innerHTML="User DELETED Project"+"<br />"+ " Called: "+data;
 	

@@ -125,6 +125,38 @@ body{ }
 .usUserProjecttab.div:hover{transform: scale(1.1);}
 
 
+.UserProjecttab::-webkit-scrollbar { 
+                
+	width:5px;
+    background: #fafafa;
+    border-radius:12px;	
+			
+} 
+
+.UserProjecttab::-webkit-scrollbar {
+  width: 10px;
+  border-radius:12px;
+}
+
+
+.UserProjecttab::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius:12px;
+}
+
+
+.UserProjecttab::-webkit-scrollbar-thumb {
+  background: #cec6c6;
+  border-radius:12px;  
+}
+
+
+.FeedUpdate::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+  border-radius:12px;
+}
+
+
 .projectdiv{
     width: 90%;
     height : 30%;
@@ -191,9 +223,40 @@ body{ }
     left: 8%;
     display:inline-block;
     border-radius: 15px;
-    overflow-y: auto;
+    overflow-y:auto;
     z-index: 0;
     transform: rotate(180deg);
+}
+
+.FeedUpdate::-webkit-scrollbar { 
+                
+	width:5px;
+    background: #fafafa;			
+			
+	border-radius:12px;
+} 
+
+.FeedUpdate::-webkit-scrollbar {
+  width: 10px;
+  border-radius:12px;
+}
+
+
+.FeedUpdate::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius:12px;  
+}
+
+
+.FeedUpdate::-webkit-scrollbar-thumb {
+  background: #cec6c6;
+border-radius:12px;  
+}
+
+
+.FeedUpdate::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+  border-radius:12px;
 }
 
 .feeddiv{
