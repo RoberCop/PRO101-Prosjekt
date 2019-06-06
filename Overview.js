@@ -23,13 +23,28 @@ window.setInterval(function()
 }, 1000);
 
 form.style.display="none";
+
 function showform() 
 {
+	var input = document.getElementById("Projectname");
+
+
+	input.addEventListener("keydown", function(event) 
+	{
+
+		if (event.keyCode === 13) 
+		{
+
+		event.preventDefault();
+		document.getElementById("send").click();
+		}
+	});
     document.getElementById("send").style.animation="show 0.3s forwards";
     document.getElementById("close").style.animation="show 0.3s forwards";
     document.getElementById("Projectname").style.animation="show 0.3s forwards";
     form.style.display = "block";
     form.style.animation = 'growing 0.2s forwards';
+	 document.getElementById("Projectname").focus();
 }
 
 function closeform()
