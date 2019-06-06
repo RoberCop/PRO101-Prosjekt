@@ -41,6 +41,9 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		const statusColor = (this.status > 0) ? ( (this.status > 1) ? "#0F0" : "#FF0" ) : "#F00";
 		this.domElem.style.backgroundColor = statusColor;
 
+		if (user !== undefined)
+			this.childPar.innerText = user.username;
+
 		if (this === selectedNode)
 			this.domElem.style.transform = "scale(1.1)";
 		else
@@ -255,20 +258,17 @@ function treeNodeClass(level, parent, index, title, desc, status)
 
 	this.domBody.className = "node-body";
 
-	// private elements
 	const icon = document.createElement("i");
-	const light = document.createElement("div");
+	this.childPar = document.createElement("p");
+	this.childPar.innerText = "";
 
 	icon.className = "fas fa-user";
-
-	light.className = "light";
-	light.style.visibility = "hidden";
 
 	// append to set structure
 	this.domHeader.appendChild(this.childH4);
 
 	this.domBody.appendChild(icon);
-	this.domBody.appendChild(light);
+	this.domBody.appendChild(this.childPar);
 
 	this.domElem.appendChild(this.domHeader);
 	this.domElem.appendChild(this.domBody);
