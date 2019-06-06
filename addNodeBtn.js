@@ -33,7 +33,7 @@ function addNodeBtnClass(level, parent, index)
 				selectedNode.domBody.style.backgroundColor = "#AAF";
 
 		self.parent.childs.splice(self.indexOfThis, 1);
-		self.parent.newChild("Sample Text", "Sample Desc", activeUser);
+		self.parent.newChild("", "", activeUser);
 
 		self.parent.childs[self.indexOfThis].newAddBtnRec();
 
