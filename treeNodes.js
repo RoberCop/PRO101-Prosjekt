@@ -41,6 +41,11 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		const statusColor = (this.status > 0) ? ( (this.status > 1) ? "#0F0" : "#FF0" ) : "#F00";
 		this.domElem.style.backgroundColor = statusColor;
 
+		if (this === selectedNode)
+			this.domElem.style.transform = "scale(1.1)";
+		else
+			this.domElem.style.transform = "scale(1.0)";
+
 		if (isSelected)
 		{
 			// style for when node is selected, excluding styling of domBody backgroundColor
@@ -54,8 +59,12 @@ function treeNodeClass(level, parent, index, title, desc, status)
 		else {
 			// style for when node is unselected
 			this.domBody.style.backgroundColor = "#FFF";
-			this.domHeader.style.backgroundColor = "#888";
-			this.childH4.style.color = "#FFF";
+
+			if (this.level >= selectedNode.level)
+			{
+				this.domHeader.style.backgroundColor = "#888";
+				this.childH4.style.color = "#FFF";
+			}
 		}
 	}
 
