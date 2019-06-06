@@ -227,6 +227,22 @@ backBtn.onclick = function()
 	wrapper.style.display = "block";
 }
 
+var savedMsg = document.getElementById("saved");
+saveNode.addEventListener('click', showSaved);
+
+function showSaved() 
+{
+    savedMsg.style.display = "flex";
+    savedPlayed();
+}
+
+function savedPlayed() {window.setTimeout(function removeAnim() 
+{ 
+    savedMsg.style.display = "none";
+   
+}, 2000);  
+}
+
 // Warning element
 function createWarningElem()
 {
