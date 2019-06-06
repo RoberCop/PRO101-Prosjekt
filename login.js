@@ -84,14 +84,18 @@ function checkLogIn()
         {
             if(password == usersArr[i].password)
             {
-				redirectToOverview(i);
+                redirectToOverview(i);
+                return;
             }
         } 
     }
 
-	if (username == sessionStorage.getItem("newUsername"))
-		if (password == sessionStorage.getItem("newPassword"))
-			redirectToOverview(-1);
+	if (username == sessionStorage.getItem("newUsername")) { 
+		if (password == sessionStorage.getItem("newPassword")) {
+            redirectToOverview(-1);
+            return;
+        }
+    }
     
     loginErr();
     return;

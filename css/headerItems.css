@@ -18,6 +18,9 @@ header > .navBox, .userDiv {
     align-items: center;
 }
 
+#project-top {
+    font-size: 2rem;
+}
 
 #backArrow {
     color: #656565;

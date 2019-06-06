@@ -56,9 +56,13 @@ moveQuickAdd(false);
 
 document.onkeydown = function(event)
 {
-	if (!currentPage) return;
-
 	var keyPressed = event.which || event.keycode;
+
+	if ( (currentPage) && (selectedNode === undefined) )
+		if (keyPressed === 13)
+			root.childs[root.selectedChild].childs[0].domElem.onclick();
+
+	if ( (!currentPage) || (selectedNode === undefined) ) return;
 
 	if (delPromptActive)
 	{
@@ -75,6 +79,7 @@ document.onkeydown = function(event)
 	if ( (event.ctrlKey) && (keyPressed === 90) )
 	{
 		moveEditContainer(!toggleEditCont);
+
 		return;
 	}
 
@@ -127,7 +132,6 @@ document.onkeydown = function(event)
 
 quickAddInput.onkeydown = function(event)
 {
-
 	if (!currentPage) return;
 
 	var keyPressed = event.which || event.keycode;
@@ -157,7 +161,7 @@ function quickNodeAdd()
 // Trigger events based on mouseXY
 document.onmousemove = (e) => {
 
-	if ( (delPromptActive) || (!currentPage) ) return;
+	if ( (delPromptActive) || (!currentPage) || (selectedNode === undefined)) return;
 
 	// Gets mouse position
 	const mouseY = e.clientY;
@@ -197,9 +201,9 @@ function moveQuickAdd(downOrUp)
 	}
 }
 
-function moveEditContainer(rightOrleft)
+function moveEditContainer(rightOrLeft)
 {
-	if (rightOrleft)
+	if (rightOrLeft)
 	{
 		// only update content when opening or refreshing, to reduce processing of authorization
 		selectedNode.refreshNodeEdit();
@@ -225,6 +229,22 @@ backBtn.onclick = function()
 	gridSection.style.display = "none";
 	editContainer.style.display = "none";
 	wrapper.style.display = "block";
+}
+
+var savedMsg = document.getElementById("saved");
+saveNode.addEventListener('click', showSaved);
+
+function showSaved() 
+{
+    savedMsg.style.display = "flex";
+    savedPlayed();
+}
+
+function savedPlayed() {window.setTimeout(function removeAnim() 
+{ 
+    savedMsg.style.display = "none";
+   
+}, 2000);  
 }
 
 // Warning element

@@ -69,14 +69,15 @@ function createProject(projectName, skipAddBtn)
 {
     var warning = document.getElementById("warning1");
     var namepro;
-	var classget = document.getElementsByClassName("projectdiv");
+    var classget = document.getElementsByClassName("projectdiv");
+    var projectTop = document.getElementById("project-top");
 	
 
-	if (projectName !== undefined)
-		namepro = projectName;
-	else
-		namepro = document.getElementById("Projectname").value;
-	
+    if (projectName !== undefined) 
+        namepro = projectName;
+    else
+        namepro = document.getElementById("Projectname").value;
+        
     if(namepro == "")
     {
         warning.innerHTML="You must write something!";
@@ -113,20 +114,27 @@ function createProject(projectName, skipAddBtn)
 		wrapper.style.display = "none";
 		section.style.display = "grid";
 		editContainer.style.display = "flex";
-		currentPage = true;
+        currentPage = true;
+        moveEditContainer(false);
 
 		if (root.childs[projectIndex].childs.length !== 1)
-		{
-			root.childs[projectIndex].childs[0].setSelectedNode();
-		}
+            root.childs[projectIndex].childs[0].setSelectedNode();
+        else 
+            selectedNode = undefined;
+
+        projectTop.innerText = namepro.name;
 
 		firstDraw();
 	}
 
     feedpro.className="feeddiv";
 
-    var upcs= " Upcoming";  
-    feedpro.innerHTML="User Crated Project"+"<br />"+ " Called: "+namepro +"<br />"+" In the: "+ upcs+ " section.";
+    var upcs= " Upcoming";
+    
+    if (activeUser === undefined)
+        feedpro.innerHTML= "Default user created Project<br /> Called: " +namepro + "<br />" + " In the: " + upcs + " section.";
+    else
+        feedpro.innerHTML= activeUser.username + " created Project<br /> Called: "+namepro +"<br />"+" In the: "+ upcs+ " section.";
 
     document.getElementById("Feedup1").appendChild(feedpro);
     document.getElementById("UpProject1").appendChild(divpro);
@@ -207,8 +215,12 @@ function drop(ev)
         feedpro.style.backgroundColor="#c5e1a5";
         
         document.getElementById("Feedup1").appendChild(feedpro);   
-    
-        feedpro.innerHTML="User moved <br />Project: "+data.name+ "<br /> to: Complete section";
+        
+        if (activeUser === undefined)
+            feedpro.innerHTML= "Default user moved <br />Project: "+data.name+ "<br /> to: Complete section";
+        else
+            feedpro.innerHTML= activeUser.username + " moved <br />Project: "+data.name+ "<br /> to: Complete section";
+      
     
         for (var i=0; i < upcomPro.length; i++) 
         {
@@ -244,7 +256,11 @@ function drop(ev)
         document.getElementById("Feedup1").appendChild(feedpro); 
         feedpro.style.backgroundColor="#f87371";
     
-        feedpro.innerHTML="User moved<br /> Project: "+data.name+ "<br /> to: Upcoming section";
+        if (activeUser === undefined)
+            feedpro.innerHTML= "Default user moved <br />Project: "+data.name+ "<br /> to: Upcoming section";
+        else
+            feedpro.innerHTML= activeUser.username + " moved <br />Project: "+data.name+ "<br /> to: Upcoming section";
+
         console.table(upcomPro);  
     
         for (var i=0; i < completePro.length; i++) 
@@ -282,7 +298,11 @@ function drop(ev)
         document.getElementById(data.name).style.backgroundColor="#fff59d";
         feedpro.style.backgroundColor="#fff59d";
     
-        feedpro.innerHTML="User moved<br /> Project: "+data.name+ " <br />to: Inprogress section";
+        if (activeUser === undefined)
+            feedpro.innerHTML= "Default user moved <br />Project: "+data.name+ "<br /> to: In progress section";
+        else
+            feedpro.innerHTML= activeUser.username + " moved <br />Project: "+data.name+ "<br /> to: In progress section";
+
         console.table(inProgressPro);
     
         for (var i=0; i < completePro.length; i++) 
