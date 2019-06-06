@@ -56,7 +56,7 @@ moveQuickAdd(false);
 
 document.onkeydown = function(event)
 {
-	if (!currentPage) return;
+	if ( (!currentPage) || (selectedNode === undefined) ) return;
 
 	var keyPressed = event.which || event.keycode;
 
@@ -75,6 +75,7 @@ document.onkeydown = function(event)
 	if ( (event.ctrlKey) && (keyPressed === 90) )
 	{
 		moveEditContainer(!toggleEditCont);
+
 		return;
 	}
 
@@ -127,7 +128,6 @@ document.onkeydown = function(event)
 
 quickAddInput.onkeydown = function(event)
 {
-
 	if (!currentPage) return;
 
 	var keyPressed = event.which || event.keycode;
@@ -157,7 +157,7 @@ function quickNodeAdd()
 // Trigger events based on mouseXY
 document.onmousemove = (e) => {
 
-	if ( (delPromptActive) || (!currentPage) ) return;
+	if ( (delPromptActive) || (!currentPage) || (selectedNode === undefined)) return;
 
 	// Gets mouse position
 	const mouseY = e.clientY;
@@ -197,9 +197,9 @@ function moveQuickAdd(downOrUp)
 	}
 }
 
-function moveEditContainer(rightOrleft)
+function moveEditContainer(rightOrLeft)
 {
-	if (rightOrleft)
+	if (rightOrLeft)
 	{
 		// only update content when opening or refreshing, to reduce processing of authorization
 		selectedNode.refreshNodeEdit();
