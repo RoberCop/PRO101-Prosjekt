@@ -42,16 +42,19 @@ function createProject(projectName, skipAddBtn)
     var warning = document.getElementById("warning1");
     var namepro;
     var classget = document.getElementsByClassName("projectdiv");
-    var topName = document.getElementById("project-top")
+    var projectTop = document.getElementById("project-top");
 	
 
-    if (projectName !== undefined)
+    if (projectName !== undefined) 
     {
         namepro = projectName;
-    }  
-	else
-		namepro = document.getElementById("Projectname").value;
-	
+        projectTop.innerText = namepro;
+    }
+    else
+    {
+        namepro = document.getElementById("Projectname").value;
+        projectTop.innerText = namepro;
+    }
     if(namepro == "")
     {
         warning.innerHTML="You must write something!";
@@ -90,16 +93,9 @@ function createProject(projectName, skipAddBtn)
 		editContainer.style.display = "flex";
 		currentPage = true;
 
-		moveEditContainer(false);
-
 		if (root.childs[projectIndex].childs.length !== 1)
 		{
 			root.childs[projectIndex].childs[0].setSelectedNode();
-			editCanOpen = true;
-		}
-		else {
-			editCanOpen = false;
-			selectedNode = undefined;
 		}
 
 		firstDraw();
