@@ -56,9 +56,13 @@ moveQuickAdd(false);
 
 document.onkeydown = function(event)
 {
-	if ( (!currentPage) || (selectedNode === undefined) ) return;
-
 	var keyPressed = event.which || event.keycode;
+
+	if ( (currentPage) && (selectedNode === undefined) )
+		if (keyPressed === 13)
+			root.childs[root.selectedChild].childs[0].domElem.onclick();
+
+	if ( (!currentPage) || (selectedNode === undefined) ) return;
 
 	if (delPromptActive)
 	{
