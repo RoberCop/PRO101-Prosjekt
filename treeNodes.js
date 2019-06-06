@@ -174,6 +174,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 
 		this.refreshNodeEdit();
 		this.draw();
+		savedMsg.style.display = "flex";
 	}
 
 	this.tryStatus = function(newStatus)

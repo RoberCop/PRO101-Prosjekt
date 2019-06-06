@@ -41,11 +41,14 @@ function createProject(projectName, skipAddBtn)
 {
     var warning = document.getElementById("warning1");
     var namepro;
-	var classget = document.getElementsByClassName("projectdiv");
+    var classget = document.getElementsByClassName("projectdiv");
+    var topName = document.getElementById("project-top")
 	
 
-	if (projectName !== undefined)
-		namepro = projectName;
+    if (projectName !== undefined)
+    {
+        namepro = projectName;
+    }  
 	else
 		namepro = document.getElementById("Projectname").value;
 	
