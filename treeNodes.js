@@ -111,6 +111,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 	this.setSelectedNode = function()
 	{
 		selectedNode.domBody.style.backgroundColor = "#AAF";
+		selectedNode.domElem.style.transform = "scale(1.0)";
 
 		// set this node to be the selected child, on the parent
 		this.parent.selectedChild = this.indexOfThis;
