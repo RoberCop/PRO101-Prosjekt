@@ -40,6 +40,7 @@ function treeNodeClass(level, parent, index, title, desc, status)
 
 		const statusColor = (this.status > 0) ? ( (this.status > 1) ? "#0F0" : "#FF0" ) : "#F00";
 		this.domElem.style.backgroundColor = statusColor;
+		this.childH4.innerText = (title != "") ? title : "-No Title-";
 
 		if (user !== undefined)
 			this.childPar.innerText = user.username;
@@ -170,7 +171,6 @@ function treeNodeClass(level, parent, index, title, desc, status)
 
 		this.setUser(usersArr[nodeOwnerSelect.selectedIndex]);
 
-		this.childH4.innerText = (title != "") ? title : "-No Title-";
 
 		this.refreshNodeEdit();
 		this.draw();
